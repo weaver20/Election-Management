@@ -1,0 +1,5 @@
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/build/CMakeFiles/me.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/build/CMakeFiles/package.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/build/CMakeFiles/package_source.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/build/CMakeFiles/edit_cache.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/build/CMakeFiles/rebuild_cache.dir
