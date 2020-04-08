@@ -3,6 +3,7 @@
 //
 
 #ifndef MTM_ELECTION_H
+
 #define MTM_ELECTION_H
 
 #include "mtm_map/map.h"
