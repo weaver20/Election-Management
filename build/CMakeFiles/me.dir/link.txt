@@ -1,0 +1,3 @@
+"D:\Program files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\me.dir/objects.a
+D:\TDM-GCC-64\bin\ar.exe cr CMakeFiles\me.dir/objects.a @CMakeFiles\me.dir\objects1.rsp
+D:\TDM-GCC-64\bin\x86_64-w64-mingw32-gcc.exe -g   -Wl,--whole-archive CMakeFiles\me.dir/objects.a -Wl,--no-whole-archive  -o me.exe -Wl,--out-implib,libme.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\me.dir\linklibs.rsp
