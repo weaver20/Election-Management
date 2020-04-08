@@ -4,7 +4,7 @@
 		"generator" : 
 		{
 			"multiConfig" : false,
-			"name" : "Unix Makefiles"
+			"name" : "MinGW Makefiles"
 		},
 		"paths" : 
 		{
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-d91cfbb999e243cb67dc.json",
+			"jsonFile" : "cache-v2-c8c3c25819d62d98db5a.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -64,7 +64,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-d91cfbb999e243cb67dc.json",
+						"jsonFile" : "cache-v2-c8c3c25819d62d98db5a.json",
 						"kind" : "cache",
 						"version" : 
 						{
