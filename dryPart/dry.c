@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #define EMPTY 0
-#define DEMI_VALUE -999999999999
+#define DEMI_VALUE -9999
 
 struct node_t {
   int x;
@@ -57,6 +57,7 @@ void destroyList(Node ptr) {
 
 ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
   // making sure merged_out is not NULL
+  Node node1 = list1, node2 = list2, node_out = *merged_out;
   (*merged_out) = createNode(DEMI_VALUE);
   if (merged_out == NULL) {
     return MEMORY_ERROR;

@@ -1,7 +1,0 @@
-[
-{
-  "directory": "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/build",
-  "command": "D:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-gcc.exe   -g   -DNDEBUG -Wall -Werror -pedantic-errors -std=gnu99 -o CMakeFiles\\me.dir\\main.c.obj   -c \"C:\\Users\\avira\\OneDrive - Technion\\GitHub\\Ex-1\\main.c\"",
-  "file": "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/main.c"
-}
-]
