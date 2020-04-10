@@ -10,7 +10,7 @@ set(CMAKE_C_STANDARD 99)
 # first arg: name of the "target" (the compiled executable wil be hello.exe)
 # rest of args: name of header (.h) and source (.c or .cpp) files used to
 # compile the executable
-add_executable(me main.c)
+add_executable(me main.c dryPart/dryMain.c dryPart/dry.h dryPart/dry.c)
 
 # Adds compile flags to compilation command of the target hello.
 # first arg: name of the target
