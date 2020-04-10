@@ -34,7 +34,7 @@ add_executable(map
         test_utilities.h
         )
 add_executable(testing
-        testMain.c)
+        test_main.c)
 # Adds compile flags to compilation command of the target hello.
 # first arg: name of the target
 # second arg: PRIVATE (can also be PUBLIC or INTERFACE)
