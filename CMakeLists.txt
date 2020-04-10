@@ -16,25 +16,25 @@ set(CMAKE_C_STANDARD 99)
 # rest of args: name of header (.h) and source (.c or .cpp) files used to
 # compile the executable
 add_executable(elections
-        ex1_from_server/mtm_map/map.c
-        ex1_from_server/mtm_map/map.h
-        ex1_from_server/tests/electionTestsExample.c
-        ex1_from_server/tests/map_example_test.c
-        ex1_from_server/election.h
-        ex1_from_server/test_utilities.h)
+        map/map.c
+        map/map.h
+        elections/electionTestsExample.c
+        map/map_example_test.c
+        elections/election.h
+        test_utilities.h)
 add_executable(dry
         dryPart/dry.c
         dryPart/dry.h
         dryPart/dryMain.c)
 add_executable(map
-        ex1_from_server/mtm_map/map.c
-        ex1_from_server/mtm_map/map.h
-        ex1_from_server/tests/map_example_test.c
-        ex1_from_server/election.h
-        ex1_from_server/test_utilities.h
-        main.c)
+        map/map.c
+        map/map.h
+        map/map_example_test.c
+        elections/election.h
+        test_utilities.h
+        )
 add_executable(testing
-        main.c)
+        testMain.c)
 # Adds compile flags to compilation command of the target hello.
 # first arg: name of the target
 # second arg: PRIVATE (can also be PUBLIC or INTERFACE)

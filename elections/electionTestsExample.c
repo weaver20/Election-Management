@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "../election.h"
+#include "election.h"
 #include "../test_utilities.h"
 
 /*The number of tests*/
