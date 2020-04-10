@@ -1,0 +1,4 @@
+D:\Downloads\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug
