@@ -36,7 +36,7 @@ int getListLength(Node list) {
 bool isListSorted(Node list) {
     return true;
 }
-
+//TODO:  destroyAll part
 Node nodeCreateOrDestroyAll(Node head, int data) {
     Node ptr = malloc(sizeof(*ptr));
     if (ptr == NULL) {
