@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <assert.h>
 #define INITIAL_SIZE 2
+#define EXPAND_FACTOR 2
 
 
 typedef struct element{
@@ -19,6 +20,36 @@ struct Map_t{
     int iterator;
     Element dict;
 };
+
+static int elementIndex(Map map, const char* key){
+    for(int i = 0; i < map->size; i++){
+        if(strcmp(map->dict[i].key, key) == 0){
+            return i;
+        }
+    }
+    return -1;
+}
+
+static MapResult expand(Map map){
+    int newSize = EXPAND_FACTOR * map->maxSize;
+    Element newElements = realloc(map->dict, newSize * sizeof(struct element));
+    if(newElements == NULL){
+        return MAP_OUT_OF_MEMORY;
+    }
+
+    map->dict = newElements;
+    map->maxSize = newSize;
+
+    return MAP_SUCCESS;
+}
+
+static char* copyString(const char* str){
+    char* newStr = malloc(strlen(str) + 1);
+    if(newStr == NULL){
+        return NULL;
+    }
+    return strcpy(newStr, str);
+}
 
 Map mapCreate(){
     Map map = malloc(sizeof(*map));
@@ -87,17 +118,64 @@ Map mapCopy(Map map){
 }
 
 int mapGetSize(Map map){
-    assert(map != NULL);
-    int count = 0;
-
-
-
-
-
-
-
-
+    if(map == NULL){
+        return -1;
+    }
+    return map->size;
 }
+
+bool mapContains(Map map, const char* key){
+    if(map == NULL || key == NULL){
+        return false;
+    }
+
+    MAP_FOREACH(iterator,map){
+        if(strcmp(iterator, key) == 0)
+            return true;
+    }
+    return false;
+}
+
+MapResult mapPut(Map map, const char* key, const char* data){
+    if( map == NULL || key == NULL || data == NULL){
+        return MAP_NULL_ARGUMENT;
+    }
+
+    if(mapContains(map, key)){
+
+        if(strcmp(map->dict[elementIndex(map,key)].value, data) == 0){
+            return MAP_SUCCESS;
+        }
+
+        else{
+            char* new_value = copyString(data);
+            if(new_value == NULL){
+                return MAP_OUT_OF_MEMORY;
+            }
+            free(map->dict[elementIndex(map,key)].value);
+            map->dict[elementIndex(map,key)].value = new_value;
+            return MAP_SUCCESS;
+        }
+    }
+
+    if(map->size == map->maxSize){
+        if(expand(map) == MAP_OUT_OF_MEMORY){
+            return MAP_OUT_OF_MEMORY;
+        }
+    }
+    Element new_element = malloc(sizeof(struct element));
+    char* new_key = copyString(key);
+    char* new_value = copyString(data);
+    if(new_value == NULL || new_key == NULL){
+        return MAP_OUT_OF_MEMORY;
+    }
+    new_element->key = new_key;
+    new_element->value = new_value;
+
+    map->dict[map->size++] = *new_element;
+    return MAP_SUCCESS;
+}
+
 
 
 
