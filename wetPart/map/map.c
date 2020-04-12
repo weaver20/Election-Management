@@ -18,12 +18,12 @@ struct Map_t{
     int size;
     int maxSize;
     int iterator;
-    Element dict;
+    Element dictionary;
 };
 
 static int elementIndex(Map map, const char* key){
     for(int i = 0; i < map->size; i++){
-        if(strcmp(map->dict[i].key, key) == 0){
+        if(strcmp(map->dictionary[i].key, key) == 0){
             return i;
         }
     }
@@ -32,12 +32,12 @@ static int elementIndex(Map map, const char* key){
 
 static MapResult expand(Map map){
     int newSize = EXPAND_FACTOR * map->maxSize;
-    Element newElements = realloc(map->dict, newSize * sizeof(struct element));
+    Element newElements = realloc(map->dictionary, newSize * sizeof(struct element));
     if(newElements == NULL){
         return MAP_OUT_OF_MEMORY;
     }
 
-    map->dict = newElements;
+    map->dictionary = newElements;
     map->maxSize = newSize;
 
     return MAP_SUCCESS;
@@ -56,9 +56,9 @@ Map mapCreate(){
     if(map == NULL){
         return NULL;
     }
-
-    map->dict = malloc(INITIAL_SIZE * sizeof(struct element));
-    if(map->dict == NULL){
+// TODO: why not sizeof(*(map->dictionary))? (line 60)
+    map->dictionary = malloc(INITIAL_SIZE * sizeof(*(map->dictionary)));
+    if(map->dictionary == NULL){
         free(map);
         return NULL;
     }
@@ -78,7 +78,7 @@ void mapDestroy(Map map){
         mapRemove(map, mapGetFirst(map));
     }
 
-    free(map->dict);
+    free(map->dictionary);
     free(map);
 }
 
@@ -92,7 +92,7 @@ static MapResult addOrDestroy(Map map, const struct element index){
 
 static MapResult addAllOrDestroy(Map map, Map targetMap){
     for(int i = 0; i < targetMap->size; i++){
-        if(addOrDestroy(map, targetMap->dict[i]) == MAP_OUT_OF_MEMORY){
+        if(addOrDestroy(map, targetMap->dictionary[i]) == MAP_OUT_OF_MEMORY){
             return MAP_OUT_OF_MEMORY;
         }
     }
@@ -143,7 +143,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
 
     if(mapContains(map, key)){
 
-        if(strcmp(map->dict[elementIndex(map,key)].value, data) == 0){
+        if(strcmp(map->dictionary[elementIndex(map,key)].value, data) == 0){
             return MAP_ITEM_ALREADY_EXISTS;
         }
 
@@ -152,8 +152,8 @@ MapResult mapPut(Map map, const char* key, const char* data){
             if(new_value == NULL){
                 return MAP_OUT_OF_MEMORY;
             }
-            free(map->dict[elementIndex(map,key)].value);
-            map->dict[elementIndex(map,key)].value = new_value;
+            free(map->dictionary[elementIndex(map,key)].value);
+            map->dictionary[elementIndex(map,key)].value = new_value;
             return MAP_SUCCESS;
         }
     }
@@ -172,7 +172,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
     new_element->key = new_key;
     new_element->value = new_value;
 
-    map->dict[map->size++] = *new_element;
+    map->dictionary[map->size++] = *new_element;
     return MAP_SUCCESS;
 }
 
@@ -181,7 +181,7 @@ char* mapGet(Map map, const char* key){
         return NULL;
     }
 
-    return map->dict[elementIndex(map, key)].value;
+    return map->dictionary[elementIndex(map, key)].value;
 }
 
 MapResult mapRemove(Map map, const char* key){
@@ -195,10 +195,10 @@ MapResult mapRemove(Map map, const char* key){
         return MAP_ITEM_DOES_NOT_EXIST;
     }
 
-    free(map->dict[index].key);
-    free(map->dict[index].value);
-    free(&(map->dict[index]));
-    map->dict[index] = map->dict[map->size - 1];
+    free(map->dictionary[index].key);
+    free(map->dictionary[index].value);
+    free(&(map->dictionary[index]));
+    map->dictionary[index] = map->dictionary[map->size - 1];
 
     map->size--;
     return MAP_SUCCESS;
@@ -222,7 +222,7 @@ char* mapGetNext(Map map){
         return NULL;
     }
 
-    return map->dict[map->iterator++].key;
+    return map->dictionary[map->iterator++].key;
 }
 
 MapResult mapClear(Map map){
@@ -240,7 +240,7 @@ MapResult mapClear(Map map){
 void mapPrint(Map map){
     printf("The following map contains the following elements in the format of key : value\n ");
     MAP_FOREACH(iterator, map){
-        printf("%s : %s ", iterator, map->dict[elementIndex(map, iterator)].value);
+        printf("%s : %s ", iterator, map->dictionary[elementIndex(map, iterator)].value);
     }
 }
 
