@@ -63,7 +63,7 @@ ErrorCode listCopyOrDestroyAll(Node list1,Node merged_ptr,Node merged_head)
 
 ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
     // making sure merged_out is not NULL
-    Node node1 = list1, node2 = list2, merged_ptr = *merged_out;
+    Node merged_ptr = *merged_out;
     merged_ptr = nodeCreateOrDestroyAll(*merged_out, DEMI_VALUE);
     if (merged_ptr == NULL) {
         return MEMORY_ERROR;

@@ -3,7 +3,7 @@ include_directories(dryPart)
 include_directories(ex1_from_server)
 include_directories(ex1_from_server/mtm_map)
 
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 2.8)
 
 # first arg: name of project
 # second arg: type of project (C or CXX)
