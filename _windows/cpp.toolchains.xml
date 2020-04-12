@@ -1,7 +1,8 @@
 <application>
   <component name="CPPToolchains" version="4">
     <toolchains detectedVersion="5">
-      <toolchain name="MinGW" toolSetKind="MINGW" toolSetPath="C:\TDM-GCC-64\x86_64-w64-mingw32" debuggerKind="CUSTOM_GDB" customGDBPath="C:\TDM-GCC-64\x86_64-w64-mingw32\bin\gdb.exe" />
+      <toolchain name="MinGW" toolSetKind="MINGW" toolSetPath="C:\TDM-GCC-64\x86_64-w64-mingw32" debuggerKind="CUSTOM_GDB" customGDBPath="C:\TDM-GCC-64\bin\gdb64.exe" />
+      <toolchain name="Remote Host" toolSetKind="REMOTE" customCMakePath="\usr\bin\cmake" hostId="0a013413-5fbf-47b6-9b56-6099477b9116" debuggerKind="CUSTOM_GDB" customGDBPath="\usr\bin\gdb" />
     </toolchains>
   </component>
 </application>

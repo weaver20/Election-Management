@@ -1,0 +1,11 @@
+<application>
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0a013413-5fbf-47b6-9b56-6099477b9116" name="Remote Host (0a013413-5fbf-47b6-9b56-6099477b9116)" url="http:///">
+        <fileTransfer host="csl3.cs.technion.ac.il" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</application>
