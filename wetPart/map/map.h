@@ -191,6 +191,7 @@ void mapPrint(Map map);
 * Macro for iterating over a map.
 * Declares a new iterator for the loop.
 */
+
 #define MAP_FOREACH(iterator, map) \
     for(char* iterator = (char*) mapGetFirst(map) ; \
         iterator ;\

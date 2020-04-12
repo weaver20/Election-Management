@@ -27,7 +27,7 @@ static int elementIndex(Map map, const char* key){
             return i;
         }
     }
-    return -1;
+    return MAP_ITEM_DOES_NOT_EXIST;
 }
 
 static MapResult expand(Map map){
@@ -144,7 +144,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
     if(mapContains(map, key)){
 
         if(strcmp(map->dict[elementIndex(map,key)].value, data) == 0){
-            return MAP_SUCCESS;
+            return MAP_ITEM_ALREADY_EXISTS;
         }
 
         else{
@@ -176,10 +176,73 @@ MapResult mapPut(Map map, const char* key, const char* data){
     return MAP_SUCCESS;
 }
 
+char* mapGet(Map map, const char* key){
+    if(map == NULL || key == NULL || !mapContains(map, key)){
+        return NULL;
+    }
 
+    return map->dict[elementIndex(map, key)].value;
+}
 
+MapResult mapRemove(Map map, const char* key){
+    assert(map != NULL);
+    if(key == NULL){
+        return MAP_NULL_ARGUMENT;
+    }
 
+    int index = elementIndex(map, key);
+    if(index == MAP_ITEM_DOES_NOT_EXIST){
+        return MAP_ITEM_DOES_NOT_EXIST;
+    }
 
+    free(map->dict[index].key);
+    free(map->dict[index].value);
+    free(&(map->dict[index]));
+    map->dict[index] = map->dict[map->size - 1];
+
+    map->size--;
+    return MAP_SUCCESS;
+}
+
+char* mapGetFirst(Map map){
+    if(map == NULL){
+        return NULL;
+    }
+
+    map->iterator = 0;
+    return mapGetNext(map);
+}
+
+char* mapGetNext(Map map){
+    if(map == NULL){
+        return NULL;
+    }
+
+    if(map->iterator >= map->size){
+        return NULL;
+    }
+
+    return map->dict[map->iterator++].key;
+}
+
+MapResult mapClear(Map map){
+    if(map == NULL){
+        return MAP_NULL_ARGUMENT;
+    }
+
+    while(mapGetSize(map) > 0){
+        mapRemove(map, mapGetFirst(map));
+    }
+
+    return MAP_SUCCESS;
+}
+
+void mapPrint(Map map){
+    printf("The following map contains the following elements in the format of key : value\n ");
+    MAP_FOREACH(iterator, map){
+        printf("%s : %s ", iterator, map->dict[elementIndex(map, iterator)].value);
+    }
+}
 
 
 
