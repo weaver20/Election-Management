@@ -6,6 +6,10 @@
           <option name="url" value="https://github.com/aviram-shubeili/Ex-1.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="http://github.com" />
+          <option name="userName" value="weaver20" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\Noam_\CLionProjects" />
