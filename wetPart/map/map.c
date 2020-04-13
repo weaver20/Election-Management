@@ -58,13 +58,16 @@ static MapResult removeElement(Map map, int index){
     for(int i = index; i < map->size - 1 ; i++){
         map->dictionary[i] = map->dictionary[i + 1];
     }
+/*
 
+    //TODO: this frees dictionary[size-2] also!!! (dictionary is an array of pointers)
     if(index != map->size - 1){
         free(map->dictionary[map->size - 1].key);
         free(map->dictionary[map->size - 1].value);
     }
+*/
 
-    Element tmp = realloc(map->dictionary, (map->maxSize - 1) * sizeof(*(map->dictionary)));
+    Element tmp = realloc(map->dictionary, (map->maxSize - 1) * sizeof(*tmp));
     if(tmp == NULL){
         return MAP_OUT_OF_MEMORY;
     }
@@ -188,7 +191,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
     }
 
     // add element
-    Element new_element = malloc(sizeof(struct element));
+    Element new_element = malloc(sizeof(*new_element));
     char* new_key = copyString(key);
     char* new_value = copyString(data);
     if(new_element == NULL ||new_value == NULL || new_key == NULL){
