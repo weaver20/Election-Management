@@ -90,5 +90,6 @@ int main(int argc, char *argv[]) {
   }
 
   RUN_TEST(tests[test_idx - 1], testNames[test_idx - 1]);
+  //RUN_TEST(tests[3], testNames[3]);
   return 0;
 }

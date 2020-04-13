@@ -51,6 +51,29 @@ static char* copyString(const char* str){
     return strcpy(newStr, str);
 }
 
+static MapResult removeElement(Map map, int index){
+
+    free(map->dictionary[index].key);
+    free(map->dictionary[index].value);
+    for(int i = index; i < map->size - 1 ; i++){
+        map->dictionary[i] = map->dictionary[i + 1];
+    }
+
+    if(index != map->size - 1){
+        free(map->dictionary[map->size - 1].key);
+        free(map->dictionary[map->size - 1].value);
+    }
+
+    Element tmp = realloc(map->dictionary, (map->maxSize - 1) * sizeof(*(map->dictionary)));
+    if(tmp == NULL){
+        return MAP_OUT_OF_MEMORY;
+    }
+
+    map->size--;
+    map->dictionary = tmp;
+    return MAP_SUCCESS;
+}
+
 Map mapCreate(){
     Map map = malloc(sizeof(*map));
     if(map == NULL){
@@ -77,7 +100,7 @@ void mapDestroy(Map map){
     while(mapGetSize(map) > 0){
         mapRemove(map, mapGetFirst(map));
     }
-
+    // TODO: Free key and value
     free(map->dictionary);
     free(map);
 }
@@ -152,7 +175,6 @@ MapResult mapPut(Map map, const char* key, const char* data){
             if(new_value == NULL){
                 return MAP_OUT_OF_MEMORY;
             }
-            free(map->dictionary[elementIndex(map,key)].value);
             map->dictionary[elementIndex(map,key)].value = new_value;
             return MAP_SUCCESS;
         }
@@ -166,7 +188,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
     Element new_element = malloc(sizeof(struct element));
     char* new_key = copyString(key);
     char* new_value = copyString(data);
-    if(new_value == NULL || new_key == NULL){
+    if(new_element == NULL ||new_value == NULL || new_key == NULL){
         return MAP_OUT_OF_MEMORY;
     }
     new_element->key = new_key;
@@ -195,13 +217,7 @@ MapResult mapRemove(Map map, const char* key){
         return MAP_ITEM_DOES_NOT_EXIST;
     }
 
-    free(map->dictionary[index].key);
-    free(map->dictionary[index].value);
-    free(&(map->dictionary[index]));
-    map->dictionary[index] = map->dictionary[map->size - 1];
-
-    map->size--;
-    return MAP_SUCCESS;
+    return removeElement(map, index);
 }
 
 char* mapGetFirst(Map map){
