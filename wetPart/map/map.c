@@ -164,6 +164,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
         return MAP_NULL_ARGUMENT;
     }
 
+    //check if key exists in map
     if(mapContains(map, key)){
 
         if(strcmp(map->dictionary[elementIndex(map,key)].value, data) == 0){
@@ -179,12 +180,14 @@ MapResult mapPut(Map map, const char* key, const char* data){
             return MAP_SUCCESS;
         }
     }
-
+    // expands map if necessary
     if(map->size == map->maxSize){
         if(expand(map) == MAP_OUT_OF_MEMORY){
             return MAP_OUT_OF_MEMORY;
         }
     }
+
+    // add element
     Element new_element = malloc(sizeof(struct element));
     char* new_key = copyString(key);
     char* new_value = copyString(data);
@@ -194,6 +197,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
     new_element->key = new_key;
     new_element->value = new_value;
 
+    //update map size
     map->dictionary[map->size++] = *new_element;
     return MAP_SUCCESS;
 }
