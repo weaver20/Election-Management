@@ -1,1 +1,1 @@
--IC:/Users/avira/ONEDRI~1/GitHub/Ex-1/dryPart -I"C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/ex1_from_server" -I"C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/ex1_from_server/mtm_map" 
+-IC:/Ex-1/dryPart -IC:/Ex-1/ex1_from_server -IC:/Ex-1/ex1_from_server/mtm_map 
