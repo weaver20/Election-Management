@@ -1,0 +1,1 @@
+/usr/bin/cc  -g    CMakeFiles/map.dir/wetPart/map/map.c.o CMakeFiles/map.dir/wetPart/map/map_example_test.c.o  -o map -rdynamic 
