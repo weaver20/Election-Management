@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/Noam_/CLionProjects/exercise-1/playground/playground.c" "C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/playground.dir/playground/playground.c.obj"
+  "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/playground/playground.c" "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/playground.dir/playground/playground.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

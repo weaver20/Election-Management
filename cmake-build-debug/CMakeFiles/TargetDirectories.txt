@@ -1,6 +1,6 @@
-C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/elections.dir
-C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/dry.dir
-C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/map.dir
-C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/playground.dir
-C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/elections.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/dry.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/map.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/playground.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

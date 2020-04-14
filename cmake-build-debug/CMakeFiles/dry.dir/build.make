@@ -33,19 +33,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = D:\Downloads\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E remove -f
+RM = D:\Downloads\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Noam_\CLionProjects\exercise-1
+CMAKE_SOURCE_DIR = "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug
+CMAKE_BINARY_DIR = "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/dry.dir/depend.make
@@ -59,30 +59,30 @@ include CMakeFiles/dry.dir/flags.make
 CMakeFiles/dry.dir/dryPart/dry.c.obj: CMakeFiles/dry.dir/flags.make
 CMakeFiles/dry.dir/dryPart/dry.c.obj: CMakeFiles/dry.dir/includes_C.rsp
 CMakeFiles/dry.dir/dryPart/dry.c.obj: ../dryPart/dry.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/dry.dir/dryPart/dry.c.obj"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\dry.dir\dryPart\dry.c.obj   -c C:\Users\Noam_\CLionProjects\exercise-1\dryPart\dry.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/dry.dir/dryPart/dry.c.obj"
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\dry.dir\dryPart\dry.c.obj   -c "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\dryPart\dry.c"
 
 CMakeFiles/dry.dir/dryPart/dry.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dry.dir/dryPart/dry.c.i"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Noam_\CLionProjects\exercise-1\dryPart\dry.c > CMakeFiles\dry.dir\dryPart\dry.c.i
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\dryPart\dry.c" > CMakeFiles\dry.dir\dryPart\dry.c.i
 
 CMakeFiles/dry.dir/dryPart/dry.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dry.dir/dryPart/dry.c.s"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Noam_\CLionProjects\exercise-1\dryPart\dry.c -o CMakeFiles\dry.dir\dryPart\dry.c.s
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\dryPart\dry.c" -o CMakeFiles\dry.dir\dryPart\dry.c.s
 
 CMakeFiles/dry.dir/dryPart/dryMain.c.obj: CMakeFiles/dry.dir/flags.make
 CMakeFiles/dry.dir/dryPart/dryMain.c.obj: CMakeFiles/dry.dir/includes_C.rsp
 CMakeFiles/dry.dir/dryPart/dryMain.c.obj: ../dryPart/dryMain.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/dry.dir/dryPart/dryMain.c.obj"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\dry.dir\dryPart\dryMain.c.obj   -c C:\Users\Noam_\CLionProjects\exercise-1\dryPart\dryMain.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/dry.dir/dryPart/dryMain.c.obj"
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\dry.dir\dryPart\dryMain.c.obj   -c "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\dryPart\dryMain.c"
 
 CMakeFiles/dry.dir/dryPart/dryMain.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dry.dir/dryPart/dryMain.c.i"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Noam_\CLionProjects\exercise-1\dryPart\dryMain.c > CMakeFiles\dry.dir\dryPart\dryMain.c.i
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\dryPart\dryMain.c" > CMakeFiles\dry.dir\dryPart\dryMain.c.i
 
 CMakeFiles/dry.dir/dryPart/dryMain.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dry.dir/dryPart/dryMain.c.s"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Noam_\CLionProjects\exercise-1\dryPart\dryMain.c -o CMakeFiles\dry.dir\dryPart\dryMain.c.s
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\dryPart\dryMain.c" -o CMakeFiles\dry.dir\dryPart\dryMain.c.s
 
 # Object files for target dry
 dry_OBJECTS = \
@@ -98,7 +98,7 @@ dry.exe: CMakeFiles/dry.dir/build.make
 dry.exe: CMakeFiles/dry.dir/linklibs.rsp
 dry.exe: CMakeFiles/dry.dir/objects1.rsp
 dry.exe: CMakeFiles/dry.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable dry.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable dry.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\dry.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -111,6 +111,6 @@ CMakeFiles/dry.dir/clean:
 .PHONY : CMakeFiles/dry.dir/clean
 
 CMakeFiles/dry.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Noam_\CLionProjects\exercise-1 C:\Users\Noam_\CLionProjects\exercise-1 C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles\dry.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles\dry.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/dry.dir/depend
 

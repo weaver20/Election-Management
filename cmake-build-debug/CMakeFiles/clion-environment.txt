@@ -1,4 +1,4 @@
-ToolSet: w64 7.0 (local)@C:\TDM-GCC-64\x86_64-w64-mingw32
+ToolSet: w64 6.0 (local)@C:\mingw64
 Options: 
 
 Options:

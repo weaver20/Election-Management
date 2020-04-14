@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/Noam_/CLionProjects/exercise-1/dryPart/dry.c" "C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/dry.dir/dryPart/dry.c.obj"
-  "C:/Users/Noam_/CLionProjects/exercise-1/dryPart/dryMain.c" "C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/dry.dir/dryPart/dryMain.c.obj"
+  "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/dryPart/dry.c" "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/dry.dir/dryPart/dry.c.obj"
+  "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/dryPart/dryMain.c" "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/dry.dir/dryPart/dryMain.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

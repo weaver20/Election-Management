@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/Noam_/CLionProjects/exercise-1/wetPart/elections/electionTestsExample.c" "C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.obj"
-  "C:/Users/Noam_/CLionProjects/exercise-1/wetPart/map/map.c" "C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/elections.dir/wetPart/map/map.c.obj"
-  "C:/Users/Noam_/CLionProjects/exercise-1/wetPart/map/map_example_test.c" "C:/Users/Noam_/CLionProjects/exercise-1/cmake-build-debug/CMakeFiles/elections.dir/wetPart/map/map_example_test.c.obj"
+  "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/wetPart/elections/electionTestsExample.c" "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.obj"
+  "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/wetPart/map/map.c" "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/elections.dir/wetPart/map/map.c.obj"
+  "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/wetPart/map/map_example_test.c" "C:/Users/avira/OneDrive - Technion/GitHub/Ex-1/cmake-build-debug/CMakeFiles/elections.dir/wetPart/map/map_example_test.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

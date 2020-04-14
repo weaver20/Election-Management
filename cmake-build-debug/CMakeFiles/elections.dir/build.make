@@ -33,19 +33,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = D:\Downloads\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E remove -f
+RM = D:\Downloads\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Noam_\CLionProjects\exercise-1
+CMAKE_SOURCE_DIR = "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug
+CMAKE_BINARY_DIR = "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/elections.dir/depend.make
@@ -59,44 +59,44 @@ include CMakeFiles/elections.dir/flags.make
 CMakeFiles/elections.dir/wetPart/map/map.c.obj: CMakeFiles/elections.dir/flags.make
 CMakeFiles/elections.dir/wetPart/map/map.c.obj: CMakeFiles/elections.dir/includes_C.rsp
 CMakeFiles/elections.dir/wetPart/map/map.c.obj: ../wetPart/map/map.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/elections.dir/wetPart/map/map.c.obj"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\elections.dir\wetPart\map\map.c.obj   -c C:\Users\Noam_\CLionProjects\exercise-1\wetPart\map\map.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/elections.dir/wetPart/map/map.c.obj"
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\elections.dir\wetPart\map\map.c.obj   -c "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\map\map.c"
 
 CMakeFiles/elections.dir/wetPart/map/map.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/elections.dir/wetPart/map/map.c.i"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Noam_\CLionProjects\exercise-1\wetPart\map\map.c > CMakeFiles\elections.dir\wetPart\map\map.c.i
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\map\map.c" > CMakeFiles\elections.dir\wetPart\map\map.c.i
 
 CMakeFiles/elections.dir/wetPart/map/map.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/elections.dir/wetPart/map/map.c.s"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Noam_\CLionProjects\exercise-1\wetPart\map\map.c -o CMakeFiles\elections.dir\wetPart\map\map.c.s
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\map\map.c" -o CMakeFiles\elections.dir\wetPart\map\map.c.s
 
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.obj: CMakeFiles/elections.dir/flags.make
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.obj: CMakeFiles/elections.dir/includes_C.rsp
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.obj: ../wetPart/elections/electionTestsExample.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.obj"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\elections.dir\wetPart\elections\electionTestsExample.c.obj   -c C:\Users\Noam_\CLionProjects\exercise-1\wetPart\elections\electionTestsExample.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.obj"
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\elections.dir\wetPart\elections\electionTestsExample.c.obj   -c "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\elections\electionTestsExample.c"
 
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.i"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Noam_\CLionProjects\exercise-1\wetPart\elections\electionTestsExample.c > CMakeFiles\elections.dir\wetPart\elections\electionTestsExample.c.i
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\elections\electionTestsExample.c" > CMakeFiles\elections.dir\wetPart\elections\electionTestsExample.c.i
 
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.s"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Noam_\CLionProjects\exercise-1\wetPart\elections\electionTestsExample.c -o CMakeFiles\elections.dir\wetPart\elections\electionTestsExample.c.s
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\elections\electionTestsExample.c" -o CMakeFiles\elections.dir\wetPart\elections\electionTestsExample.c.s
 
 CMakeFiles/elections.dir/wetPart/map/map_example_test.c.obj: CMakeFiles/elections.dir/flags.make
 CMakeFiles/elections.dir/wetPart/map/map_example_test.c.obj: CMakeFiles/elections.dir/includes_C.rsp
 CMakeFiles/elections.dir/wetPart/map/map_example_test.c.obj: ../wetPart/map/map_example_test.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/elections.dir/wetPart/map/map_example_test.c.obj"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\elections.dir\wetPart\map\map_example_test.c.obj   -c C:\Users\Noam_\CLionProjects\exercise-1\wetPart\map\map_example_test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/elections.dir/wetPart/map/map_example_test.c.obj"
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\elections.dir\wetPart\map\map_example_test.c.obj   -c "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\map\map_example_test.c"
 
 CMakeFiles/elections.dir/wetPart/map/map_example_test.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/elections.dir/wetPart/map/map_example_test.c.i"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Noam_\CLionProjects\exercise-1\wetPart\map\map_example_test.c > CMakeFiles\elections.dir\wetPart\map\map_example_test.c.i
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\map\map_example_test.c" > CMakeFiles\elections.dir\wetPart\map\map_example_test.c.i
 
 CMakeFiles/elections.dir/wetPart/map/map_example_test.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/elections.dir/wetPart/map/map_example_test.c.s"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Noam_\CLionProjects\exercise-1\wetPart\map\map_example_test.c -o CMakeFiles\elections.dir\wetPart\map\map_example_test.c.s
+	C:\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\wetPart\map\map_example_test.c" -o CMakeFiles\elections.dir\wetPart\map\map_example_test.c.s
 
 # Object files for target elections
 elections_OBJECTS = \
@@ -114,7 +114,7 @@ elections.exe: CMakeFiles/elections.dir/build.make
 elections.exe: CMakeFiles/elections.dir/linklibs.rsp
 elections.exe: CMakeFiles/elections.dir/objects1.rsp
 elections.exe: CMakeFiles/elections.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable elections.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable elections.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\elections.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -127,6 +127,6 @@ CMakeFiles/elections.dir/clean:
 .PHONY : CMakeFiles/elections.dir/clean
 
 CMakeFiles/elections.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Noam_\CLionProjects\exercise-1 C:\Users\Noam_\CLionProjects\exercise-1 C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug C:\Users\Noam_\CLionProjects\exercise-1\cmake-build-debug\CMakeFiles\elections.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug" "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles\elections.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/elections.dir/depend
 
