@@ -188,20 +188,14 @@ MapResult mapPut(Map map, const char* key, const char* data){
             return MAP_OUT_OF_MEMORY;
         }
     }
-
-    // add element
-    Element new_element = malloc(sizeof(*new_element));
     char* new_key = copyString(key);
     char* new_value = copyString(data);
-    if(new_element == NULL ||new_value == NULL || new_key == NULL){
+    if(new_value == NULL || new_key == NULL){
         return MAP_OUT_OF_MEMORY;
     }
-    new_element->key = new_key;
-    new_element->value = new_value;
+    map->dictionary[map->size].key = new_key;
+    map->dictionary[map->size++].value = new_value;
 
-    //update map size
-    map->dictionary[map->size++] = *new_element;
-    free(new_element);
     return MAP_SUCCESS;
 }
 

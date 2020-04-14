@@ -8,46 +8,53 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define EMPTY 0
-#define DEMI_VALUE -9999
 
 struct node_t {
     int x;
     struct node_t* next;
 };
 
-static void destroyList(Node ptr);
-static Node createOrDestroy(int data);
-
-int getListLength(Node list) {
-    int length = 0;
-    while (list != NULL)
-        length++;
-
-
-
-
-
-
-    return length - 1;  // first Node is a demi.
-}
-
-// TODO:
-bool isListSorted(Node list) {
-    return true;
-}
-//TODO:  destroyAll part
-Node nodeCreateOrDestroyAll(Node head, int data) {
-    Node ptr = malloc(sizeof(*ptr));
-    if (ptr == NULL) {
+Node makeListUp(int first, int size) {
+    Node list_head = malloc(sizeof(*list_head));
+    Node list = list_head;
+    if(list == NULL)
         return NULL;
+    list->x= first;
+    for(int i=1;i<size;i++)
+    {
+       list->next = nodeCreateOrDestroyAll(list_head,first+i);
+        if (list->next == NULL) {
+            return NULL;
+        }
+        list = list->next;
     }
-    ptr->x = data;
-    ptr->next = NULL;
-    return ptr;
+    return list_head;
+}
+Node makeListDown(int first, int size) {
+    Node list_head = malloc(sizeof(*list_head));
+    Node list = list_head;
+    if(list == NULL)
+        return NULL;
+    list->x= first;
+    for(int i=1;i<size;i++)
+    {
+        list->next = nodeCreateOrDestroyAll(list_head,first+2*i);
+        if (list->next == NULL) {
+            return NULL;
+        }
+        list = list->next;
+    }
+    return list_head;
 }
 
-void destroyList(Node ptr) {
+void listPrint(Node list) {
+    while (list != NULL) {
+        printf("%d, ",list->x);
+        list = list->next;
+    }
+
+}
+void listDestroy(Node ptr) {
     while (ptr) {
         Node toDelete = ptr;
         ptr = ptr->next;
@@ -55,60 +62,109 @@ void destroyList(Node ptr) {
     }
 }
 
-ErrorCode listCopyOrDestroyAll(Node list1,Node merged_ptr,Node merged_head)
+Node nodeCreateOrDestroyAll(Node head, int data) {
+    Node node = malloc(sizeof(*node));
+    if (node == NULL) {
+        listDestroy(head);
+        return NULL;
+    }
+    node->x = data;
+    node->next = NULL;
+    return node;
+}
+
+
+Node listCopyOrDestroyAll(Node source,Node destination,Node destination_head)
 {
-
-
+    assert(source != NULL);
+    while(source) {
+        // destination list is empty
+        if(destination_head == NULL) {
+            destination_head = nodeCreateOrDestroyAll(destination_head, source->x);
+            if(destination_head == NULL){
+                return NULL;
+            }
+            destination = destination_head;
+        }
+        // destination list is NOT empty
+        else {
+            destination->next = nodeCreateOrDestroyAll(destination_head, source->x);
+            if (destination->next == NULL) {
+                return NULL;
+            }
+            destination = destination->next;
+        }
+        source = source->next;
+    }
+    return destination_head;
 }
 
 ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
-    // making sure merged_out is not NULL
+
     Node merged_ptr = *merged_out;
-    merged_ptr = nodeCreateOrDestroyAll(*merged_out, DEMI_VALUE);
-    if (merged_ptr == NULL) {
-        return MEMORY_ERROR;
+    // both lists are empty
+    if (list1 == NULL && list2 == NULL) {
+        return EMPTY_LIST;
     }
-    int list1_length = getListLength(list1);
-    int list2_length = getListLength(list2);
-
-    if (list1_length == EMPTY && list2_length == EMPTY) {
-        return EMPTY_LIST;  // what do we do with merged_out?
-    }
-
-    //if we made it so far both of the lists are not empty
+    // check if lists are sorted (or empty).
+/*    if(!isListSorted((list1)) || !isListSorted((list2))){
+        return UNSORTED_LIST;
+    }*/
+    //both lists are full
     while (list1 != NULL && list2 != NULL) {
         int merge_from = (list1->x <= list2->x) ? 1 : 2;
         switch (merge_from) {
             case 1:
-                //..
-                merged_ptr->next = nodeCreateOrDestroyAll(*merged_out, list1->x);
-                if (merged_ptr->next == NULL) {
-                    return MEMORY_ERROR;
+                if(*merged_out == NULL) { // merged list is empty
+                    *merged_out = nodeCreateOrDestroyAll(*merged_out, list1->x);
+                    if(*merged_out == NULL){
+                        return MEMORY_ERROR;
+                    }
+                    merged_ptr=*merged_out;
                 }
-                merged_ptr = merged_ptr->next;
-                list1 = list1->next;
+                else {
+                    merged_ptr->next = nodeCreateOrDestroyAll(*merged_out, list1->x);
+                    if (merged_ptr->next == NULL) {
+                        return MEMORY_ERROR;
+                    }
+                    merged_ptr = merged_ptr->next;
+                }
+                    list1 = list1->next;
+
                 break;
             case 2:
-                //..
-                merged_ptr->next = nodeCreateOrDestroyAll(*merged_out, list2->x);
-                if (merged_ptr->next == NULL) {
-                    return MEMORY_ERROR;
+                if(*merged_out == NULL) { // merged list is empty
+                    *merged_out = nodeCreateOrDestroyAll(*merged_out, list2->x);
+                    if(*merged_out == NULL){
+                        return MEMORY_ERROR;
+                    }
+                    merged_ptr=*merged_out;
                 }
-                merged_ptr = merged_ptr->next;
+                else {
+                    merged_ptr->next = nodeCreateOrDestroyAll(*merged_out, list2->x);
+                    if (merged_ptr->next == NULL) {
+                        return MEMORY_ERROR;
+                    }
+                    merged_ptr = merged_ptr->next;
+                }
                 list2 = list2->next;
                 break;
         }
 
     }
-        // TODO: maybe do a recursive call instead??
+    // one of the lists is empty
     if (list1 == NULL) {
-        if (listCopyOrDestroyAll(list2, merged_ptr, *merged_out) == MEMORY_ERROR) {
+        Node tmp = listCopyOrDestroyAll(list2, merged_ptr, *merged_out);
+        if ( tmp == NULL) {
             return MEMORY_ERROR;
         }
-    } else if (list2 == NULL) {
-        if (listCopyOrDestroyAll(list1, merged_ptr, *merged_out) == MEMORY_ERROR) {
+    } else {  // list2 == NULL
+        Node tmp = listCopyOrDestroyAll(list1, merged_ptr, *merged_out);
+        if (tmp == NULL) {
             return MEMORY_ERROR;
         }
+        *merged_out = tmp;
     }
+
     return SUCCESS;
 }
