@@ -18,7 +18,7 @@ set(CMAKE_C_STANDARD 99)
 add_executable(elections
         wetPart/elections/electionTestsExample.c
         wetPart/elections/election.h
-        wetPart/test_utilities.h)
+        wetPart/test_utilities.h wetPart/elections/elections.c)
 add_executable(dry
         dryPart/dry.c
         dryPart/dry.h
@@ -32,6 +32,7 @@ add_executable(map
         wetPart/test_utilities.h
         )
 add_executable(playground
+        dryPart/findErrors.c
         playground/playground.c)
 # Adds compile flags to compilation command of the target hello.
 # first arg: name of the target
