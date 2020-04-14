@@ -169,7 +169,6 @@ MapResult mapPut(Map map, const char* key, const char* data){
 
     //check if key exists in map
     if(mapContains(map, key)){
-
         if(strcmp(map->dictionary[elementIndex(map,key)].value, data) == 0){
             return MAP_ITEM_ALREADY_EXISTS;
         }
@@ -202,6 +201,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
 
     //update map size
     map->dictionary[map->size++] = *new_element;
+    free(new_element);
     return MAP_SUCCESS;
 }
 
