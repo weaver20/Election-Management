@@ -1,0 +1,1 @@
+/usr/bin/cc  -O3 -DNDEBUG    CMakeFiles/dry.dir/dryPart/dry.c.o CMakeFiles/dry.dir/dryPart/dryMain.c.o  -o dry -rdynamic 

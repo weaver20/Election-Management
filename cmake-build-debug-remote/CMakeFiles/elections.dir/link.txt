@@ -1,0 +1,1 @@
+/usr/bin/cc  -O3 -DNDEBUG    CMakeFiles/elections.dir/wetPart/map/map.c.o CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o  -o elections -rdynamic 

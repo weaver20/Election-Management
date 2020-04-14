@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Noam_/CLionProjects/exercise-1/dryPart/dry.c
+dry.h
+C:/Users/Noam_/CLionProjects/exercise-1/dryPart/dry.h
+assert.h
+-
+stdbool.h
+-
+stdio.h
+-
+stdlib.h
+-
+
+C:/Users/Noam_/CLionProjects/exercise-1/dryPart/dry.h
+stdbool.h
+-
+stdio.h
+-
+
+C:/Users/Noam_/CLionProjects/exercise-1/dryPart/dryMain.c
+
