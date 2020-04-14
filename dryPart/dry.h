@@ -17,7 +17,10 @@ typedef enum {
   NULL_ARGUMENT,
 } ErrorCode;
 
-int getListLength(Node list);
+void listPrint(Node list);
+Node makeListUp(int first, int size);
+Node makeListDown(int first, int size);
+Node nodeCreateOrDestroyAll(Node head, int data);
 bool isListSorted(Node list);
 ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out);
 
