@@ -22,7 +22,8 @@ add_executable(elections
 add_executable(dry
         dryPart/dry.c
         dryPart/dry.h
-        dryPart/dryMain.c)
+        dryPart/dryMain.c
+        dryPart/findErrors.c)
 add_executable(map
         wetPart/map/map.c
         wetPart/map/map.h
