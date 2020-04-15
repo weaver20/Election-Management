@@ -8,7 +8,7 @@
 
 .idea/
 _windows/
-color/
+colors/
 build/
 cmake-build-debug/
 cmake-build-debug-remote/
