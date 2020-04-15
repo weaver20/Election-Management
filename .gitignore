@@ -6,6 +6,7 @@
 *.internal
 *.o
 
+color/
 build/
 cmake-build-debug/
 cmake-build-debug-remote/
