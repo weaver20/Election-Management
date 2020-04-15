@@ -1,6 +1,0 @@
-C:/Ex-1/cmake-build-debug/CMakeFiles/elections.dir
-C:/Ex-1/cmake-build-debug/CMakeFiles/dry.dir
-C:/Ex-1/cmake-build-debug/CMakeFiles/map.dir
-C:/Ex-1/cmake-build-debug/CMakeFiles/playground.dir
-C:/Ex-1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Ex-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
