@@ -30,7 +30,7 @@ add_executable(map
         wetPart/map/map_example_test.c
         wetPart/elections/election.h
         wetPart/test_utilities.h
-        )
+        wetPart/map/test_file.c)
 add_executable(playground
         playground/playground.c)
 # Adds compile flags to compilation command of the target hello.
@@ -38,7 +38,7 @@ add_executable(playground
 # second arg: PRIVATE (can also be PUBLIC or INTERFACE)
 # rest of args: flags to add to the command
 target_compile_options(dry PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
-target_compile_options(map PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
+target_compile_options(map PRIVATE -Wall -Werror -pedantic-errors)
 target_compile_options(elections PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors -L. -lmap)
 target_compile_options(playground PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
 

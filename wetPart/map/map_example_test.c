@@ -6,7 +6,7 @@
 #include "map.h"
 #include <stdlib.h>
 
-#define NUMBER_TESTS 4
+/*#define NUMBER_TESTS 4
 
 bool testMapCreateDestroy() {
     Map map = mapCreate();
@@ -92,4 +92,4 @@ int main(int argc, char *argv[]) {
   RUN_TEST(tests[test_idx - 1], testNames[test_idx - 1]);
   //RUN_TEST(tests[3], testNames[3]);
   return 0;
-}
+}*/
