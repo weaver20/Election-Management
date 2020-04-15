@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/noamchen/mtm/Clion Files/Ex-1"
+CMAKE_SOURCE_DIR = /home/aviramsh/mtm/Clion/Ex-1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote"
+CMAKE_BINARY_DIR = /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote
 
 # Include any dependencies generated for this target.
 include CMakeFiles/map.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/map.dir/flags.make
 
 CMakeFiles/map.dir/wetPart/map/map.c.o: CMakeFiles/map.dir/flags.make
 CMakeFiles/map.dir/wetPart/map/map.c.o: ../wetPart/map/map.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/map.dir/wetPart/map/map.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/map.dir/wetPart/map/map.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map.c"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/map.dir/wetPart/map/map.c.o   -c /home/aviramsh/mtm/Clion/Ex-1/wetPart/map/map.c
 
 CMakeFiles/map.dir/wetPart/map/map.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/map.dir/wetPart/map/map.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map.c" > CMakeFiles/map.dir/wetPart/map/map.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/aviramsh/mtm/Clion/Ex-1/wetPart/map/map.c > CMakeFiles/map.dir/wetPart/map/map.c.i
 
 CMakeFiles/map.dir/wetPart/map/map.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/map.dir/wetPart/map/map.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map.c" -o CMakeFiles/map.dir/wetPart/map/map.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/aviramsh/mtm/Clion/Ex-1/wetPart/map/map.c -o CMakeFiles/map.dir/wetPart/map/map.c.s
 
 CMakeFiles/map.dir/wetPart/map/map.c.o.requires:
 .PHONY : CMakeFiles/map.dir/wetPart/map/map.c.o.requires
@@ -77,17 +77,17 @@ CMakeFiles/map.dir/wetPart/map/map.c.o.provides.build: CMakeFiles/map.dir/wetPar
 
 CMakeFiles/map.dir/wetPart/map/map_example_test.c.o: CMakeFiles/map.dir/flags.make
 CMakeFiles/map.dir/wetPart/map/map_example_test.c.o: ../wetPart/map/map_example_test.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/map.dir/wetPart/map/map_example_test.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/map.dir/wetPart/map/map_example_test.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map_example_test.c"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/map.dir/wetPart/map/map_example_test.c.o   -c /home/aviramsh/mtm/Clion/Ex-1/wetPart/map/map_example_test.c
 
 CMakeFiles/map.dir/wetPart/map/map_example_test.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/map.dir/wetPart/map/map_example_test.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map_example_test.c" > CMakeFiles/map.dir/wetPart/map/map_example_test.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/aviramsh/mtm/Clion/Ex-1/wetPart/map/map_example_test.c > CMakeFiles/map.dir/wetPart/map/map_example_test.c.i
 
 CMakeFiles/map.dir/wetPart/map/map_example_test.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/map.dir/wetPart/map/map_example_test.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map_example_test.c" -o CMakeFiles/map.dir/wetPart/map/map_example_test.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/aviramsh/mtm/Clion/Ex-1/wetPart/map/map_example_test.c -o CMakeFiles/map.dir/wetPart/map/map_example_test.c.s
 
 CMakeFiles/map.dir/wetPart/map/map_example_test.c.o.requires:
 .PHONY : CMakeFiles/map.dir/wetPart/map/map_example_test.c.o.requires
@@ -126,6 +126,6 @@ CMakeFiles/map.dir/clean:
 .PHONY : CMakeFiles/map.dir/clean
 
 CMakeFiles/map.dir/depend:
-	cd "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/map.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/map.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/map.dir/depend
 

@@ -6,5 +6,13 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Noam_/CLionProjects/exercise-1/playground/playground.c
+C:/Ex-1/playground/playground.c
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+stdio.h
+-
 

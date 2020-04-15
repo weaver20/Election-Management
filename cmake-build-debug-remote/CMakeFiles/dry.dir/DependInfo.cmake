@@ -4,8 +4,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dry.c" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir/dryPart/dry.c.o"
-  "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dryMain.c" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir/dryPart/dryMain.c.o"
+  "/home/aviramsh/mtm/Clion/Ex-1/dryPart/dry.c" "/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir/dryPart/dry.c.o"
+  "/home/aviramsh/mtm/Clion/Ex-1/dryPart/dryMain.c" "/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir/dryPart/dryMain.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

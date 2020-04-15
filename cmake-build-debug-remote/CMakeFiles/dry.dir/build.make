@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/noamchen/mtm/Clion Files/Ex-1"
+CMAKE_SOURCE_DIR = /home/aviramsh/mtm/Clion/Ex-1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote"
+CMAKE_BINARY_DIR = /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote
 
 # Include any dependencies generated for this target.
 include CMakeFiles/dry.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/dry.dir/flags.make
 
 CMakeFiles/dry.dir/dryPart/dry.c.o: CMakeFiles/dry.dir/flags.make
 CMakeFiles/dry.dir/dryPart/dry.c.o: ../dryPart/dry.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/dry.dir/dryPart/dry.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/dry.dir/dryPart/dry.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dry.c"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/dry.dir/dryPart/dry.c.o   -c /home/aviramsh/mtm/Clion/Ex-1/dryPart/dry.c
 
 CMakeFiles/dry.dir/dryPart/dry.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dry.dir/dryPart/dry.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dry.c" > CMakeFiles/dry.dir/dryPart/dry.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/aviramsh/mtm/Clion/Ex-1/dryPart/dry.c > CMakeFiles/dry.dir/dryPart/dry.c.i
 
 CMakeFiles/dry.dir/dryPart/dry.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dry.dir/dryPart/dry.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dry.c" -o CMakeFiles/dry.dir/dryPart/dry.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/aviramsh/mtm/Clion/Ex-1/dryPart/dry.c -o CMakeFiles/dry.dir/dryPart/dry.c.s
 
 CMakeFiles/dry.dir/dryPart/dry.c.o.requires:
 .PHONY : CMakeFiles/dry.dir/dryPart/dry.c.o.requires
@@ -77,17 +77,17 @@ CMakeFiles/dry.dir/dryPart/dry.c.o.provides.build: CMakeFiles/dry.dir/dryPart/dr
 
 CMakeFiles/dry.dir/dryPart/dryMain.c.o: CMakeFiles/dry.dir/flags.make
 CMakeFiles/dry.dir/dryPart/dryMain.c.o: ../dryPart/dryMain.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/dry.dir/dryPart/dryMain.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/dry.dir/dryPart/dryMain.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dryMain.c"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/dry.dir/dryPart/dryMain.c.o   -c /home/aviramsh/mtm/Clion/Ex-1/dryPart/dryMain.c
 
 CMakeFiles/dry.dir/dryPart/dryMain.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dry.dir/dryPart/dryMain.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dryMain.c" > CMakeFiles/dry.dir/dryPart/dryMain.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/aviramsh/mtm/Clion/Ex-1/dryPart/dryMain.c > CMakeFiles/dry.dir/dryPart/dryMain.c.i
 
 CMakeFiles/dry.dir/dryPart/dryMain.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dry.dir/dryPart/dryMain.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/dryPart/dryMain.c" -o CMakeFiles/dry.dir/dryPart/dryMain.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/aviramsh/mtm/Clion/Ex-1/dryPart/dryMain.c -o CMakeFiles/dry.dir/dryPart/dryMain.c.s
 
 CMakeFiles/dry.dir/dryPart/dryMain.c.o.requires:
 .PHONY : CMakeFiles/dry.dir/dryPart/dryMain.c.o.requires
@@ -126,6 +126,6 @@ CMakeFiles/dry.dir/clean:
 .PHONY : CMakeFiles/dry.dir/clean
 
 CMakeFiles/dry.dir/depend:
-	cd "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/dry.dir/depend
 

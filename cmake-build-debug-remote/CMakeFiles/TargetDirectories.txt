@@ -1,4 +1,4 @@
-/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir
-/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir
-/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/map.dir
-/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/playground.dir
+/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/dry.dir
+/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir
+/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/map.dir
+/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/playground.dir

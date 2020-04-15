@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/noamchen/mtm/Clion Files/Ex-1"
+CMAKE_SOURCE_DIR = /home/aviramsh/mtm/Clion/Ex-1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote"
+CMAKE_BINARY_DIR = /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote
 
 # Include any dependencies generated for this target.
 include CMakeFiles/elections.dir/depend.make
@@ -52,42 +52,19 @@ include CMakeFiles/elections.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/elections.dir/flags.make
 
-CMakeFiles/elections.dir/wetPart/map/map.c.o: CMakeFiles/elections.dir/flags.make
-CMakeFiles/elections.dir/wetPart/map/map.c.o: ../wetPart/map/map.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/elections.dir/wetPart/map/map.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/elections.dir/wetPart/map/map.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map.c"
-
-CMakeFiles/elections.dir/wetPart/map/map.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/elections.dir/wetPart/map/map.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map.c" > CMakeFiles/elections.dir/wetPart/map/map.c.i
-
-CMakeFiles/elections.dir/wetPart/map/map.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/elections.dir/wetPart/map/map.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map.c" -o CMakeFiles/elections.dir/wetPart/map/map.c.s
-
-CMakeFiles/elections.dir/wetPart/map/map.c.o.requires:
-.PHONY : CMakeFiles/elections.dir/wetPart/map/map.c.o.requires
-
-CMakeFiles/elections.dir/wetPart/map/map.c.o.provides: CMakeFiles/elections.dir/wetPart/map/map.c.o.requires
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map.c.o.provides.build
-.PHONY : CMakeFiles/elections.dir/wetPart/map/map.c.o.provides
-
-CMakeFiles/elections.dir/wetPart/map/map.c.o.provides.build: CMakeFiles/elections.dir/wetPart/map/map.c.o
-
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o: CMakeFiles/elections.dir/flags.make
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o: ../wetPart/elections/electionTestsExample.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/elections/electionTestsExample.c"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o   -c /home/aviramsh/mtm/Clion/Ex-1/wetPart/elections/electionTestsExample.c
 
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/elections/electionTestsExample.c" > CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/aviramsh/mtm/Clion/Ex-1/wetPart/elections/electionTestsExample.c > CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.i
 
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/elections/electionTestsExample.c" -o CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/aviramsh/mtm/Clion/Ex-1/wetPart/elections/electionTestsExample.c -o CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.s
 
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o.requires:
 .PHONY : CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o.requires
@@ -98,41 +75,14 @@ CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o.provides: CM
 
 CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o.provides.build: CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o
 
-CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o: CMakeFiles/elections.dir/flags.make
-CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o: ../wetPart/map/map_example_test.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map_example_test.c"
-
-CMakeFiles/elections.dir/wetPart/map/map_example_test.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/elections.dir/wetPart/map/map_example_test.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map_example_test.c" > CMakeFiles/elections.dir/wetPart/map/map_example_test.c.i
-
-CMakeFiles/elections.dir/wetPart/map/map_example_test.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/elections.dir/wetPart/map/map_example_test.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map_example_test.c" -o CMakeFiles/elections.dir/wetPart/map/map_example_test.c.s
-
-CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.requires:
-.PHONY : CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.requires
-
-CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.provides: CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.requires
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.provides.build
-.PHONY : CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.provides
-
-CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.provides.build: CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o
-
 # Object files for target elections
 elections_OBJECTS = \
-"CMakeFiles/elections.dir/wetPart/map/map.c.o" \
-"CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o" \
-"CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o"
+"CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o"
 
 # External object files for target elections
 elections_EXTERNAL_OBJECTS =
 
-elections: CMakeFiles/elections.dir/wetPart/map/map.c.o
 elections: CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o
-elections: CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o
 elections: CMakeFiles/elections.dir/build.make
 elections: CMakeFiles/elections.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C executable elections"
@@ -142,9 +92,7 @@ elections: CMakeFiles/elections.dir/link.txt
 CMakeFiles/elections.dir/build: elections
 .PHONY : CMakeFiles/elections.dir/build
 
-CMakeFiles/elections.dir/requires: CMakeFiles/elections.dir/wetPart/map/map.c.o.requires
 CMakeFiles/elections.dir/requires: CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o.requires
-CMakeFiles/elections.dir/requires: CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o.requires
 .PHONY : CMakeFiles/elections.dir/requires
 
 CMakeFiles/elections.dir/clean:
@@ -152,6 +100,6 @@ CMakeFiles/elections.dir/clean:
 .PHONY : CMakeFiles/elections.dir/clean
 
 CMakeFiles/elections.dir/depend:
-	cd "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/elections.dir/depend
 
