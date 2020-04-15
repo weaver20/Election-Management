@@ -4,9 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/elections/electionTestsExample.c" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o"
-  "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map.c" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir/wetPart/map/map.c.o"
-  "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/map_example_test.c" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o"
+  "/home/aviramsh/mtm/Clion/Ex-1/wetPart/elections/electionTestsExample.c" "/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/elections.dir/wetPart/elections/electionTestsExample.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

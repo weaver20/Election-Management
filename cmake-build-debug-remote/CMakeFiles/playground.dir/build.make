@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/noamchen/mtm/Clion Files/Ex-1"
+CMAKE_SOURCE_DIR = /home/aviramsh/mtm/Clion/Ex-1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote"
+CMAKE_BINARY_DIR = /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote
 
 # Include any dependencies generated for this target.
 include CMakeFiles/playground.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/playground.dir/flags.make
 
 CMakeFiles/playground.dir/playground/playground.c.o: CMakeFiles/playground.dir/flags.make
 CMakeFiles/playground.dir/playground/playground.c.o: ../playground/playground.c
-	$(CMAKE_COMMAND) -E cmake_progress_report "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/playground.dir/playground/playground.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/playground.dir/playground/playground.c.o   -c "/home/noamchen/mtm/Clion Files/Ex-1/playground/playground.c"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/playground.dir/playground/playground.c.o   -c /home/aviramsh/mtm/Clion/Ex-1/playground/playground.c
 
 CMakeFiles/playground.dir/playground/playground.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/playground.dir/playground/playground.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E "/home/noamchen/mtm/Clion Files/Ex-1/playground/playground.c" > CMakeFiles/playground.dir/playground/playground.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/aviramsh/mtm/Clion/Ex-1/playground/playground.c > CMakeFiles/playground.dir/playground/playground.c.i
 
 CMakeFiles/playground.dir/playground/playground.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/playground.dir/playground/playground.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S "/home/noamchen/mtm/Clion Files/Ex-1/playground/playground.c" -o CMakeFiles/playground.dir/playground/playground.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/aviramsh/mtm/Clion/Ex-1/playground/playground.c -o CMakeFiles/playground.dir/playground/playground.c.s
 
 CMakeFiles/playground.dir/playground/playground.c.o.requires:
 .PHONY : CMakeFiles/playground.dir/playground/playground.c.o.requires
@@ -100,6 +100,6 @@ CMakeFiles/playground.dir/clean:
 .PHONY : CMakeFiles/playground.dir/clean
 
 CMakeFiles/playground.dir/depend:
-	cd "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/playground.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1 /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote /home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/playground.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/playground.dir/depend
 

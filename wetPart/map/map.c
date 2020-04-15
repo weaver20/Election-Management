@@ -16,7 +16,7 @@ typedef struct element{
 
 struct Map_t{
     int size;
-    int maxSize;
+    int max_size;
     int iterator;
     Element dictionary;
 };
@@ -31,14 +31,14 @@ static int elementIndex(Map map, const char* key){
 }
 
 static MapResult expand(Map map){
-    int newSize = EXPAND_FACTOR * map->maxSize;
-    Element newElements = realloc(map->dictionary, newSize * sizeof(struct element));
+    int newSize = EXPAND_FACTOR * map->max_size;
+    Element newElements = realloc(map->dictionary, newSize * sizeof(*(map->dictionary)));
     if(newElements == NULL){
         return MAP_OUT_OF_MEMORY;
     }
 
     map->dictionary = newElements;
-    map->maxSize = newSize;
+    map->max_size = newSize;
 
     return MAP_SUCCESS;
 }
@@ -52,7 +52,7 @@ static char* copyString(const char* str){
 }
 
 static MapResult removeElement(Map map, int index){
-
+    assert(map != NULL && map->size > 0);
     free(map->dictionary[index].key);
     free(map->dictionary[index].value);
     for(int i = index; i < map->size - 1 ; i++){
@@ -67,14 +67,21 @@ static MapResult removeElement(Map map, int index){
     }
 */
 
-    Element tmp = realloc(map->dictionary, (map->maxSize - 1) * sizeof(*tmp));
-    if(tmp == NULL){
-        return MAP_OUT_OF_MEMORY;
-    }
+    if(map->size > 1){
+        Element tmp = realloc(map->dictionary, (map->max_size - 1) * sizeof(*tmp));
+        if(tmp == NULL){
+            return MAP_OUT_OF_MEMORY;
+        }
 
-    map->size--;
-    map->dictionary = tmp;
-    return MAP_SUCCESS;
+        map->max_size--;
+        map->size--;
+        map->dictionary = tmp;
+        return MAP_SUCCESS;
+    }
+    else{
+        map->size--;
+        return MAP_SUCCESS;
+    }
 }
 
 Map mapCreate(){
@@ -91,7 +98,7 @@ Map mapCreate(){
 
     map->size = 0;
     map ->iterator = 0;
-    map->maxSize = INITIAL_SIZE;
+    map->max_size = INITIAL_SIZE;
     return map;
 }
 
@@ -108,8 +115,8 @@ void mapDestroy(Map map){
     free(map);
 }
 
-static MapResult addOrDestroy(Map map, const struct element index){
-    MapResult result = mapPut(map, index.key, index.value);
+static MapResult addOrDestroy(Map map, const Element index){
+    MapResult result = mapPut(map, index->key, index->value);
     if(result == MAP_OUT_OF_MEMORY){
         mapDestroy(map);
     }
@@ -117,8 +124,8 @@ static MapResult addOrDestroy(Map map, const struct element index){
 }
 
 static MapResult addAllOrDestroy(Map map, Map targetMap){
-    for(int i = 0; i < targetMap->size; i++){
-        if(addOrDestroy(map, targetMap->dictionary[i]) == MAP_OUT_OF_MEMORY){
+    for(int i = 0; i < map->size; i++){
+        if(addOrDestroy(targetMap, &map->dictionary[i]) == MAP_OUT_OF_MEMORY){
             return MAP_OUT_OF_MEMORY;
         }
     }
@@ -131,8 +138,8 @@ Map mapCopy(Map map){
     }
 
     Map newMap = mapCreate();
-    if(newMap == NULL){
-        return  NULL;
+    if(newMap == NULL) {
+        return NULL;
     }
 
     if(addAllOrDestroy(map, newMap) == MAP_OUT_OF_MEMORY){
@@ -183,7 +190,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
         }
     }
     // expands map if necessary
-    if(map->size == map->maxSize){
+    if(map->size == map->max_size){
         if(expand(map) == MAP_OUT_OF_MEMORY){
             return MAP_OUT_OF_MEMORY;
         }

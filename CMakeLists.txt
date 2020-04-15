@@ -18,7 +18,7 @@ set(CMAKE_C_STANDARD 99)
 add_executable(elections
         wetPart/elections/electionTestsExample.c
         wetPart/elections/election.h
-        wetPart/test_utilities.h)
+        wetPart/test_utilities.h wetPart/elections/elections.c)
 add_executable(dry
         dryPart/dry.c
         dryPart/dry.h
@@ -30,15 +30,16 @@ add_executable(map
         wetPart/map/map_example_test.c
         wetPart/elections/election.h
         wetPart/test_utilities.h
-        )
+        wetPart/map/test_file.c)
 add_executable(playground
+        dryPart/findErrors.c
         playground/playground.c)
 # Adds compile flags to compilation command of the target hello.
 # first arg: name of the target
 # second arg: PRIVATE (can also be PUBLIC or INTERFACE)
 # rest of args: flags to add to the command
 target_compile_options(dry PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
-target_compile_options(map PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
+target_compile_options(map PRIVATE -Wall -Werror -pedantic-errors)
 target_compile_options(elections PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors -L. -lmap)
 target_compile_options(playground PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
 

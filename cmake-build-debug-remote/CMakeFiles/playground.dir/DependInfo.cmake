@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/noamchen/mtm/Clion Files/Ex-1/playground/playground.c" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/playground.dir/playground/playground.c.o"
+  "/home/aviramsh/mtm/Clion/Ex-1/playground/playground.c" "/home/aviramsh/mtm/Clion/Ex-1/cmake-build-debug-remote/CMakeFiles/playground.dir/playground/playground.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

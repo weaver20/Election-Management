@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/noamchen/mtm/Clion Files/Ex-1"
+CMAKE_SOURCE_DIR = "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote"
+CMAKE_BINARY_DIR = "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/cmake-build-debug-remote"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/cmake-build-debug-remote/CMakeFiles" "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/cmake-build-debug-remote/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/noamchen/mtm/Clion Files/Ex-1/cmake-build-debug-remote/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/noamchen/mtm/Clion Files/Ex-1/wetPart/map/cmake-build-debug-remote/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -201,6 +201,30 @@ dryPart/dryMain.c.s:
 	$(MAKE) -f CMakeFiles/dry.dir/build.make CMakeFiles/dry.dir/dryPart/dryMain.c.s
 .PHONY : dryPart/dryMain.c.s
 
+dryPart/findErrors.o: dryPart/findErrors.c.o
+.PHONY : dryPart/findErrors.o
+
+# target to build an object file
+dryPart/findErrors.c.o:
+	$(MAKE) -f CMakeFiles/dry.dir/build.make CMakeFiles/dry.dir/dryPart/findErrors.c.o
+.PHONY : dryPart/findErrors.c.o
+
+dryPart/findErrors.i: dryPart/findErrors.c.i
+.PHONY : dryPart/findErrors.i
+
+# target to preprocess a source file
+dryPart/findErrors.c.i:
+	$(MAKE) -f CMakeFiles/dry.dir/build.make CMakeFiles/dry.dir/dryPart/findErrors.c.i
+.PHONY : dryPart/findErrors.c.i
+
+dryPart/findErrors.s: dryPart/findErrors.c.s
+.PHONY : dryPart/findErrors.s
+
+# target to generate assembly for a file
+dryPart/findErrors.c.s:
+	$(MAKE) -f CMakeFiles/dry.dir/build.make CMakeFiles/dry.dir/dryPart/findErrors.c.s
+.PHONY : dryPart/findErrors.c.s
+
 playground/playground.o: playground/playground.c.o
 .PHONY : playground/playground.o
 
@@ -254,7 +278,6 @@ wetPart/map/map.o: wetPart/map/map.c.o
 
 # target to build an object file
 wetPart/map/map.c.o:
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map.c.o
 	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/map.c.o
 .PHONY : wetPart/map/map.c.o
 
@@ -263,7 +286,6 @@ wetPart/map/map.i: wetPart/map/map.c.i
 
 # target to preprocess a source file
 wetPart/map/map.c.i:
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map.c.i
 	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/map.c.i
 .PHONY : wetPart/map/map.c.i
 
@@ -272,7 +294,6 @@ wetPart/map/map.s: wetPart/map/map.c.s
 
 # target to generate assembly for a file
 wetPart/map/map.c.s:
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map.c.s
 	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/map.c.s
 .PHONY : wetPart/map/map.c.s
 
@@ -281,7 +302,6 @@ wetPart/map/map_example_test.o: wetPart/map/map_example_test.c.o
 
 # target to build an object file
 wetPart/map/map_example_test.c.o:
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map_example_test.c.o
 	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/map_example_test.c.o
 .PHONY : wetPart/map/map_example_test.c.o
 
@@ -290,7 +310,6 @@ wetPart/map/map_example_test.i: wetPart/map/map_example_test.c.i
 
 # target to preprocess a source file
 wetPart/map/map_example_test.c.i:
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map_example_test.c.i
 	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/map_example_test.c.i
 .PHONY : wetPart/map/map_example_test.c.i
 
@@ -299,9 +318,32 @@ wetPart/map/map_example_test.s: wetPart/map/map_example_test.c.s
 
 # target to generate assembly for a file
 wetPart/map/map_example_test.c.s:
-	$(MAKE) -f CMakeFiles/elections.dir/build.make CMakeFiles/elections.dir/wetPart/map/map_example_test.c.s
 	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/map_example_test.c.s
 .PHONY : wetPart/map/map_example_test.c.s
+
+wetPart/map/test_file.o: wetPart/map/test_file.c.o
+.PHONY : wetPart/map/test_file.o
+
+# target to build an object file
+wetPart/map/test_file.c.o:
+	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/test_file.c.o
+.PHONY : wetPart/map/test_file.c.o
+
+wetPart/map/test_file.i: wetPart/map/test_file.c.i
+.PHONY : wetPart/map/test_file.i
+
+# target to preprocess a source file
+wetPart/map/test_file.c.i:
+	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/test_file.c.i
+.PHONY : wetPart/map/test_file.c.i
+
+wetPart/map/test_file.s: wetPart/map/test_file.c.s
+.PHONY : wetPart/map/test_file.s
+
+# target to generate assembly for a file
+wetPart/map/test_file.c.s:
+	$(MAKE) -f CMakeFiles/map.dir/build.make CMakeFiles/map.dir/wetPart/map/test_file.c.s
+.PHONY : wetPart/map/test_file.c.s
 
 # Help Target
 help:
@@ -321,6 +363,9 @@ help:
 	@echo "... dryPart/dryMain.o"
 	@echo "... dryPart/dryMain.i"
 	@echo "... dryPart/dryMain.s"
+	@echo "... dryPart/findErrors.o"
+	@echo "... dryPart/findErrors.i"
+	@echo "... dryPart/findErrors.s"
 	@echo "... playground/playground.o"
 	@echo "... playground/playground.i"
 	@echo "... playground/playground.s"
@@ -333,6 +378,9 @@ help:
 	@echo "... wetPart/map/map_example_test.o"
 	@echo "... wetPart/map/map_example_test.i"
 	@echo "... wetPart/map/map_example_test.s"
+	@echo "... wetPart/map/test_file.o"
+	@echo "... wetPart/map/test_file.i"
+	@echo "... wetPart/map/test_file.s"
 .PHONY : help
 
 

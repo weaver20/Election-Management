@@ -1,0 +1,9 @@
+
+*.cmake
+*.make
+*.exe
+*.xml
+*.internal
+*.o
+
+build/

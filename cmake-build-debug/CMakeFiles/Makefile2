@@ -34,19 +34,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = D:\Downloads\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe
+CMAKE_COMMAND = C:\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe
 
 # The command to remove a file.
-RM = D:\Downloads\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe -E remove -f
+RM = C:\CLion-2019.3.4.win\bin\cmake\win\bin\cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1"
+CMAKE_SOURCE_DIR = C:\Ex-1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug"
+CMAKE_BINARY_DIR = C:\Ex-1\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -79,14 +79,14 @@ preinstall:
 CMakeFiles/elections.dir/all:
 	$(MAKE) -f CMakeFiles\elections.dir\build.make CMakeFiles/elections.dir/depend
 	$(MAKE) -f CMakeFiles\elections.dir\build.make CMakeFiles/elections.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=4,5,6,7 "Built target elections"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Ex-1\cmake-build-debug\CMakeFiles --progress-num=4,5 "Built target elections"
 .PHONY : CMakeFiles/elections.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/elections.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 4
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 2
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/elections.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/elections.dir/rule
 
 # Convenience name for target.
@@ -106,14 +106,14 @@ CMakeFiles/elections.dir/clean:
 CMakeFiles/dry.dir/all:
 	$(MAKE) -f CMakeFiles\dry.dir\build.make CMakeFiles/dry.dir/depend
 	$(MAKE) -f CMakeFiles\dry.dir\build.make CMakeFiles/dry.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=1,2,3 "Built target dry"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Ex-1\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target dry"
 .PHONY : CMakeFiles/dry.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/dry.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 3
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/dry.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/dry.dir/rule
 
 # Convenience name for target.
@@ -133,14 +133,14 @@ CMakeFiles/dry.dir/clean:
 CMakeFiles/map.dir/all:
 	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/depend
 	$(MAKE) -f CMakeFiles\map.dir\build.make CMakeFiles/map.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=8,9,10 "Built target map"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Ex-1\cmake-build-debug\CMakeFiles --progress-num=6,7,8 "Built target map"
 .PHONY : CMakeFiles/map.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/map.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 3
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/map.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/map.dir/rule
 
 # Convenience name for target.
@@ -160,14 +160,14 @@ CMakeFiles/map.dir/clean:
 CMakeFiles/playground.dir/all:
 	$(MAKE) -f CMakeFiles\playground.dir\build.make CMakeFiles/playground.dir/depend
 	$(MAKE) -f CMakeFiles\playground.dir\build.make CMakeFiles/playground.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" --progress-num=11,12 "Built target playground"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Ex-1\cmake-build-debug\CMakeFiles --progress-num=9,10 "Built target playground"
 .PHONY : CMakeFiles/playground.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/playground.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 2
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/playground.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\avira\OneDrive - Technion\GitHub\Ex-1\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Ex-1\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/playground.dir/rule
 
 # Convenience name for target.

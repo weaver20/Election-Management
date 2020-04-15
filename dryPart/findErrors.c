@@ -31,10 +31,6 @@ char *stringDuplicator(char *s, int times) {
 
                     // **********  Fixed: **********
 
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-
 
 char* stringDuplicate(char *str, int times) {
     assert(str);
