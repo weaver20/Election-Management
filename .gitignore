@@ -6,6 +6,7 @@
 *.internal
 *.o
 
+.idea/
 color/
 build/
 cmake-build-debug/
