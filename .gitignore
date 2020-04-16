@@ -5,10 +5,12 @@
 *.xml
 *.internal
 *.o
+*.icls
 
 .idea/
 _windows/
 colors/
+codestyles/
 build/
 cmake-build-debug/
 cmake-build-debug-remote/

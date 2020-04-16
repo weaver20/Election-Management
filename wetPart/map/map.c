@@ -90,7 +90,7 @@ Map mapCreate(){
     if(map == NULL){
         return NULL;
     }
-// TODO: why not sizeof(*(map->dictionary))? (line 60)
+
     map->dictionary = malloc(INITIAL_SIZE * sizeof(*(map->dictionary)));
     if(map->dictionary == NULL){
         free(map);

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <time.h>
 #include "../test_utilities.h"
 #include "map.h"
 
@@ -9,6 +9,8 @@ bool testMapCreate() {
     printf("Testing mapCreate\n");
     Map map1 = mapCreate();
     Map map2 = mapCreate();
+    Map map3 = mapCreate();
+    mapDestroy(map3);
     ASSERT_TEST(map1 != NULL);
     ASSERT_TEST(map2 != NULL);
     ASSERT_TEST(mapGetSize(map1) == 0);
@@ -21,7 +23,6 @@ bool testMapCreate() {
     ASSERT_TEST(mapGetSize(map1) == -1);
     ASSERT_TEST(map2 != NULL);
     mapDestroy(map2);
-    printf("testMapCreate: OK\n");
     return true;
 }
 
@@ -55,6 +56,7 @@ bool testMapPutGet() {
     ASSERT_TEST(mapRemove(map, key3) == MAP_SUCCESS);
     count--;
     ASSERT_TEST(mapPut(map, key3, "value1") == MAP_SUCCESS);
+    count++;
 
     printf("Verify `PUT` with NULL arguments\n");
     ASSERT_TEST(mapPut(map, key3, NULL) == MAP_NULL_ARGUMENT);
@@ -66,6 +68,7 @@ bool testMapPutGet() {
 
     printf("Make sure added key has the correct value\n");
     ASSERT_TEST(mapPut(map, key1, "value2") == MAP_SUCCESS);
+    count++;
     ASSERT_TEST(strcmp(mapGet(map, key1), "value2") == 0);
     printf("Verify value of key changed\n");
     ASSERT_TEST(mapPut(map, key1, "value1") == MAP_SUCCESS);
@@ -78,6 +81,7 @@ bool testMapPutGet() {
     printf("Verify string value is duplicated on PUT\n");
     const char *value1 = "value1";
     ASSERT_TEST(mapPut(map, key1, value1) == MAP_SUCCESS);
+    count++;
     ASSERT_TEST(mapGet(map, key1) != value1);
     ASSERT_TEST(mapGetSize(map) == count);
 
@@ -89,7 +93,7 @@ bool testMapPutGet() {
     ASSERT_TEST(mapGetSize(map) == count);
     ASSERT_TEST(strcmp(mapGet(map, key1), value1) == 0);
 
-    printf("Testing emptry strings\n");
+    printf("Testing empty strings\n");
     ASSERT_TEST(mapPut(map, key1, "") == MAP_SUCCESS);
     ASSERT_TEST(mapPut(map, key2, "") == MAP_SUCCESS);
     count++;
@@ -155,12 +159,10 @@ bool testMapPutGet() {
     ASSERT_TEST(strcmp(mapGet(map, super_long_string), value1) == 0);
     ASSERT_TEST(mapGetSize(map) == count);
     ASSERT_TEST(strcmp(mapGet(map, key2), "") == 0);
-
+    mapDestroy(map);
     printf(
             "Destroy the list without removing all the keys. To let valgrind catch "
             "de-allocation errors\n");
-    mapDestroy(map);
-    printf("testMapPutGet: OK\n");
     return true;
 }
 
@@ -182,7 +184,6 @@ bool testMapCopy() {
     ASSERT_TEST(mapRemove(map1, "key1") == MAP_SUCCESS);
 
     // Try re-allocating the same memory so it will change
-    //TODO: Check the allocation problem.
     ASSERT_TEST(mapPut(map1, "key4", "value1") == MAP_SUCCESS);
     ASSERT_TEST(mapPut(map1, "key5", "value1") == MAP_SUCCESS);
     ASSERT_TEST(mapPut(map1, "key6", "value1") == MAP_SUCCESS);
@@ -193,7 +194,6 @@ bool testMapCopy() {
     ASSERT_TEST(strcmp(mapGet(map2, "key1"), "value1") == 0);
     ASSERT_TEST(strcmp(mapGet(map2, "key2"), "value2") == 0);
     mapDestroy(map2);
-    printf("testMapCopy: OK\n");
     return true;
 }
 
@@ -208,9 +208,9 @@ bool testMapGetSize() {
     ASSERT_TEST(mapGetSize(map) == 0);
     ASSERT_TEST(mapGetSize(NULL) == -1);
     mapDestroy(map);
-    printf("testMapGetSize: OK\n");
     return true;
 }
+
 bool testMapContains() {
     Map map1 = mapCreate();
     mapPut(map1, "key1", "value1");
@@ -219,9 +219,9 @@ bool testMapContains() {
     ASSERT_TEST(mapContains(map1, NULL) == false);
     ASSERT_TEST(mapContains(map1, "dani") == false);
     mapDestroy(map1);
-    printf("testMapContains: OK\n");
     return true;
 }
+
 bool testMapRemove() {
     Map map1 = mapCreate();
     mapPut(map1, "key1", "value1");
@@ -238,9 +238,60 @@ bool testMapRemove() {
     mapRemove(map1, "key3");
     ASSERT_TEST(mapContains(map1, "key3") == false);
     ASSERT_TEST(mapGetSize(map1) == 2);
-    printf("testMapRemove: OK\n");
+    mapDestroy(map1);
     return true;
 }
+
+char *randstring(int length) {
+    static int mySeed = 25011984;
+    char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!";
+    size_t stringLen = strlen(string);
+    char *randomString = NULL;
+
+    srand(time(NULL) * length + ++mySeed);
+
+    if (length < 1) {
+        length = 1;
+    }
+
+    randomString = malloc(sizeof(char) * (length + 1));
+
+    if (randomString) {
+        short key = 0;
+
+        for (int n = 0; n < length; n++) {
+            key = rand() % stringLen;
+            randomString[n] = string[key];
+        }
+
+        randomString[length] = '\0';
+
+        return randomString;
+    } else {
+        printf("No memory");
+        exit(1);
+    }
+}
+
+bool doomsDay() {
+    Map map = mapCreate();
+    int length = 100;
+    char *arr[length];
+    for (int i = 0; i < length; i++) {
+        char *str = randstring(i);
+        ASSERT_TEST(mapPut(map, str, str)==MAP_SUCCESS);
+        arr[i] = str;
+    }
+    ASSERT_TEST(mapGetSize(map)==length);
+    for (int i = 0; i < length; i++) {
+        ASSERT_TEST(strcmp(mapGet(map, arr[i]), arr[i])==0);
+        ASSERT_TEST(mapRemove(map,arr[i])==MAP_SUCCESS);
+        free(arr[i]);
+    }
+    mapDestroy(map);
+    return true;
+}
+
 int main(int argc, char *argv[]) {
     printf("Start Map Tests\n");
     testMapPutGet();
@@ -249,5 +300,7 @@ int main(int argc, char *argv[]) {
     testMapCreate();
     testMapContains();
     testMapRemove();
+    //doomsDay();
+    printf("end Map Tests\n");
     return 0;
 }
