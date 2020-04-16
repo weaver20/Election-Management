@@ -300,7 +300,7 @@ int main(int argc, char *argv[]) {
     testMapCreate();
     testMapContains();
     testMapRemove();
-    //doomsDay();
+    doomsDay();
     printf("end Map Tests\n");
     return 0;
 }
