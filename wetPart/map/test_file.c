@@ -88,7 +88,12 @@ bool testMapPutGet() {
     printf("Verify string isn't duplicated on GET\n");
     ASSERT_TEST(mapGet(map, key1) == mapGet(map, key1));
 
+    printf("\n************\n"
+           "MAP_ITEM_DOES_NOT_EXIST int value is: %d\n"
+           "**************\n",MAP_ITEM_DOES_NOT_EXIST);
     printf("Verify override lookup by value and not by address\n");
+
+
     ASSERT_TEST(mapPut(map, "key1", value1) == MAP_SUCCESS);
     ASSERT_TEST(mapGetSize(map) == count);
     ASSERT_TEST(strcmp(mapGet(map, key1), value1) == 0);
@@ -103,6 +108,7 @@ bool testMapPutGet() {
     ASSERT_TEST(mapGetSize(map) == count);
     ASSERT_TEST(strcmp(mapGet(map, ""), value1) == 0);
     ASSERT_TEST(strcmp(mapGet(map, key1), "") == 0);
+
 
     printf("Test a super long string\n");
     const char *super_long_string =

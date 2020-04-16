@@ -8,7 +8,7 @@
 #include <assert.h>
 #define INITIAL_SIZE 2
 #define EXPAND_FACTOR 2
-
+#define NOT_FOUND -1
 
 typedef struct element{
     char* key;
@@ -28,7 +28,8 @@ static int elementIndex(Map map, const char* key){
             return i;
         }
     }
-    return MAP_ITEM_DOES_NOT_EXIST;
+    //TODO: returns index of 4
+    return NOT_FOUND;
 }
 
 static MapResult expand(Map map){
@@ -59,14 +60,6 @@ static MapResult removeElement(Map map, int index){
     for(int i = index; i < map->size - 1 ; i++){
         map->dictionary[i] = map->dictionary[i + 1];
     }
-/*
-
-    //TODO: this frees dictionary[size-2] also!!! (dictionary is an array of pointers)
-    if(index != map->size - 1){
-        free(map->dictionary[map->size - 1].key);
-        free(map->dictionary[map->size - 1].value);
-    }
-*/
 
     if(map->size > 1){
         Element tmp = realloc(map->dictionary, (map->max_size - 1) * sizeof(*tmp));
@@ -222,7 +215,7 @@ MapResult mapRemove(Map map, const char* key){
     }
 
     int index = elementIndex(map, key);
-    if(index == MAP_ITEM_DOES_NOT_EXIST){
+    if(index == NOT_FOUND){
         return MAP_ITEM_DOES_NOT_EXIST;
     }
 

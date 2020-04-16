@@ -34,6 +34,8 @@ add_executable(map
 add_executable(playground
         dryPart/findErrors.c
         playground/playground.c)
+
+target_link_libraries(elections /wetPart/elections/libmap.a)
 # Adds compile flags to compilation command of the target hello.
 # first arg: name of the target
 # second arg: PRIVATE (can also be PUBLIC or INTERFACE)
