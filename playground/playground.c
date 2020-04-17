@@ -10,62 +10,54 @@
 #include <string.h>
 #include <assert.h>
 #include <stdio.h>
-
-//
-// Created by aviram on 14/04/2020.
-//
-
-#include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
-#include <assert.h>
 
+//TODO: valgrind disturbing errors - not memory leaks.
 
-char *stringDuplicator(char *s, int times) {
-    // PROGRAMMING ERROR 1: s should be transferred to the function as const to
-    // CONVENTION ERROR 1: s should be str
-    // CONVENTION ERROR 2: func name should be a verb
-    assert(!s);
-    // PROGRAMMING ERROR 2: should be assert(s)
-    assert(times > 0);
-    int LEN = strlen(s);
-    // CONVENTION ERROR 3: LEN - variable names should be in lower case
-    // PROGRAMMING ERROR 3:we should allocate an additional bye for the /0  (strlen() returns the length of the string without the /0 char)
-    char *out = malloc(LEN * times);
-    assert(out);
-    // PROGRAMMING ERROR 4: should be if(!out) { return NULL; }
-    for (int i = 0; i < times; i++) {
-        // CONVENTION ERROR 4: no indent lines in for loop
-        out = out + LEN;
-        // PROGRAMMING ERROR 5: this two lines should flip - first copy, than increment pointer
-        strcpy(out, s);
-    }
-    return out;
-    // PROGRAMMING ERROR 6: returning a pointer to the end of out string
-}
-
-
-// **********  Fixed: **********
-
-
-char* stringDuplicate(const char *str, int times) {
-    assert(str);
-    assert(times > 0);
-    char* out = malloc(strlen(str) * (times));
-    if(!out) {
+static char* removeTribeFromArea(char* value, int index) {
+    char* spacer = ":";
+    char* tmp = malloc(sizeof(value)+1);
+    if(tmp == NULL) {
         return NULL;
     }
-    for (int i = 0; i < times; i++) {
-        strcat(out, str);
-    }
-    return out;
-}
+    char* token;
+    strcpy(tmp,strtok(value, spacer));        // skipping the area name
+    token = strtok(NULL, spacer);     // getting first token
+    for(int i=0; token ; i++ , token = strtok(NULL, spacer)) {
+        if(i == index) {
+            continue;
+        }
+        strcat(tmp,spacer);
+        strncat(tmp,token,strlen(token));
+        // debug
+#ifndef NDEBUG
+        printf("iteration #%d: %s\n",i, tmp);
+#endif
 
+    }
+    // debug
+#ifndef NDEBUG
+    printf("end of loop: %s\n", tmp);
+#endif
+    int new_size = strlen(tmp) + 1;
+    char* final = realloc(tmp, new_size);
+    if(final == NULL) {
+        return NULL;
+    }
+    return final;
+}
 
 int main()
 {
-    printf("\ntesting stringDuplicator: \n");
-    puts(stringDuplicate("Hello", 3));
+    printf("\nTesting removeTribesFromArea \n");
+    char* string = malloc(22);
+    strcpy(string, "lod:0:100:200:300:400") ;
+    char* final_ptr =removeTribeFromArea(string,5);
+    puts(final_ptr);
+    free(string);
+    free(final_ptr);
 
-    printf("\ntesting stringDuplicate: \n");
-    puts(stringDuplicator("Hello", 3));
+
+
 }
