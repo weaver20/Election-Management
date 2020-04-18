@@ -5,7 +5,7 @@
 #ifndef MTM_ELECTION_H
 #define MTM_ELECTION_H
 
-#include "../map/map.h"
+#include "mtm_map/map.h"
 
 typedef struct election_t* Election;
 
@@ -32,7 +32,7 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
 
 ElectionResult electionAddArea(Election election, int area_id, const char* area_name);
 
-const char* electionGetTribeName (Election election, int tribe_id);
+char* electionGetTribeName (Election election, int tribe_id);
 
 ElectionResult electionAddVote (Election election, int area_id, int tribe_id, int num_of_votes);
 
@@ -46,4 +46,4 @@ ElectionResult electionRemoveAreas(Election election, AreaConditionFunction shou
 
 Map electionComputeAreasToTribesMapping (Election election);
 
-#endif //MTM_ELECTION_H
+#endif //MTM_ELECTION_He

@@ -3,19 +3,19 @@
 //
 
 #define NOT_FOUND -1
-
+#define MAX_LENGTH_OF_ITOA_OUTPUT 11
+#define  DECIMAL 10
 #include "election.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // TODO: tip from forum: use strtok()
 
 struct election_t {
     Map areas;
     Map tribes;
-    // todo: do we really need those?
-    int num_of_tribes;
-    int num_of_areas;
+
 
 };
 /* *********************************************************************************************** */
@@ -24,10 +24,12 @@ struct election_t {
 
 static bool isValidNameChar(const char toCheck);
 static bool isValidIDChar(const char toCheck);
-static ElectionResult isValidName(const char* name);
-static ElectionResult isValidID(const char* name);
+static bool isValidName(const char* name);
+static bool isValidID(const char* name);
 static int getIndex(Map map, const char* key);
 static char* removeTribeFromArea(char* value, int index);
+static ElectionResult addTribeToAreas(Map areas, char *key);
+
 /**
  * validate that the char is a-z or space
  * @param toCheck
@@ -56,26 +58,26 @@ static bool isValidIDChar(const char toCheck) {
  * @param name
  * @return
  */
-static ElectionResult isValidName(const char* name) {
+static bool isValidName(const char* name) {
     int name_length = strlen(name);
    for(int i=0;i<name_length;i++)
     {
         if(!isValidNameChar(name[i])) {
-            return ELECTION_INVALID_NAME;
+            return false;
         }
     }
-   return ELECTION_SUCCESS;
+   return true;
 }
 
-static ElectionResult isValidID(const char* name) {
-    int name_length = strlen(name);
-    for(int i=0;i<name_length;i++)
+static bool isValidID(const char* id) {
+    int id_length = strlen(id);
+    for(int i=0;i<id_length;i++)
     {
-        if(!isValidIDChar(name[i])) {
-            return ELECTION_INVALID_ID;
+        if(!isValidIDChar(id[i])) {
+            return false;
         }
     }
-    return ELECTION_SUCCESS;
+    return true;
 }
 
 
@@ -132,6 +134,11 @@ static char* removeTribeFromArea(char* value, int index) {
 }
 
 
+static ElectionResult addTribeToAreas(Map areas, char *key) {
+
+}
+
+
 /* *********************************************************************************************** */
 /* **********************************  END OF HELPER FUNCTIONS *********************************** */
 /* *********************************************************************************************** */
@@ -165,12 +172,44 @@ void electionDestroy(Election election) {
     free(election);
 }
 
+// todo: can`t use itoa(tribe_id, buffer) - will not compile in csl3 - implement userItoa()
 
 ElectionResult electionAddTribe (Election election, int tribe_id, const char* tribe_name) {
 
-// todo: can`t use itoa(tribe_id, buffer) - will not compile in csl3 - substitute??
+    if(tribe_id < 0) {
+        return ELECTION_INVALID_ID;
+    }
+    if(tribe_name == NULL || election == NULL) {
+        return ELECTION_NULL_ARGUMENT;
+    }
+    char* tribe_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
+    itoa(tribe_id,tribe_id_in_string, DECIMAL); // todo: change to userItoa()
+
+    if(tribe_id_in_string == NULL) {
+        return ELECTION_OUT_OF_MEMORY;
+    }
+    if(mapContains(election->tribes,tribe_id_in_string)) {
+        free(tribe_id_in_string);
+        return ELECTION_TRIBE_ALREADY_EXIST;
+    }
+    if(!isValidName(tribe_name)) {
+        free(tribe_id_in_string);
+        return ELECTION_INVALID_NAME;
+    }
+
+    // todo: should we check if mapPut... == MAP_NULL_ARG?????
+    if(mapPut(election->tribes,tribe_id_in_string,tribe_name) == MAP_OUT_OF_MEMORY) {
+        free(tribe_id_in_string);
+        return ELECTION_OUT_OF_MEMORY;
+    }
+
+   addTribeToAreas(election->areas,tribe_id_in_string);
+    //TODO: check return values of this function
 
 }
+
+
+
 
 
 
