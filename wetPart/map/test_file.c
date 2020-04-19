@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
 #include "../test_utilities.h"
 #include "map.h"
 
@@ -88,17 +89,12 @@ bool testMapPutGet() {
     printf("Verify string isn't duplicated on GET\n");
     ASSERT_TEST(mapGet(map, key1) == mapGet(map, key1));
 
-    printf("\n************\n"
-           "MAP_ITEM_DOES_NOT_EXIST int value is: %d\n"
-           "**************\n",MAP_ITEM_DOES_NOT_EXIST);
     printf("Verify override lookup by value and not by address\n");
-
-
     ASSERT_TEST(mapPut(map, "key1", value1) == MAP_SUCCESS);
     ASSERT_TEST(mapGetSize(map) == count);
     ASSERT_TEST(strcmp(mapGet(map, key1), value1) == 0);
 
-    printf("Testing empty strings\n");
+    printf("Testing emptry strings\n");
     ASSERT_TEST(mapPut(map, key1, "") == MAP_SUCCESS);
     ASSERT_TEST(mapPut(map, key2, "") == MAP_SUCCESS);
     count++;
@@ -108,7 +104,6 @@ bool testMapPutGet() {
     ASSERT_TEST(mapGetSize(map) == count);
     ASSERT_TEST(strcmp(mapGet(map, ""), value1) == 0);
     ASSERT_TEST(strcmp(mapGet(map, key1), "") == 0);
-
 
     printf("Test a super long string\n");
     const char *super_long_string =
@@ -248,56 +243,53 @@ bool testMapRemove() {
     return true;
 }
 
-char *randstring(int length) {
-    static int mySeed = 25011984;
-    char *string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!";
-    size_t stringLen = strlen(string);
-    char *randomString = NULL;
-
-    srand(time(NULL) * length + ++mySeed);
+char *randString(int length) {
+    char *string =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#'?!";
+    size_t string_len = strlen(string);
+    char *random_string = NULL;
 
     if (length < 1) {
         length = 1;
     }
-
-    randomString = malloc(sizeof(char) * (length + 1));
-
-    if (randomString) {
-        short key = 0;
-
-        for (int n = 0; n < length; n++) {
-            key = rand() % stringLen;
-            randomString[n] = string[key];
-        }
-
-        randomString[length] = '\0';
-
-        return randomString;
-    } else {
-        printf("No memory");
-        exit(1);
+    random_string = malloc(sizeof(char) * (length + 1));
+    if (random_string == NULL) {
+        return NULL;
     }
+    short key = 0;
+    for (int n = 0; n < length; n++) {
+        key = rand() % string_len;
+        random_string[n] = string[key];
+    }
+
+    random_string[length] = '\0';
+
+    return random_string;
 }
 
 bool doomsDay() {
     Map map = mapCreate();
-    int length = 100;
-    char *arr[length];
-    for (int i = 0; i < length; i++) {
-        char *str = randstring(i);
-        ASSERT_TEST(mapPut(map, str, str)==MAP_SUCCESS);
+    const int repeat = 10000;
+    const int length = 7;
+    char *arr[repeat];
+    static int my_seed = 25011984;
+    srand(time(NULL) * length + ++my_seed);
+    char *str;
+    for (int i = 0; i < repeat; i++) {
+        str = randString(length);
         arr[i] = str;
+        ASSERT_TEST(mapPut(map, str, str) == MAP_SUCCESS);
     }
-    ASSERT_TEST(mapGetSize(map)==length);
-    for (int i = 0; i < length; i++) {
-        ASSERT_TEST(strcmp(mapGet(map, arr[i]), arr[i])==0);
-        ASSERT_TEST(mapRemove(map,arr[i])==MAP_SUCCESS);
-        free(arr[i]);
+    ASSERT_TEST(mapGetSize(map) == repeat);
+    for (int i = 1; i <= repeat; i++) {
+        ASSERT_TEST(strcmp(mapGet(map, arr[repeat - i]), arr[repeat - i]) == 0);
+        ASSERT_TEST(mapRemove(map, arr[repeat - i]) == MAP_SUCCESS);
+        free(arr[repeat - i]);
     }
     mapDestroy(map);
+    printf("OK\n");
     return true;
 }
-
 
 int main(int argc, char *argv[]) {
     printf("Start Map Tests\n");
