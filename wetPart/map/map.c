@@ -46,11 +46,11 @@ static MapResult expand(Map map){
 }
 
 static char* copyString(const char* str){
-    char* newStr = malloc(strlen(str) + 1);
-    if(newStr == NULL){
+    char* new_str = malloc(strlen(str) + 1);
+    if(new_str == NULL){
         return NULL;
     }
-    return strcpy(newStr, str);
+    return strcpy(new_str, str);
 }
 
 static MapResult removeElement(Map map, int index){
@@ -180,6 +180,7 @@ MapResult mapPut(Map map, const char* key, const char* data){
                 return MAP_OUT_OF_MEMORY;
             }
 
+            free(map->dictionary[elementIndex(map,key)].value);
             map->dictionary[elementIndex(map,key)].value = new_value;
             return MAP_SUCCESS;
         }
