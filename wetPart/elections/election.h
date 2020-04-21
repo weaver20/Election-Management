@@ -24,11 +24,11 @@ typedef enum ElectionResult_t {
 
 typedef bool (*AreaConditionFunction) (int);
 
-Election electionCreate();
+Election electionCreate(); // DONE!
 
-void electionDestroy(Election election);
+void electionDestroy(Election election); // DONE!
 
-ElectionResult electionAddTribe (Election election, int tribe_id, const char* tribe_name);
+ElectionResult electionAddTribe (Election election, int tribe_id, const char* tribe_name); // DONE!
 
 ElectionResult electionAddArea(Election election, int area_id, const char* area_name);
 
@@ -46,4 +46,4 @@ ElectionResult electionRemoveAreas(Election election, AreaConditionFunction shou
 
 Map electionComputeAreasToTribesMapping (Election election);
 
-#endif //MTM_ELECTION_He
+#endif //MTM_ELECTION_H
