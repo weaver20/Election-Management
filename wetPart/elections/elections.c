@@ -4,13 +4,14 @@
 
 #define NOT_FOUND -1
 #define MAX_LENGTH_OF_ITOA_OUTPUT 11
-#define VOTE_SIZE 12
-#define VOTE ":0"
+#define VOTE_SIZE 13 // 11 for itoa output + 2 for ":" and ";"
+#define VOTE (id) strcat(";",strcat(id":0"),)
 #define  DECIMAL 10
 #include "election.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
 
 // TODO: tip from forum: use strtok()
 
@@ -23,16 +24,30 @@ struct election_t {
 /* *********************************************************************************************** */
 /* **************************************  HELPER FUNCTIONS ************************************** */
 /* *********************************************************************************************** */
+/*  *************  NOT FIXED ************* */
+static char* removeTribeFromArea(char* value, char* tribe_id);
+static char *addVoteSlots(const char *name,Map tribes);
 
+// TODO: dont think we need that anymore
+static int getIndex(Map map, const char* key);
+
+/*  *************  FIXED ************* */
+static ElectionResult addTribeToArea(Map areas, char* area_id, char* new_tribe_id);
 static bool isValidNameChar(const char toCheck);
 static bool isValidIDChar(const char toCheck);
 static bool isValidName(const char* name);
 static bool isValidID(const char* name);
-static int getIndex(Map map, const char* key);
-static char* removeTribeFromArea(char* value, int index);
-static ElectionResult addTribeToAreas(Map areas);
 static void userItoa(int x, char* buffer);
-static char *addVoteSlots(const char *name, int slots);
+
+
+static ElectionResult copyString(char* new_value,char* old_value, int new_size) {
+    new_value = malloc(new_size);
+    if (new_value == NULL) {
+        return ELECTION_OUT_OF_MEMORY;
+    }
+    strcpy(new_value,old_value);
+    return ELECTION_SUCCESS;
+}
 /**
  * validate that the char is a-z or space
  * @param toCheck
@@ -112,7 +127,8 @@ static int getIndex(Map map, const char* key) {
  * @return
  */
  // TODO: valgrind ends with disturbing errors (not memory leaks) - mini tester in playground
-static char* removeTribeFromArea(char* value, int index) {
+ // TODO: keep the format update
+static char* removeTribeFromArea(char* value, char* tribe_id) {
     char* spacer = ":";
     char* tmp = malloc(sizeof(value)+1);
     if(tmp == NULL) {
@@ -144,17 +160,25 @@ static char* removeTribeFromArea(char* value, int index) {
  * @return
  * ELECTION_SUCCESS if succeeded doing so.
  * ELECTION_OUT_OF_MEMORY if one of the reallocation failed.
- */
-static ElectionResult addTribeToAreas(Map areas) {
-
-    MAP_FOREACH(iterator,areas) {
-        char* new_value = realloc(iterator, sizeof(*iterator) + VOTE_SIZE);
-        if(new_value == NULL) {
-            return ELECTION_OUT_OF_MEMORY;
-        }
-        iterator = new_value;
-        strcat(iterator,":0");
+ */                 /*  *************  FIXED ************* */
+static ElectionResult addTribeToArea(Map areas, char* area_id, char* new_tribe_id) {
+    assert(areas != NULL && area_id != NULL && new_tribe_id != NULL);
+    char* old_value = mapGet(areas,area_id);
+    int new_size = sizeof(*old_value) + VOTE_SIZE + strlen(new_tribe_id);
+    char* new_value = NULL;
+    if(copyString(new_value,old_value,new_size) == ELECTION_OUT_OF_MEMORY) {
+        return ELECTION_OUT_OF_MEMORY;
     }
+    strcat(new_value,";");
+    strcat(new_value,area_id);
+    strcat(new_value,":0");
+
+    assert(mapContains(areas,area_id));
+    if(mapPut(areas,area_id,new_value) == MAP_OUT_OF_MEMORY) {
+        free(new_value);
+        return ELECTION_OUT_OF_MEMORY;
+    }
+    free(new_value);
     return ELECTION_SUCCESS;
 }
 //TODO : rewrite itoa.
@@ -162,13 +186,12 @@ static void userItoa(int x, char* buffer) {
     itoa(x, buffer,10);
 }
 
+//TODO: change string FORMAT
+static char* addVoteSlots(const char *name,Map tribes) {
 
-static char* addVoteSlots(const char *name, int slots) {
-
-    if(name == NULL || slots < 0) {
+    if(name == NULL || tribes == NULL) {
         return NULL;
     }
-
     char* new_name = malloc (sizeof(*name) + (slots * VOTE_SIZE));
     if(new_name == NULL) {
         return NULL;
@@ -242,14 +265,14 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
         free(tribe_id_in_string);
         return ELECTION_OUT_OF_MEMORY;
     }
-    // dont need this anymore.
+
+    MAP_FOREACH(iterator,election->areas) {
+        if(addTribeToArea(election->areas, iterator, tribe_id_in_string) == ELECTION_OUT_OF_MEMORY) {
+            free(tribe_id_in_string);
+            return ELECTION_OUT_OF_MEMORY;
+        }
+    }
     free(tribe_id_in_string);
-
-
-   if(addTribeToAreas(election->areas) == ELECTION_OUT_OF_MEMORY) {
-       return ELECTION_OUT_OF_MEMORY;
-   }
-
     return ELECTION_SUCCESS;
 }
 
@@ -279,7 +302,7 @@ ElectionResult electionAddArea(Election election, int area_id, const char* area_
     }
 
     // Concatenating vote slots to the end of area name.
-    char* area_name_with_votes = addVoteSlots(area_name, mapGetSize(election->tribes));
+    char* area_name_with_votes = addVoteSlots(area_name,election->tribes);
     if(area_name_with_votes == NULL) {
         free(area_id_in_string);
         return ELECTION_OUT_OF_MEMORY;
@@ -356,7 +379,7 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
 }
 
 
-//TODO: finish removeTribe
+//TODO: change string FORMAT
 ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     if(election == NULL) {
         return ELECTION_NULL_ARGUMENT;
@@ -386,7 +409,7 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
        if(mapPut(election->areas,iterator,new_value) == MAP_OUT_OF_MEMORY) {
            return ELECTION_OUT_OF_MEMORY;
        }
-    }
+    } // TODO:add  mapRemove()
     return ELECTION_SUCCESS;
 }
 
