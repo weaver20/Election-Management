@@ -370,14 +370,32 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     }
     userItoa(tribe_id,tribe_id_in_string);
 
-    if(!mapContains(election->tribes,tribe_id_in_string)) {
+    int index = getIndex(election->tribes,tribe_id_in_string);
+    if(index == NOT_FOUND) {
         free(tribe_id_in_string);
         return ELECTION_TRIBE_NOT_EXIST;
+}
+    free(tribe_id_in_string);
+
+    MAP_FOREACH(iterator, election->areas) {
+        char* old_value = mapGet(election->areas,iterator);
+       char* new_value = removeTribeFromArea(old_value,index);
+       if (new_value == NULL) {
+           return ELECTION_OUT_OF_MEMORY;
+       }
+       if(mapPut(election->areas,iterator,new_value) == MAP_OUT_OF_MEMORY) {
+           return ELECTION_OUT_OF_MEMORY;
+       }
     }
-
-
+    return ELECTION_SUCCESS;
 }
 
+ElectionResult electionRemoveAreas(Election election, AreaConditionFunction should_delete_area) {
+    if(isValidID("43")) {
+        return ELECTION_SUCCESS;
+    }
+    return ELECTION_SUCCESS;
+}
 
 
 

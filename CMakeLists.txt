@@ -15,10 +15,12 @@ set(CMAKE_C_STANDARD 99)
 # first arg: name of the "target" (the compiled executable wil be hello.exe)
 # rest of args: name of header (.h) and source (.c or .cpp) files used to
 # compile the executable
+link_directories(.)
 add_executable(elections
         wetPart/elections/electionTestsExample.c
-        wetPart/elections/election.h
         wetPart/test_utilities.h wetPart/elections/elections.c)
+target_link_libraries(elections
+        C:/Ex-1/wetPart/elections/libmap.a)
 add_executable(dry
         dryPart/dry.c
         dryPart/dry.h
@@ -32,18 +34,17 @@ add_executable(map
         wetPart/test_utilities.h
         wetPart/map/test_file.c)
 add_executable(playground
-        dryPart/findErrors.c
         playground/playground.c)
 
-target_link_libraries(elections /wetPart/elections/libmap.a)
+
 # Adds compile flags to compilation command of the target hello.
 # first arg: name of the target
 # second arg: PRIVATE (can also be PUBLIC or INTERFACE)
 # rest of args: flags to add to the command
 target_compile_options(dry PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
 target_compile_options(map PRIVATE -Wall -Werror -pedantic-errors)
-target_compile_options(elections PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors -L. -lmap)
-target_compile_options(playground PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
+target_compile_options(elections PRIVATE -DNDEBUG -Wall -Werror -pedantic-errors)
+target_compile_options(playground PRIVATE -Wall -Werror -pedantic-errors)
 
 # optional. similar to using gcc's -I flag when compiling the target hello
 # target_include_directories(hello ...)

@@ -78,6 +78,7 @@ bool testElectionGetTribeName() {
     ASSERT_TEST((test_ptr = electionGetTribeName(election, 3)) == NULL);
 
     electionDestroy(election);
+    return true;
 }
 
 bool testElectionSetTribeName() {
@@ -99,6 +100,7 @@ bool testElectionSetTribeName() {
 
 
     electionDestroy(election);
+    return true;
 }
 /*The functions for the tests should be added here*/
 bool (*tests[]) (void) = {
@@ -111,7 +113,11 @@ bool (*tests[]) (void) = {
 
 /*The names of the test functions should be added here*/
 const char* testNames[] = {
-                           "testElectionRemoveAreas"
+                           "testElectionRemoveAreas",
+                           "testElectionAddTribe",
+                           "testElectionAddArea",
+                           "testElectionGetTribeName",
+                           "testElectionSetTribeName",
 };
 
 int main(int argc, char *argv[]) {
