@@ -17,7 +17,7 @@
 
 static char* removeTribeFromArea(char* value, int index) {
     char* spacer = ":";
-    char* tmp = malloc(sizeof(value)+1);
+    char* tmp = malloc(strlen(value)+1);
     if(tmp == NULL) {
         return NULL;
     }

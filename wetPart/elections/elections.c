@@ -5,8 +5,10 @@
 #define NOT_FOUND -1
 #define MAX_LENGTH_OF_ITOA_OUTPUT 11
 #define VOTE_SIZE 13 // 11 for itoa output + 2 for ":" and ";"
-#define VOTE (id) strcat(";",strcat(id":0"),)
-#define  DECIMAL 10
+#define START_OF_NEW_VOTE ";"
+#define START_OF_NUMBER_OF_VOTES ":"
+#define DEFAULT_NUMBER_OF_VOTES "0"
+
 #include "election.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,15 +26,11 @@ struct election_t {
 /* *********************************************************************************************** */
 /* **************************************  HELPER FUNCTIONS ************************************** */
 /* *********************************************************************************************** */
-/*  *************  NOT FIXED ************* */
-static char* removeTribeFromArea(char* value, char* tribe_id);
-static char *addVoteSlots(const char *name,Map tribes);
-
-// TODO: dont think we need that anymore
-static int getIndex(Map map, const char* key);
 
 /*  *************  FIXED ************* */
-static ElectionResult addTribeToArea(Map areas, char* area_id, char* new_tribe_id);
+static char* removeTribeFromArea(const char *old_value, const char *tribe_id);
+static char *addVoteSlots(const char *area_name, Map tribes);
+static char* addTribeToArea(const char* area_name, const char *tribe_id);
 static bool isValidNameChar(const char toCheck);
 static bool isValidIDChar(const char toCheck);
 static bool isValidName(const char* name);
@@ -40,13 +38,13 @@ static bool isValidID(const char* name);
 static void userItoa(int x, char* buffer);
 
 
-static ElectionResult copyString(char* new_value,char* old_value, int new_size) {
-    new_value = malloc(new_size);
-    if (new_value == NULL) {
-        return ELECTION_OUT_OF_MEMORY;
+static char * allocateAndCopyString(const char *old_value, int new_size) {
+    char* new_value2 = malloc(new_size);
+    if (new_value2 == NULL) {
+        return NULL;
     }
-    strcpy(new_value,old_value);
-    return ELECTION_SUCCESS;
+    strcpy(new_value2,old_value);
+    return new_value2;
 }
 /**
  * validate that the char is a-z or space
@@ -55,7 +53,7 @@ static ElectionResult copyString(char* new_value,char* old_value, int new_size) 
  */
 static bool isValidNameChar(const char toCheck) {
     if( (toCheck <= 'z' && toCheck >= 'a')
-          || toCheck == ' ' ) {
+        || toCheck == ' ' ) {
         return true;
     }
     return false;
@@ -78,13 +76,13 @@ static bool isValidIDChar(const char toCheck) {
  */
 static bool isValidName(const char* name) {
     int name_length = strlen(name);
-   for(int i=0;i<name_length;i++)
+    for(int i=0;i<name_length;i++)
     {
         if(!isValidNameChar(name[i])) {
             return false;
         }
     }
-   return true;
+    return true;
 }
 
 
@@ -101,85 +99,73 @@ static bool isValidID(const char* id) {
 
 
 
+
 /**
- * returns the index of the key in the map
- * @param map
- * @param key
- * @return
- *  -1 if not found
- */
-static int getIndex(Map map, const char* key) {
-    char* id_ptr = mapGetFirst(map);
-    int i=0;
-    while(id_ptr) {
-        if(strcmp(key, id_ptr) == 0) {
-            return i;
-        }
-        id_ptr = mapGetNext(map);
-        i++;
-    }
-    return NOT_FOUND;
-}
-/**
- * returns a copy of value string and reducts ":num_of_votes_of_tribe[index]"
- * @param value
+ * returns a copy of old_value string and reducts ":num_of_votes_of_tribe[index]"
+ * @param old_value
  * @param index
  * @return
+ * pointer to a COPY of the new value if succeeded <br>
+ * NULL in case of memory fail.
  */
- // TODO: valgrind ends with disturbing errors (not memory leaks) - mini tester in playground
- // TODO: keep the format update
-static char* removeTribeFromArea(char* value, char* tribe_id) {
-    char* spacer = ":";
-    char* tmp = malloc(sizeof(value)+1);
-    if(tmp == NULL) {
+// TODO: valgrind ends with disturbing errors (not memory leaks) - mini tester in playground
+
+static char* removeTribeFromArea(const char *old_value, const char *tribe_id) {
+
+    // copy the old value
+    char* temp = allocateAndCopyString(old_value, strlen(old_value) + 1);
+    if(temp == NULL) {
         return NULL;
     }
-    char* token;
-    strcpy(tmp,strtok(value, spacer));        // skipping the area name
-    token = strtok(NULL, spacer);     // getting first token
-    for(int i=0; token ; i++ , token = strtok(NULL, spacer)) {
-        if(i == index) {
-            continue;
-        }
-        strcat(tmp,spacer);
-        strncat(tmp,token,strlen(token));
-        //     printf("iteration #%d: %s\n",i, tmp);
-    }
-    //  printf("end of loop: %s\n", tmp);
-    int new_size = strlen(tmp) + 1;
-    char* final = realloc(tmp, new_size);
-    if(final == NULL) {
+    // create delimeter: "tribeID:"
+    char* delimeter = allocateAndCopyString(tribe_id, strlen(tribe_id) + 2);
+    if(delimeter == NULL) {
         return NULL;
     }
-    return final;
+    strcat(delimeter, START_OF_NUMBER_OF_VOTES);
+
+    // find tribe votes in temp and skip them
+    strtok(temp, delimeter);
+    char* rest_of_value = strtok(NULL,START_OF_NEW_VOTE); // this will be NULL if tribeID is in the end
+
+    // create the new value and copy from old everything before tribe_id votes
+    int size_of_removed = strlen(tribe_id) + VOTE_SIZE;
+    int new_size = strlen(old_value) +1 - size_of_removed;
+
+    char* new_value = allocateAndCopyString(temp, new_size);
+    if(new_value == NULL) {
+        free(delimeter);
+        return NULL;
+    }
+    // adds everything after tribe_id votes.
+    strcat(new_value, rest_of_value);
+    free(rest_of_value);
+    return new_value;
 }
 
 /**
- * adds  ":0" at the end of value strings of all areas
- * @param areas
+ * adds ;(tribe_id):0 at the end of area_name.
+ * @param area_name
+ * @param tribe_id
  * @return
- * ELECTION_SUCCESS if succeeded doing so.
- * ELECTION_OUT_OF_MEMORY if one of the reallocation failed.
- */                 /*  *************  FIXED ************* */
-static ElectionResult addTribeToArea(Map areas, char* area_id, char* new_tribe_id) {
-    assert(areas != NULL && area_id != NULL && new_tribe_id != NULL);
-    char* old_value = mapGet(areas,area_id);
-    int new_size = sizeof(*old_value) + VOTE_SIZE + strlen(new_tribe_id);
-    char* new_value = NULL;
-    if(copyString(new_value,old_value,new_size) == ELECTION_OUT_OF_MEMORY) {
-        return ELECTION_OUT_OF_MEMORY;
-    }
-    strcat(new_value,";");
-    strcat(new_value,area_id);
-    strcat(new_value,":0");
+ * pointer to updated area name
+ * NULL if failed
+ */
+/*  *************  FIXED ************* */
+static char* addTribeToArea(const char* area_name, const char *tribe_id) {
+    assert(area_name != NULL && tribe_id != NULL);
+    int new_size = strlen(area_name) + VOTE_SIZE + strlen(tribe_id);
 
-    assert(mapContains(areas,area_id));
-    if(mapPut(areas,area_id,new_value) == MAP_OUT_OF_MEMORY) {
-        free(new_value);
-        return ELECTION_OUT_OF_MEMORY;
+    char* updated_area_name = allocateAndCopyString(area_name, new_size);
+    if(updated_area_name == NULL) {
+        return NULL;
     }
-    free(new_value);
-    return ELECTION_SUCCESS;
+    strcat(updated_area_name,START_OF_NEW_VOTE);
+    strcat(updated_area_name, tribe_id);
+    strcat(updated_area_name,START_OF_NUMBER_OF_VOTES);
+    strcat(updated_area_name,DEFAULT_NUMBER_OF_VOTES);
+
+    return updated_area_name;
 }
 //TODO : rewrite itoa.
 static void userItoa(int x, char* buffer) {
@@ -187,21 +173,42 @@ static void userItoa(int x, char* buffer) {
 }
 
 //TODO: change string FORMAT
-static char* addVoteSlots(const char *name,Map tribes) {
 
-    if(name == NULL || tribes == NULL) {
+
+/**
+ * change "area_name" to "area_name;tribeID:0;......;tribeID:0"
+ * @param area_name
+ * @param tribes
+ * @return
+ * pointer to the updated area_name if succeeded. <br>
+ * NULL if one of the parameters is NULL or allocation failed.
+ */
+static char* addVoteSlots(const char *area_name, Map tribes) {
+
+    if (area_name == NULL || tribes == NULL) {
         return NULL;
     }
-    char* new_name = malloc (sizeof(*name) + (slots * VOTE_SIZE));
-    if(new_name == NULL) {
+
+    char* updated_area_name = allocateAndCopyString(area_name, strlen(area_name) + 1);
+    if(updated_area_name == NULL) {
         return NULL;
     }
-    //adding Vote Slots
-    strcpy(new_name,name);
-    for(int i=0;i<slots;i++) {
-        strcat(new_name,VOTE);
+
+
+    MAP_FOREACH(iterator, tribes) {
+        char *tmp = addTribeToArea(updated_area_name, iterator);
+        if (tmp == NULL) {
+            return NULL;
+        }
+        free(updated_area_name);
+        updated_area_name = allocateAndCopyString(tmp, strlen(tmp) + 1);
+        if(updated_area_name == NULL) {
+            free(tmp);
+            return NULL;
+        }
+        free(tmp);
     }
-    return new_name;
+    return updated_area_name;
 }
 
 /* *********************************************************************************************** */
@@ -267,10 +274,16 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
     }
 
     MAP_FOREACH(iterator,election->areas) {
-        if(addTribeToArea(election->areas, iterator, tribe_id_in_string) == ELECTION_OUT_OF_MEMORY) {
-            free(tribe_id_in_string);
+
+        char* updated_area_name = addTribeToArea(mapGet(election->areas,iterator),tribe_id_in_string);
+        if(updated_area_name == NULL) {
             return ELECTION_OUT_OF_MEMORY;
         }
+        if(mapPut(election->areas,iterator,updated_area_name) == MAP_OUT_OF_MEMORY) {
+            free(updated_area_name);
+            return ELECTION_OUT_OF_MEMORY;
+        }
+        free(updated_area_name);
     }
     free(tribe_id_in_string);
     return ELECTION_SUCCESS;
@@ -286,14 +299,15 @@ ElectionResult electionAddArea(Election election, int area_id, const char* area_
         return ELECTION_NULL_ARGUMENT;
     }
     char* area_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
-    userItoa(area_id,area_id_in_string); // todo: implement userItoa()
-
     if(area_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
     }
+    userItoa(area_id,area_id_in_string); // todo: implement userItoa()
+
+
     if(mapContains(election->areas,area_id_in_string)) {
         free(area_id_in_string);
-        return ELECTION_TRIBE_ALREADY_EXIST;
+        return ELECTION_AREA_ALREADY_EXIST;
     }
 
     if(!isValidName(area_name)) {
@@ -307,12 +321,13 @@ ElectionResult electionAddArea(Election election, int area_id, const char* area_
         free(area_id_in_string);
         return ELECTION_OUT_OF_MEMORY;
     }
-
+    // updating the new area to the map
     if(mapPut(election->areas,area_id_in_string, area_name_with_votes) == MAP_OUT_OF_MEMORY) {
         free(area_id_in_string);
         return ELECTION_OUT_OF_MEMORY;
     }
-    // dont need this anymore.
+
+
     free(area_id_in_string);
     free( area_name_with_votes);
     return ELECTION_SUCCESS;
@@ -331,12 +346,16 @@ char* electionGetTribeName (Election election, int tribe_id) {
 
     char* name_ptr = mapGet(election->tribes,tribe_id_in_string);
     if(name_ptr == NULL) {
+        free(tribe_id_in_string);
         return NULL;
     }
-    char* copy_of_name = malloc(sizeof(*name_ptr));
-    strcpy(copy_of_name,name_ptr);
-    free(tribe_id_in_string);
+    char* copy_of_name = allocateAndCopyString(name_ptr, strlen(name_ptr) + 1);
+    if(copy_of_name == NULL) {
+        free(tribe_id_in_string);
+        return NULL;
+    }
 
+    free(tribe_id_in_string);
     return copy_of_name;
 }
 
@@ -346,7 +365,7 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
         return ELECTION_NULL_ARGUMENT;
     }
 
-    if(tribe_id <0) {
+    if(tribe_id < 0) {
         return ELECTION_INVALID_ID;
     }
     //TODO: how about a helper function to do all that?
@@ -357,8 +376,6 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
     userItoa(tribe_id,tribe_id_in_string);
     //END OF HELPER FUNCTION?
 
-
-
     if(!mapContains(election->tribes,tribe_id_in_string)) {
         free(tribe_id_in_string);
         return ELECTION_TRIBE_NOT_EXIST;
@@ -368,7 +385,6 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
         free(tribe_id_in_string);
         return ELECTION_INVALID_NAME;
     }
-
     if(mapPut(election->tribes,tribe_id_in_string,tribe_name) == MAP_OUT_OF_MEMORY) {
         free(tribe_id_in_string);
         return ELECTION_OUT_OF_MEMORY;
@@ -379,7 +395,13 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
 }
 
 
-//TODO: change string FORMAT
+/**
+ * removes tribe and all votes data of that tribe  from the system
+ * @param election
+ * @param tribe_id
+ * @return
+ *
+ */
 ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     if(election == NULL) {
         return ELECTION_NULL_ARGUMENT;
@@ -387,29 +409,31 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     if(tribe_id < 0) {
         return ELECTION_INVALID_ID;
     }
+    // converting to string
     char* tribe_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
     if(tribe_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
     }
     userItoa(tribe_id,tribe_id_in_string);
 
-    int index = getIndex(election->tribes,tribe_id_in_string);
-    if(index == NOT_FOUND) {
+    if(mapRemove(election->tribes,tribe_id_in_string) == MAP_ITEM_DOES_NOT_EXIST) {
         free(tribe_id_in_string);
         return ELECTION_TRIBE_NOT_EXIST;
-}
-    free(tribe_id_in_string);
+    }
 
     MAP_FOREACH(iterator, election->areas) {
         char* old_value = mapGet(election->areas,iterator);
-       char* new_value = removeTribeFromArea(old_value,index);
-       if (new_value == NULL) {
-           return ELECTION_OUT_OF_MEMORY;
-       }
-       if(mapPut(election->areas,iterator,new_value) == MAP_OUT_OF_MEMORY) {
-           return ELECTION_OUT_OF_MEMORY;
-       }
-    } // TODO:add  mapRemove()
+        char* new_value = removeTribeFromArea(old_value,tribe_id_in_string);
+        if (new_value == NULL) {
+            return ELECTION_OUT_OF_MEMORY;
+        }
+        if(mapPut(election->areas,iterator,new_value) == MAP_OUT_OF_MEMORY) {
+            free(new_value);
+            return ELECTION_OUT_OF_MEMORY;
+        }
+        free(new_value);
+    }
+    free(tribe_id_in_string);
     return ELECTION_SUCCESS;
 }
 

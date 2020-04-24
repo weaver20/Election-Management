@@ -49,7 +49,7 @@ bool testElectionAddArea() {
     ASSERT_TEST(electionAddArea(NULL, 2, "second area") == ELECTION_NULL_ARGUMENT);
     ASSERT_TEST(electionAddArea(election, 2, NULL) == ELECTION_NULL_ARGUMENT);
     ASSERT_TEST(electionAddArea(election, -3, "second area") == ELECTION_INVALID_ID);
-    ASSERT_TEST(electionAddArea(election, 2, "already exists") == ELECTION_TRIBE_ALREADY_EXIST);
+    ASSERT_TEST(electionAddArea(election, 2, "already exists") == ELECTION_AREA_ALREADY_EXIST);
     ASSERT_TEST(electionAddArea(election, 3, "second area") == ELECTION_SUCCESS);
     ASSERT_TEST(electionAddArea(election, 4, "INVAL!D NAME") == ELECTION_INVALID_NAME);
 
@@ -59,7 +59,7 @@ bool testElectionAddArea() {
 
     //area with two tribes
     ASSERT_TEST(electionAddTribe(election, 2, "second tribe") == ELECTION_SUCCESS);
-    ASSERT_TEST(electionAddArea(election, 4, "area with two vote slots") == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddArea(election, 5, "area with two vote slots") == ELECTION_SUCCESS);
 
     electionDestroy(election);
     return true;
@@ -73,8 +73,10 @@ bool testElectionGetTribeName() {
     ASSERT_TEST(electionAddTribe(election, 2, "second tribe") == ELECTION_SUCCESS);
     ASSERT_TEST((test_ptr = electionGetTribeName(NULL, 1)) == NULL);
     ASSERT_TEST((test_ptr = electionGetTribeName(election, -2)) == NULL);
-    ASSERT_TEST_WITH_FREE(strcmp(test_ptr = electionGetTribeName(election, 1),"first tribe"), free(test_ptr));
-    ASSERT_TEST_WITH_FREE(strcmp(test_ptr = electionGetTribeName(election, 2),"first tribe"), free(test_ptr));
+    test_ptr = electionGetTribeName(election, 1);
+    ASSERT_TEST_WITH_FREE(strcmp(test_ptr ,"first tribe") == 0, free(test_ptr));
+    test_ptr = electionGetTribeName(election, 2);
+    ASSERT_TEST_WITH_FREE(strcmp(test_ptr ,"first tribe") != 0, free(test_ptr));
     ASSERT_TEST((test_ptr = electionGetTribeName(election, 3)) == NULL);
 
     electionDestroy(election);
