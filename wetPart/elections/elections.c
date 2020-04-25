@@ -101,9 +101,9 @@ static bool isValidID(const char* id) {
 
 
 /**
- * returns a copy of old_value string and reducts ":num_of_votes_of_tribe[index]"
+ * returns a copy of old_value string and reducts ";<tribe id>:<tribe votes>"
  * @param old_value
- * @param index
+ * @param tribe_id
  * @return
  * pointer to a COPY of the new value if succeeded <br>
  * NULL in case of memory fail.
