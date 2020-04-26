@@ -3,7 +3,7 @@
 #include "../test_utilities.h"
 
 /*The number of tests*/
-#define NUMBER_TESTS 4
+#define NUMBER_TESTS 6
 
 bool deleteOnlyFirstArea (int area_id) {
 	return area_id == 1;
@@ -104,13 +104,24 @@ bool testElectionSetTribeName() {
     electionDestroy(election);
     return true;
 }
+
+bool testElectionRemoveTribe() {
+    Election election = electionCreate();
+    ASSERT_TEST(electionAddTribe(election, 1, "first tribe") == ELECTION_SUCCESS);
+
+
+
+
+    return true;
+}
 /*The functions for the tests should be added here*/
 bool (*tests[]) (void) = {
                       testElectionRemoveAreas,
                       testElectionAddTribe,
                       testElectionAddArea,
                       testElectionGetTribeName,
-                      testElectionSetTribeName
+                      testElectionSetTribeName,
+                      testElectionRemoveTribe
 };
 
 /*The names of the test functions should be added here*/
@@ -120,6 +131,7 @@ const char* testNames[] = {
                            "testElectionAddArea",
                            "testElectionGetTribeName",
                            "testElectionSetTribeName",
+                           "testElectionRemoveTribe"
 };
 
 int main(int argc, char *argv[]) {
