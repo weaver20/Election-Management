@@ -38,8 +38,8 @@ static bool isValidID(const char* name);
 static void userItoa(int x, char* buffer);
 
 
-static char * allocateAndCopyString(const char *old_value, int new_size) {
-    char* new_value2 = malloc(new_size);
+static char* allocateAndCopyString(const char *old_value, int new_size) {
+    char* new_value2 = malloc(new_size + 1);
     if (new_value2 == NULL) {
         return NULL;
     }
@@ -108,7 +108,6 @@ static bool isValidID(const char* id) {
  * pointer to a COPY of the new value if succeeded <br>
  * NULL in case of memory fail.
  */
-// TODO: valgrind ends with disturbing errors (not memory leaks) - mini tester in playground
 
 static char* removeTribeFromArea(const char *old_value, const char *tribe_id) {
 
@@ -117,9 +116,10 @@ static char* removeTribeFromArea(const char *old_value, const char *tribe_id) {
     if(temp == NULL) {
         return NULL;
     }
-    // create delimeter: "tribeID:"
+    // create a delimeter: "tribeID:"
     char* delimeter = allocateAndCopyString(tribe_id, strlen(tribe_id) + 2);
     if(delimeter == NULL) {
+        free(temp);
         return NULL;
     }
     strcat(delimeter, START_OF_NUMBER_OF_VOTES);
@@ -135,11 +135,13 @@ static char* removeTribeFromArea(const char *old_value, const char *tribe_id) {
     char* new_value = allocateAndCopyString(temp, new_size);
     if(new_value == NULL) {
         free(delimeter);
+        free(temp);
         return NULL;
     }
     // adds everything after tribe_id votes.
     strcat(new_value, rest_of_value);
     free(rest_of_value);
+    free(temp);
     return new_value;
 }
 
@@ -169,7 +171,7 @@ static char* addTribeToArea(const char* area_name, const char *tribe_id) {
 }
 //TODO : rewrite itoa.
 static void userItoa(int x, char* buffer) {
-    itoa(x, buffer,10);
+    itoa(x, buffer, 10);
 }
 
 //TODO: change string FORMAT
@@ -425,10 +427,12 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
         char* old_value = mapGet(election->areas,iterator);
         char* new_value = removeTribeFromArea(old_value,tribe_id_in_string);
         if (new_value == NULL) {
+            free(tribe_id_in_string);
             return ELECTION_OUT_OF_MEMORY;
         }
         if(mapPut(election->areas,iterator,new_value) == MAP_OUT_OF_MEMORY) {
             free(new_value);
+            free(tribe_id_in_string);
             return ELECTION_OUT_OF_MEMORY;
         }
         free(new_value);
