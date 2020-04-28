@@ -20,17 +20,17 @@ typedef enum VoteResult_t {
 
 VoteMap voteCreate();
 
-void voteDestrroy(VoteMap toDestroy);
+void voteDestroy(VoteMap toDestroy);
 
-VoteResult voteAdd(VoteMap votes, const char* tribe_id, const char* area_id);
+VoteResult votePut(VoteMap votes, const char* tribe_id, const char* area_id);
 
-VoteResult voteRemoveTribe(VoteMap votes, const char* tribe_id);
+VoteResult voteRemove(VoteMap votes,const char* area_id, const char* tribe_id);
 
 VoteResult voteRemoveArea(VoteMap votes, const char* area_id);
 
-VoteResult voteSet(VoteMap votes, const char* tribe_id, const char* area_id, const char* num_of_votes);
+VoteResult voteSet(VoteMap votes, const char* tribe_id, const char* area_id, int votes_to_add);
 
-VoteResult  voteGet(VoteMap votes, const char* tribe_id, const char* area_id);
+int voteGet(VoteMap votes, const char* tribe_id, const char* area_id);
 
 
 

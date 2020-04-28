@@ -239,6 +239,7 @@ Election electionCreate() {
     }
     new_election->areas = mapCreate();
     new_election->tribes = mapCreate();
+    new_election->votes = voteCreate();
     return new_election;
 }
 /**
@@ -251,6 +252,7 @@ void electionDestroy(Election election) {
     }
     mapDestroy(election->tribes);
     mapDestroy(election->areas);
+    voteDestroy(election->votes);
     free(election);
 }
 
@@ -277,7 +279,6 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
         return ELECTION_INVALID_NAME;
     }
 
-    // todo: should we check if mapPut... == MAP_NULL_ARG?????
     if(mapPut(election->tribes,tribe_id_in_string,tribe_name) == MAP_OUT_OF_MEMORY) {
         free(tribe_id_in_string);
         return ELECTION_OUT_OF_MEMORY;
@@ -285,15 +286,11 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
 
     MAP_FOREACH(iterator,election->areas) {
 
-        char* updated_area_name = addTribeToArea(mapGet(election->areas,iterator),tribe_id_in_string);
-        if(updated_area_name == NULL) {
+        if(votePut(election->votes, tribe_id_in_string, iterator)
+           == VOTE_OUT_OF_MEMORY) {
+            free(tribe_id_in_string);
             return ELECTION_OUT_OF_MEMORY;
         }
-        if(mapPut(election->areas,iterator,updated_area_name) == MAP_OUT_OF_MEMORY) {
-            free(updated_area_name);
-            return ELECTION_OUT_OF_MEMORY;
-        }
-        free(updated_area_name);
     }
     free(tribe_id_in_string);
     return ELECTION_SUCCESS;
@@ -323,25 +320,20 @@ ElectionResult electionAddArea(Election election, int area_id, const char* area_
         return ELECTION_INVALID_NAME;
     }
 
-    // Concatenating vote slots to the end of area name.
-    char* area_name_with_votes = addVoteSlots(area_name,election->tribes);
-    if(area_name_with_votes == NULL) {
-        free(area_id_in_string);
-        return ELECTION_OUT_OF_MEMORY;
+    MAP_FOREACH(iterator,election->tribes) {
+        if(votePut(election->votes,iterator,area_id_in_string)
+           == VOTE_OUT_OF_MEMORY) {
+            free(area_id_in_string);
+            return ELECTION_OUT_OF_MEMORY;
+        }
     }
-    // updating the new area to the map
-    if(mapPut(election->areas,area_id_in_string, area_name_with_votes) == MAP_OUT_OF_MEMORY) {
-        free(area_id_in_string);
-        return ELECTION_OUT_OF_MEMORY;
-    }
-
-
     free(area_id_in_string);
-    free( area_name_with_votes);
     return ELECTION_SUCCESS;
 }
 
+
 char* electionGetTribeName (Election election, int tribe_id) {
+
     if(election == NULL || tribe_id <0) {
         return NULL;
     }
@@ -350,12 +342,12 @@ char* electionGetTribeName (Election election, int tribe_id) {
     if(tribe_id_in_string == NULL) {
         return NULL;
     }
-    char* name_ptr = mapGet(election->tribes,tribe_id_in_string);
-    if(name_ptr == NULL) {
+    char* name = mapGet(election->tribes, tribe_id_in_string);
+    if(name == NULL) {
         free(tribe_id_in_string);
         return NULL;
     }
-    char* copy_of_name = allocateAndCopyString(name_ptr, strlen(name_ptr) + 1);
+    char* copy_of_name = allocateAndCopyString(name, strlen(name) + 1);
     if(copy_of_name == NULL) {
         free(tribe_id_in_string);
         return NULL;
@@ -381,15 +373,21 @@ ElectionResult electionAddVote (Election election, int area_id, int tribe_id, in
        tribe_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
     }
-    char* old_area_value = mapGet(election->areas,area_id_in_string);
-    if(old_area_value == NULL) {
-        return ELECTION_AREA_NOT_EXIST;
+
+    int current_num_of_votes = voteGet(election->votes,tribe_id_in_string,area_id_in_string);
+    //if(current_num_of_votes == -1) { ERROR??} ??
+
+    int updated_votes = current_num_of_votes + num_of_votes;
+    if(voteSet(election->votes,tribe_id_in_string,area_id_in_string,updated_votes)
+       == VOTE_OUT_OF_MEMORY) {
+        free(area_id_in_string);
+        free(tribe_id_in_string);
+        return ELECTION_OUT_OF_MEMORY;
     }
 
-    char* new_area_value =
-            allocateAndCopyString(old_area_value,strlen(old_area_value) + ROOM_FOR_NULL_TERMINATOR);
-
-
+    free(area_id_in_string);
+    free(tribe_id_in_string);
+    return ELECTION_SUCCESS;
 }
 
 ElectionResult electionSetTribeName (Election election, int tribe_id, const char* tribe_name) {
@@ -401,7 +399,7 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
     if(tribe_id < 0) {
         return ELECTION_INVALID_ID;
     }
-    //TODO: how about a helper function to do all that?
+
     char* tribe_id_in_string = allocateAndItoa(tribe_id);
     if(tribe_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
@@ -451,18 +449,11 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     }
 
     MAP_FOREACH(iterator, election->areas) {
-        char* old_value = mapGet(election->areas,iterator);
-        char* new_value = removeTribeFromArea(old_value,tribe_id_in_string);
-        if (new_value == NULL) {
-            free(tribe_id_in_string);
-            return ELECTION_OUT_OF_MEMORY;
-        }
-        if(mapPut(election->areas,iterator,new_value) == MAP_OUT_OF_MEMORY) {
-            free(new_value);
-            free(tribe_id_in_string);
-            return ELECTION_OUT_OF_MEMORY;
-        }
-        free(new_value);
+#ifndef NDEBUG
+        VoteResult result =
+#endif
+        voteRemove(election->votes,iterator,tribe_id_in_string);
+        assert(result == VOTE_SUCCESS);
     }
     free(tribe_id_in_string);
     return ELECTION_SUCCESS;
