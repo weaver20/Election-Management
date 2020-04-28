@@ -21,6 +21,8 @@ election.h
 /mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/elections.c
 election.h
 /mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/election.h
+voteMap.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/voteMap.h
 stdio.h
 -
 stdlib.h
@@ -35,6 +37,10 @@ stdbool.h
 -
 string.h
 -
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/voteMap.h
+mtm_map/map.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/mtm_map/map.h
 
 /mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/test_utilities.h
 stdbool.h
