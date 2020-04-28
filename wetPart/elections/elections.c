@@ -3,25 +3,27 @@
 //
 
 #define NOT_FOUND -1
-#define MAX_LENGTH_OF_ITOA_OUTPUT 11
+#define MAX_LENGTH_OF_INT 11
 #define VOTE_SIZE 13 // 11 for itoa output + 2 for ":" and ";"
 #define START_OF_NEW_VOTE ";"
 #define START_OF_NUMBER_OF_VOTES ":"
 #define DEFAULT_NUMBER_OF_VOTES "0"
+#define DECIMAL 10
+#define ROOM_FOR_NULL_TERMINATOR 1
 
 #include "election.h"
+#include "voteMap.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
 
-// TODO: tip from forum: use strtok()
+
 
 struct election_t {
     Map areas;
     Map tribes;
-
-
+    VoteMap votes;
 };
 /* *********************************************************************************************** */
 /* **************************************  HELPER FUNCTIONS ************************************** */
@@ -35,7 +37,7 @@ static bool isValidNameChar(const char toCheck);
 static bool isValidIDChar(const char toCheck);
 static bool isValidName(const char* name);
 static bool isValidID(const char* name);
-static void userItoa(int x, char* buffer);
+static char* allocateAndItoa(int x);
 
 
 static char* allocateAndCopyString(const char *old_value, int new_size) {
@@ -52,7 +54,7 @@ static char* allocateAndCopyString(const char *old_value, int new_size) {
  * @return
  */
 static bool isValidNameChar(const char toCheck) {
-    if( (toCheck <= 'z' && toCheck >= 'a')
+    if( isValidIDChar(toCheck)
         || toCheck == ' ' ) {
         return true;
     }
@@ -169,9 +171,17 @@ static char* addTribeToArea(const char* area_name, const char *tribe_id) {
 
     return updated_area_name;
 }
-//TODO : rewrite itoa.
-static void userItoa(int x, char* buffer) {
-    itoa(x, buffer, 10);
+
+static char* allocateAndItoa(int x) {
+    if(x < 0) {
+        return NULL;
+    }
+    char* x_in_string = malloc(MAX_LENGTH_OF_INT);
+    if(x_in_string == NULL) {
+        return NULL;
+    }
+    sprintf(x_in_string,"%d",x);
+    return x_in_string;
 }
 
 //TODO: change string FORMAT
@@ -244,7 +254,7 @@ void electionDestroy(Election election) {
     free(election);
 }
 
-// todo: can`t use itoa(tribe_id, buffer) - will not compile in csl3 - implement userItoa()
+
 
 ElectionResult electionAddTribe (Election election, int tribe_id, const char* tribe_name) {
 
@@ -254,9 +264,7 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
     if(tribe_name == NULL || election == NULL) {
         return ELECTION_NULL_ARGUMENT;
     }
-    char* tribe_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
-    userItoa(tribe_id,tribe_id_in_string); // todo: implement userItoa()
-
+    char* tribe_id_in_string = allocateAndItoa(tribe_id);
     if(tribe_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
     }
@@ -300,12 +308,10 @@ ElectionResult electionAddArea(Election election, int area_id, const char* area_
     if(area_name == NULL || election == NULL) {
         return ELECTION_NULL_ARGUMENT;
     }
-    char* area_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
+    char* area_id_in_string = allocateAndItoa(area_id);
     if(area_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
     }
-    userItoa(area_id,area_id_in_string); // todo: implement userItoa()
-
 
     if(mapContains(election->areas,area_id_in_string)) {
         free(area_id_in_string);
@@ -340,12 +346,10 @@ char* electionGetTribeName (Election election, int tribe_id) {
         return NULL;
     }
 
-    char* tribe_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
+    char* tribe_id_in_string = allocateAndItoa(tribe_id);
     if(tribe_id_in_string == NULL) {
         return NULL;
     }
-    userItoa(tribe_id,tribe_id_in_string);
-
     char* name_ptr = mapGet(election->tribes,tribe_id_in_string);
     if(name_ptr == NULL) {
         free(tribe_id_in_string);
@@ -361,6 +365,33 @@ char* electionGetTribeName (Election election, int tribe_id) {
     return copy_of_name;
 }
 
+ElectionResult electionAddVote (Election election, int area_id, int tribe_id, int num_of_votes) {
+    if(election == NULL) {
+        return ELECTION_NULL_ARGUMENT;
+    }
+    if(tribe_id < 0 || area_id < 0) {
+        return ELECTION_INVALID_ID;
+    }
+    if(num_of_votes <= 0 ) {
+        return ELECTION_INVALID_VOTES;
+    }
+    char* area_id_in_string = allocateAndItoa(area_id);
+    char* tribe_id_in_string = allocateAndItoa(tribe_id);
+    if(area_id_in_string == NULL ||
+       tribe_id_in_string == NULL) {
+        return ELECTION_OUT_OF_MEMORY;
+    }
+    char* old_area_value = mapGet(election->areas,area_id_in_string);
+    if(old_area_value == NULL) {
+        return ELECTION_AREA_NOT_EXIST;
+    }
+
+    char* new_area_value =
+            allocateAndCopyString(old_area_value,strlen(old_area_value) + ROOM_FOR_NULL_TERMINATOR);
+
+
+}
+
 ElectionResult electionSetTribeName (Election election, int tribe_id, const char* tribe_name) {
 
     if(election == NULL || tribe_name == NULL) {
@@ -371,12 +402,10 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
         return ELECTION_INVALID_ID;
     }
     //TODO: how about a helper function to do all that?
-    char* tribe_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
+    char* tribe_id_in_string = allocateAndItoa(tribe_id);
     if(tribe_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
     }
-    userItoa(tribe_id,tribe_id_in_string);
-    //END OF HELPER FUNCTION?
 
     if(!mapContains(election->tribes,tribe_id_in_string)) {
         free(tribe_id_in_string);
@@ -411,12 +440,10 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     if(tribe_id < 0) {
         return ELECTION_INVALID_ID;
     }
-    // converting to string
-    char* tribe_id_in_string = malloc(MAX_LENGTH_OF_ITOA_OUTPUT);
+    char* tribe_id_in_string = allocateAndItoa(tribe_id);
     if(tribe_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
     }
-    userItoa(tribe_id,tribe_id_in_string);
 
     if(mapRemove(election->tribes,tribe_id_in_string) == MAP_ITEM_DOES_NOT_EXIST) {
         free(tribe_id_in_string);
