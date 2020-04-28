@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/election.h
+mtm_map/map.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/mtm_map/map.h
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/electionTestsExample.c
+stdlib.h
+-
+election.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/election.h
+../test_utilities.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/test_utilities.h
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/elections.c
+election.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/election.h
+stdio.h
+-
+stdlib.h
+-
+stdbool.h
+-
+assert.h
+-
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/elections/mtm_map/map.h
+stdbool.h
+-
+string.h
+-
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/wetPart/test_utilities.h
+stdbool.h
+-
+stdio.h
+-
+
