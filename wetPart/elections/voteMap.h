@@ -4,35 +4,39 @@
 
 #ifndef EX_1_VOTEMAP_H
 #define EX_1_VOTEMAP_H
+#define AREA "area"
+#define TRIBE "tribe"
 
 #include "mtm_map/map.h"
 
-typedef struct vote_t* VoteMap;
+typedef struct vote_t *VoteMap;
 
 typedef enum VoteResult_t {
     VOTE_SUCCESS,
     VOTE_OUT_OF_MEMORY,
     VOTE_NULL_ARGUMENT,
     VOTE_ITEM_DOES_NOT_EXIST,
+    VOTE_INVALID_INPUT
 } VoteResult;
 
 
 
-VoteMap voteCreate();
+VoteMap voteCreate(); // Done!t
 
-void voteDestroy(VoteMap toDestroy);
+void voteDestroy(VoteMap toDestroy); // Done!
 
-VoteResult votePut(VoteMap votes, const char* tribe_id, const char* area_id);
+VoteResult votePut(VoteMap votes, const char* tribe_id, const char* area_id); // Done!
 
-VoteResult voteRemove(VoteMap votes,const char* area_id, const char* tribe_id);
+VoteResult voteRemove(VoteMap votes, const char* name_id, const char* to_remove); // Done!
 
-VoteResult voteRemoveArea(VoteMap votes, const char* area_id);
+VoteResult voteSet(VoteMap votes, const char* tribe_id, const char* area_id, int updated_votes_number); // Done!
 
-VoteResult voteSet(VoteMap votes, const char* tribe_id, const char* area_id, int votes_to_add);
+int voteGet(VoteMap votes, const char* area_id, const char* tribe_id); // Done!
 
-int voteGet(VoteMap votes, const char* tribe_id, const char* area_id);
-
-
+#define VOTE_FOREACH(iterator, map) \
+    for(char* (iterator) = (char*) mapGetFirst(map) ; \
+        (iterator) ;\
+        (iterator) = mapGetNext(map))
 
 
 #endif //EX_1_VOTEMAP_H

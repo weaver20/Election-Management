@@ -391,7 +391,7 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
 #ifndef NDEBUG
         VoteResult result =
 #endif
-        voteRemove(election->votes,iterator,tribe_id_in_string);
+        voteRemove(election->votes,iterator,tribe_id_in_string, TRIBE);
         assert(result == VOTE_SUCCESS);
     }
     free(tribe_id_in_string);
