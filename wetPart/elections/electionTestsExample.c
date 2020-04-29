@@ -4,7 +4,7 @@
 
 /*The number of tests*/
 #define NUMBER_TESTS 6
-//#define NPRINT
+#define NPRINT
 
 
 bool deleteOnlyFirstArea (int area_id) {
@@ -49,7 +49,7 @@ bool testElectionRemoveAreas() {
 #endif
 	ASSERT_TEST(electionAddVote(election, 1, 1,10) == ELECTION_SUCCESS);
 	ASSERT_TEST(electionAddVote(election, 2, 1,10) == ELECTION_AREA_NOT_EXIST);
-	ASSERT_TEST(electionAddVote(election, 3, 1,10) == ELECTION_AREA_NOT_EXIST);
+	ASSERT_TEST(electionAddVote(election, 3, 1,10) == ELECTION_SUCCESS);
 	electionDestroy(election);
 	return true;
 }
