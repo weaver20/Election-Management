@@ -4,17 +4,52 @@
 
 /*The number of tests*/
 #define NUMBER_TESTS 6
+//#define NPRINT
+
 
 bool deleteOnlyFirstArea (int area_id) {
 	return area_id == 1;
 }
+bool deleteNothing(int area_id) {
+    return false;
+}
+bool deleteAll(int area_id) {
+    return true;
+}
+bool deleteEvenNumbers(int area_id) {
+    return area_id % 2 == 0;
+}
+
 
 bool testElectionRemoveAreas() {
 	Election election = electionCreate();
 	ASSERT_TEST(electionAddArea(election, 1, "first area") == ELECTION_SUCCESS);
     ASSERT_TEST(electionAddArea(election, 2, "second area") == ELECTION_SUCCESS);
 
+    ASSERT_TEST(electionAddTribe(election, 1, "first tribe") == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddTribe(election, 2, "first tribe") == ELECTION_SUCCESS);
+
 	ASSERT_TEST(electionRemoveAreas(election, deleteOnlyFirstArea) == ELECTION_SUCCESS);
+	ASSERT_TEST(electionAddVote(election, 1, 1,10) == ELECTION_AREA_NOT_EXIST);
+
+	ASSERT_TEST(electionAddArea(election, 1, "first area") == ELECTION_SUCCESS);
+	ASSERT_TEST(electionAddArea(election, 3, "third area") == ELECTION_SUCCESS);
+	ASSERT_TEST(electionRemoveAreas(election, deleteAll) == ELECTION_SUCCESS);
+
+	ASSERT_TEST(electionAddArea(election, 1, "first area") == ELECTION_SUCCESS);
+	ASSERT_TEST(electionAddArea(election, 2, "first area") == ELECTION_SUCCESS);
+	ASSERT_TEST(electionAddArea(election, 3, "third area") == ELECTION_SUCCESS);
+	ASSERT_TEST(electionAddArea(election, 4, "forth area") == ELECTION_SUCCESS);
+#ifndef NPRINT
+    printElection(election,"4 areas, 2 tribe");
+#endif
+	ASSERT_TEST(electionRemoveAreas(election, deleteEvenNumbers) == ELECTION_SUCCESS);
+#ifndef NPRINT
+    printElection(election,"deleted even areas");
+#endif
+	ASSERT_TEST(electionAddVote(election, 1, 1,10) == ELECTION_SUCCESS);
+	ASSERT_TEST(electionAddVote(election, 2, 1,10) == ELECTION_AREA_NOT_EXIST);
+	ASSERT_TEST(electionAddVote(election, 3, 1,10) == ELECTION_AREA_NOT_EXIST);
 	electionDestroy(election);
 	return true;
 }
@@ -98,7 +133,7 @@ bool testElectionSetTribeName() {
     ASSERT_TEST(electionSetTribeName(election, -3, "negative id") == ELECTION_INVALID_ID);
     ASSERT_TEST(electionSetTribeName(election, 2, "INVAL!D NAME") == ELECTION_INVALID_NAME);
     ASSERT_TEST(electionSetTribeName(NULL, 2, "INVAL!D NAME and NULL") == ELECTION_NULL_ARGUMENT);
-    ASSERT_TEST(electionSetTribeName(NULL, 8, "INVAL!D NAME and not exists") == ELECTION_TRIBE_NOT_EXIST);
+    ASSERT_TEST(electionSetTribeName(election, 8, "INVAL!D NAME and not exists") == ELECTION_TRIBE_NOT_EXIST);
 
 
     electionDestroy(election);

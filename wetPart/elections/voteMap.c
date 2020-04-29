@@ -20,6 +20,22 @@ struct vote_t{
     Map votes;
     int total_num_of_votes;
 };
+/**
+ * Helper functions to printing
+ * @param map
+ */
+static void printMap(Map map){
+    MAP_FOREACH(iterator, map){
+        printf("%s: \"%s\" \n",
+               iterator,
+               mapGet(map,iterator));
+    }
+}
+void votesPrint(VoteMap votes) {
+    printMap(votes->votes);
+}
+/*      end of printing functions */
+
 
 static char* copyString(const char* str){
     char* new_str = malloc(strlen(str) + 1);
@@ -31,6 +47,7 @@ static char* copyString(const char* str){
 
 static int toInteger(char* str){
     assert(strlen(str) > 0);
+
     int factor = pow((double) INITIAL_FACTOR, (double) strlen(str) - 1);
     int number_of_votes = 0;
 
@@ -50,14 +67,10 @@ static char* createVoteKeyElement(const char* area_id, const char* tribe_id){
         return NULL;
     }
     char* delimeter = DELIMETER;
-    char* area_copy = copyString(area_id);
-    char* tribe_copy = copyString(tribe_id);
-    strcat(key_to_assign, area_copy);
+    strcpy(key_to_assign, area_id);
     strcat(key_to_assign, delimeter);
-    strcat(key_to_assign, tribe_copy);
+    strcat(key_to_assign, tribe_id);
 
-    free(area_copy);
-    free(tribe_copy);
     return key_to_assign;
 }
 
@@ -95,7 +108,7 @@ VoteResult votePut(VoteMap votes, const char* tribe_id, const char* area_id){
         return VOTE_NULL_ARGUMENT;
     }
 
-    char* key_to_assign = createVoteKeyElement(area_id, tribe_id);
+    char* key_to_assign = createVoteKeyElement(area_id, tribe_id); //TODO: fix
     char* value_to_assign = createVoteValueElement(INITIAL_VOTES);
     if(key_to_assign == NULL || value_to_assign == NULL){
         return VOTE_OUT_OF_MEMORY;
@@ -115,33 +128,42 @@ VoteResult voteRemove(VoteMap votes, const char* name_id, const char* to_remove)
         return VOTE_NULL_ARGUMENT;
     }
 
-    if(strcmp(to_remove, TRIBE) !=0 || strcmp(to_remove, AREA) != 0){
+    if(strcmp(to_remove, TRIBE) !=0 && strcmp(to_remove, AREA) != 0){
         return VOTE_INVALID_INPUT;
     }
 
     char* delimeter = DELIMETER;
     int delete_count = 0;
+    bool deleted_item = false;
+    do {
+        deleted_item = false;
+        VOTE_FOREACH(iterator, votes->votes) {
+            char *key_copy = copyString(iterator);
+            char *token = strtok(key_copy, delimeter);
 
-    VOTE_FOREACH(iterator, votes->votes){
-        char* key_copy = copyString(iterator);
-        char* token = strtok(key_copy, delimeter);
-
-        //in case a tribe ID supplied
-        if(strcmp(to_remove, TRIBE) == 0){
-            token = strtok(NULL, delimeter);
-            if(strcmp(name_id, token) == 0){
-                mapRemove(votes->votes, iterator);
-                delete_count++; // if we've reached this phase then the item necessarily exists in the map
+            //in case a tribe ID supplied
+            if (strcmp(to_remove, TRIBE) == 0) {
+                token = strtok(NULL, delimeter);
+                if (strcmp(name_id, token) == 0) {
+                    mapRemove(votes->votes, iterator);
+                    deleted_item = true;
+                    delete_count++; // if we've reached this phase then the item necessarily exists in the map
+                    free(key_copy);
+                    break;
+                }
             }
-        }
 
-        //in case an area ID supplied
-        if(strcmp(name_id, token) == 0){
-            mapRemove(votes->votes, iterator);
-            delete_count++; // if we've reached this phase then the item necessarily exists in the map
+            //in case an area ID supplied
+            if (strcmp(name_id, token) == 0) {
+                mapRemove(votes->votes, iterator);
+                deleted_item = true;
+                delete_count++; // if we've reached this phase then the item necessarily exists in the map
+                free(key_copy);
+                break;
+            }
+            free(key_copy);
         }
-        free(key_copy);
-    }
+    }while(deleted_item);
 
     if(delete_count > 0){
         return VOTE_SUCCESS;
