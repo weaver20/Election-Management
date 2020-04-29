@@ -110,8 +110,10 @@ bool testElectionGetTribeName() {
     ASSERT_TEST((test_ptr = electionGetTribeName(election, -2)) == NULL);
     test_ptr = electionGetTribeName(election, 1);
     ASSERT_TEST_WITH_FREE(strcmp(test_ptr ,"first tribe") == 0, free(test_ptr));
+    free(test_ptr);
     test_ptr = electionGetTribeName(election, 2);
     ASSERT_TEST_WITH_FREE(strcmp(test_ptr ,"first tribe") != 0, free(test_ptr));
+    free(test_ptr);
     ASSERT_TEST((test_ptr = electionGetTribeName(election, 3)) == NULL);
 
     electionDestroy(election);
@@ -143,10 +145,7 @@ bool testElectionSetTribeName() {
 bool testElectionRemoveTribe() {
     Election election = electionCreate();
     ASSERT_TEST(electionAddTribe(election, 1, "first tribe") == ELECTION_SUCCESS);
-
-
-
-
+    electionDestroy(election);
     return true;
 }
 /*The functions for the tests should be added here*/

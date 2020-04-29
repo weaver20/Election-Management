@@ -21,7 +21,7 @@ typedef enum VoteResult_t {
 
 
 
-VoteMap voteCreate(); // Done!t
+VoteMap voteCreate(); // Done!ta
 
 void voteDestroy(VoteMap toDestroy); // Done!
 

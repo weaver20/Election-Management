@@ -5,7 +5,6 @@
 #include "voteMap.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include "assert.h"
 
 
@@ -44,22 +43,6 @@ static char* copyString(const char* str){
         return NULL;
     }
     return strcpy(new_str, str);
-}
-
-static int toInteger(char* str){
-    assert(strlen(str) > 0);
-
-    int factor = pow((double) INITIAL_FACTOR, (double) strlen(str) - 1);
-    int number_of_votes = 0;
-
-    char* iterator = str;
-    while(*iterator != '\0'){
-        number_of_votes += factor * (*iterator - '0');
-        factor--;
-        iterator++;
-    }
-    return number_of_votes;
-
 }
 
 static char* createVoteKeyElement(const char* area_id, const char* tribe_id){
@@ -116,11 +99,12 @@ VoteResult votePut(VoteMap votes, const char* tribe_id, const char* area_id){
     }
 
 #ifndef NDEBUG
-    VoteResult result =
+    MapResult result =
 #endif
     mapPut(votes->votes, key_to_assign, value_to_assign);
     assert(result == MAP_SUCCESS);
     free(key_to_assign);
+    free(value_to_assign);
     return VOTE_SUCCESS;
 }
 
@@ -198,10 +182,12 @@ int voteGet(VoteMap votes, const char* area_id, const char* tribe_id){
     if(votes == NULL || area_id == NULL || tribe_id == NULL){
         return VOTE_NULL_ARGUMENT;
     }
+
     char* key = createVoteKeyElement(area_id, tribe_id);
     char* votes_number = mapGet(votes->votes, key); // We call this function when it's certain that the key element
                                                     // is in the map
-    return toInteger(votes_number);
+    free(key);
+    return atoi(votes_number);
 }
 
 
