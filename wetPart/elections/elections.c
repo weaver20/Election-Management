@@ -419,7 +419,7 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
 #ifndef NDEBUG
     VoteResult result =
 #endif
-    voteRemove(election->votes,tribe_id_in_string, TRIBE);
+            voteRemove(election->votes,tribe_id_in_string, TRIBE);
     assert(result == VOTE_SUCCESS);
     free(tribe_id_in_string);
     return ELECTION_SUCCESS;
@@ -444,11 +444,46 @@ ElectionResult electionRemoveAreas(Election election, AreaConditionFunction shou
 
         }
     }while(removed_an_area);
-
-
     return ELECTION_SUCCESS;
 }
+Map electionComputeAreasToTribesMapping (Election election) {
+    if(election == NULL) {
+        return NULL;
+    }
+    Map areas_to_tribes = mapCreate();
+    if(areas_to_tribes == NULL) {
+        return NULL;
+    }
+    if(mapGetSize(election->tribes) == 0 ||
+       mapGetSize(election->areas) == 0) {
+        return areas_to_tribes;
+    }
 
+    MAP_FOREACH(area_iterator,election->areas) {
+        char* tribe_with_max_votes = mapGetFirst(election->tribes);
+        int max_votes = voteGet(election->votes,area_iterator,tribe_with_max_votes);
+        MAP_FOREACH(tribe_iterator,election->tribes) {
+
+            int current_votes = voteGet(election->votes,area_iterator,tribe_iterator);
+
+            if(current_votes > max_votes) {
+                max_votes = current_votes;
+                tribe_with_max_votes = tribe_iterator;
+            }
+            else if(current_votes == max_votes &&
+                    strcmp(tribe_iterator,tribe_with_max_votes) < 0) {
+                tribe_with_max_votes = tribe_iterator;
+            }
+
+        }
+        assert(areas_to_tribes != NULL && area_iterator != NULL && tribe_with_max_votes != NULL);
+        if(mapPut(areas_to_tribes,area_iterator,tribe_with_max_votes) == MAP_OUT_OF_MEMORY) {
+            mapDestroy(areas_to_tribes);
+            return NULL;
+        }
+    }
+    return areas_to_tribes;
+}
 
 
 
