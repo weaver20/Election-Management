@@ -28,7 +28,7 @@ static int elementIndex(Map map, const char* key){
             return i;
         }
     }
-    //TODO: returns index of 4
+
     return NOT_FOUND;
 }
 
@@ -207,7 +207,11 @@ char* mapGet(Map map, const char* key){
         return NULL;
     }
 
-    return map->dictionary[elementIndex(map, key)].value;
+    int index = elementIndex(map, key);
+    if(index == NOT_FOUND){
+        return NULL;
+    }
+    return map->dictionary[index].value;
 }
 
 MapResult mapRemove(Map map, const char* key){
