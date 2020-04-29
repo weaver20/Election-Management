@@ -29,11 +29,37 @@ struct election_t {
 /* **************************************  HELPER FUNCTIONS ************************************** */
 /* *********************************************************************************************** */
 
+
+
 static bool isValidNameChar(const char toCheck);
 static bool isValidName(const char* name);
 static bool isValidID(int id);
 static char* allocateAndItoa(int x);
 
+/**
+ * printing functions
+ * @param map
+ */
+static void printMap(Map map){
+    MAP_FOREACH(iterator, map){
+        printf("%s: \"%s\" \n",
+               iterator,
+               mapGet(map,iterator));
+    }
+}
+
+
+void printElection(Election election, const char* name) {
+    printf("\n ************ Printing Election \"%s\" ************: \n", name);
+    printf("**** Printing Areas: \n");
+    printMap(election->areas);
+    printf("**** Printing Tribes: \n");
+    printMap(election->tribes);
+    printf("**** Printing Votes: \n");
+    votesPrint(election->votes);
+    printf("\n");
+}
+/*       end of printing functions  */
 
 static char* allocateAndCopyString(const char *old_value, int new_size) {
     char* new_value2 = malloc(new_size + 1);
@@ -142,7 +168,7 @@ void electionDestroy(Election election) {
 
 ElectionResult electionAddTribe (Election election, int tribe_id, const char* tribe_name) {
 
-    if(isValidID(tribe_id)) {
+    if(!isValidID(tribe_id)) {
         return ELECTION_INVALID_ID;
     }
     if(tribe_name == NULL || election == NULL) {
@@ -181,7 +207,7 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
 
 ElectionResult electionAddArea(Election election, int area_id, const char* area_name) {
 
-    if(isValidID(area_id)) {
+    if(!isValidID(area_id)) {
         return ELECTION_INVALID_ID;
     }
     if(area_name == NULL || election == NULL) {
@@ -202,6 +228,10 @@ ElectionResult electionAddArea(Election election, int area_id, const char* area_
         return ELECTION_INVALID_NAME;
     }
 
+    if(mapPut(election->areas,area_id_in_string,area_name) == MAP_OUT_OF_MEMORY) {
+        free(area_id_in_string);
+        return ELECTION_OUT_OF_MEMORY;
+    }
     MAP_FOREACH(iterator,election->tribes) {
         if(votePut(election->votes,iterator,area_id_in_string)
            == VOTE_OUT_OF_MEMORY) {
@@ -243,7 +273,7 @@ ElectionResult electionAddVote (Election election, int area_id, int tribe_id, in
     if(election == NULL) {
         return ELECTION_NULL_ARGUMENT;
     }
-    if(isValidID(tribe_id) || isValidID(area_id)) {
+    if(!isValidID(tribe_id) || !isValidID(area_id)) {
         return ELECTION_INVALID_ID;
     }
     if(num_of_votes <= 0 ) {
@@ -286,7 +316,7 @@ ElectionResult electionRemoveVote(Election election, int area_id, int tribe_id, 
     if(election == NULL) {
         return ELECTION_NULL_ARGUMENT;
     }
-    if(isValidID(tribe_id)|| isValidID(area_id)) {
+    if(!isValidID(tribe_id)|| !isValidID(area_id)) {
         return ELECTION_INVALID_ID;
     }
     if(num_of_votes <= 0 ) {
@@ -335,7 +365,7 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
         return ELECTION_NULL_ARGUMENT;
     }
 
-    if(isValidID(tribe_id)) {
+    if(!isValidID(tribe_id)) {
         return ELECTION_INVALID_ID;
     }
 
@@ -374,7 +404,7 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     if(election == NULL) {
         return ELECTION_NULL_ARGUMENT;
     }
-    if(isValidID(tribe_id)) {
+    if(!isValidID(tribe_id)) {
         return ELECTION_INVALID_ID;
     }
     char* tribe_id_in_string = allocateAndItoa(tribe_id);
@@ -386,14 +416,11 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
         free(tribe_id_in_string);
         return ELECTION_TRIBE_NOT_EXIST;
     }
-
-    MAP_FOREACH(iterator, election->areas) {
 #ifndef NDEBUG
-        VoteResult result =
+    VoteResult result =
 #endif
-        voteRemove(election->votes,iterator,tribe_id_in_string, TRIBE);
-        assert(result == VOTE_SUCCESS);
-    }
+    voteRemove(election->votes,tribe_id_in_string, TRIBE);
+    assert(result == VOTE_SUCCESS);
     free(tribe_id_in_string);
     return ELECTION_SUCCESS;
 }
@@ -405,10 +432,11 @@ ElectionResult electionRemoveAreas(Election election, AreaConditionFunction shou
     }
     bool removed_an_area = false;
     do {
+        removed_an_area = false;
         MAP_FOREACH(iterator, election->areas) {
-            removed_an_area = false;
             int int_id = atoi(iterator);
             if(should_delete_area(int_id)) {
+                voteRemove(election->votes,iterator,AREA);
                 mapRemove(election->areas, iterator);
                 removed_an_area = true;
                 break;

@@ -9,7 +9,7 @@
 
 #include "mtm_map/map.h"
 
-typedef struct vote_t *VoteMap;
+typedef struct vote_t* VoteMap;
 
 typedef enum VoteResult_t {
     VOTE_SUCCESS,
@@ -32,6 +32,8 @@ VoteResult voteRemove(VoteMap votes, const char* name_id, const char* to_remove)
 VoteResult voteSet(VoteMap votes, const char* tribe_id, const char* area_id, int updated_votes_number); // Done!
 
 int voteGet(VoteMap votes, const char* area_id, const char* tribe_id); // Done!
+
+void votesPrint(VoteMap votes); // Done!
 
 #define VOTE_FOREACH(iterator, map) \
     for(char* (iterator) = (char*) mapGetFirst(map) ; \
