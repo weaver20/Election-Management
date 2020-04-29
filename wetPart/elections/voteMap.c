@@ -12,6 +12,7 @@
 #define INITIAL_VOTES 0
 #define DELIMETER ":"
 #define MAX_VOTE_SIZE 13
+#define MAX_VOTE_SIZE 13 // 11 for itoa output + 2 for ":" and ";"
 #define INITIAL_FACTOR 10
 
 
