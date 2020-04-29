@@ -296,7 +296,7 @@ ElectionResult electionAddVote (Election election, int area_id, int tribe_id, in
         return ELECTION_TRIBE_NOT_EXIST;
     }
 
-    int current_num_of_votes = voteGet(election->votes,tribe_id_in_string,area_id_in_string);
+    int current_num_of_votes = voteGet(election->votes,area_id_in_string,tribe_id_in_string);
     //if(current_num_of_votes == -1) { ERROR??} ??
 
     int updated_votes = current_num_of_votes + num_of_votes;
