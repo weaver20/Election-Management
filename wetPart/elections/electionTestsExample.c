@@ -2,10 +2,12 @@
 #include "election.h"
 #include "../test_utilities.h"
 #include "print_utils.h"
+#include "Utilities_For_Testing.h"
+#include <math.h>
 
 
 /*The number of tests*/
-#define NUMBER_TESTS 6
+#define NUMBER_TESTS 7
 //#define NPRINT
 
 
@@ -170,10 +172,62 @@ bool testElectionSetTribeName() {
 
 bool testElectionRemoveTribe() {
     Election election = electionCreate();
+
+    // Adding areas
+    ASSERT_TEST(electionAddArea(election, 1, "Haifa") == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddArea(election, 2, "Tel Aviv") == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddArea(election, 1, "Haifa") == ELECTION_AREA_ALREADY_EXIST);
+    ASSERT_TEST(electionAddArea(election, 3, "Tel Aviv") == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddArea(election, 4, "Jerusalem") == ELECTION_SUCCESS);
+
+    // Adding votes and tribes
+    ASSERT_TEST(electionAddVote(NULL, 1, 1, 10) == ELECTION_NULL_ARGUMENT);
+    ASSERT_TEST(electionAddVote(election, 1, 1, 100) == ELECTION_TRIBE_NOT_EXIST);
     ASSERT_TEST(electionAddTribe(election, 1, "first tribe") == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddVote(election, 1, 1, 100) == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddTribe(election, 2, "second tribe") == ELECTION_SUCCESS);
+    ASSERT_TEST(electionAddTribe(election,3, "third tribe") == ELECTION_SUCCESS);
+
+    //Removing tribes
+    ASSERT_TEST(electionRemoveTribe(election, -123) == ELECTION_INVALID_ID);
+    ASSERT_TEST(electionRemoveTribe(NULL, 12) == ELECTION_NULL_ARGUMENT);
+    ASSERT_TEST(electionRemoveTribe(election, 1) == ELECTION_SUCCESS);
+    ASSERT_TEST(electionRemoveTribe(election, 2) == ELECTION_SUCCESS);
+    ASSERT_TEST(electionRemoveTribe(election, 5) == ELECTION_TRIBE_NOT_EXIST);
+    ASSERT_TEST(electionRemoveTribe(election, 3) == ELECTION_SUCCESS);
     electionDestroy(election);
     return true;
 }
+
+bool testElectionComputeAreasToTribesMapping(){
+    Election election = electionCreate();
+    char* areas[] = {"Tel Aviv", "Haifa", "Jerusalem",  "Beer Sheva", "Ashdod", "Ashkelon", "Rehovot"};
+    char* tribes[] = {"Likud", "Kahol Lavan", "Meretz", "Yamina", "Avoda", "Reshima Meshutefet", "Shas"};
+    for(int idx = 0; idx < 7; idx++){
+        ASSERT_TEST(electionAddArea(election, idx, areas[idx]) == ELECTION_SUCCESS);
+    }
+
+    for(int j =0; j < 7; j++){
+        ASSERT_TEST(electionAddTribe(election, j, tribes[j]) == ELECTION_SUCCESS);
+    }
+
+    for(int idx = 0; idx < 7; idx++){
+        for(int j =0; j < 7; j++){
+            ASSERT_TEST_FOR_VOTES(electionAddVote(election, idx, j, rand() %10000) == ELECTION_SUCCESS);
+        }
+    }
+
+    //printElection(election, "Israel's elections results:\n"); - put here your printing function instead
+    puts("Winning tribes by areas:\n");
+    Map winners_map = electionComputeAreasToTribesMapping(election);
+    MAP_FOREACH(iterator, winners_map){
+        printf("%s : %s ", iterator, mapGet(winners_map, iterator));
+    }
+    mapDestroy(winners_map);
+    electionDestroy(election);
+    return true;
+}
+
 /*The functions for the tests should be added here*/
 bool (*tests[]) (void) = {
                       testElectionRemoveAreas,
@@ -181,7 +235,8 @@ bool (*tests[]) (void) = {
                       testElectionAddArea,
                       testElectionGetTribeName,
                       testElectionSetTribeName,
-                      testElectionRemoveTribe
+                      testElectionRemoveTribe,
+                      testElectionComputeAreasToTribesMapping
 };
 
 /*The names of the test functions should be added here*/
@@ -191,7 +246,9 @@ const char* testNames[] = {
                            "testElectionAddArea",
                            "testElectionGetTribeName",
                            "testElectionSetTribeName",
-                           "testElectionRemoveTribe"
+                           "testElectionRemoveTribe",
+                           "testElectionAddVote",
+                           "testElectionComputeAreasToTribesMapping"
 };
 
 int main(int argc, char *argv[]) {

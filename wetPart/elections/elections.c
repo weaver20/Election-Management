@@ -12,6 +12,7 @@
 #define ROOM_FOR_NULL_TERMINATOR 1
 
 #include "election.h"
+#include "mtm_map/map.h"
 #include "voteMap.h"
 #include "print_utils.h"
 #include <stdio.h>
@@ -76,7 +77,7 @@ static char* allocateAndCopyString(const char *old_value, int new_size) {
  * @return
  */
 static bool isValidNameChar(const char toCheck) {
-    if( (toCheck <= 'z' && toCheck >= 'a')
+    if((toCheck <= 'z' && toCheck >= 'a') || (toCheck <= 'Z' && toCheck >= 'A')
         || toCheck == ' ' ) {
         return true;
     }
@@ -90,7 +91,7 @@ static bool isValidNameChar(const char toCheck) {
  */
 static bool isValidName(const char* name) {
     int name_length = strlen(name);
-    for(int i=0;i<name_length;i++)
+    for(int i=0; i < name_length; i++)
     {
         if(!isValidNameChar(name[i])) {
             return false;
@@ -299,6 +300,7 @@ ElectionResult electionAddVote (Election election, int area_id, int tribe_id, in
 
     int current_num_of_votes = voteGet(election->votes,area_id_in_string,tribe_id_in_string);
     //if(current_num_of_votes == -1) { ERROR??} ??
+    //Answer: the initial votes number per each element is 0
 
     int updated_votes = current_num_of_votes + num_of_votes;
     if(voteSet(election->votes,tribe_id_in_string,area_id_in_string,updated_votes)
@@ -421,7 +423,7 @@ ElectionResult electionRemoveTribe (Election election, int tribe_id) {
     VoteResult result =
 #endif
             voteRemove(election->votes,tribe_id_in_string, TRIBE);
-    assert(result == VOTE_SUCCESS);
+    assert(result == VOTE_SUCCESS || result == VOTE_ITEM_DOES_NOT_EXIST);
     free(tribe_id_in_string);
     return ELECTION_SUCCESS;
 }

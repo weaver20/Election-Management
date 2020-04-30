@@ -9,11 +9,14 @@
 
 
 #define INITIAL_VOTES 0
-#define DELIMETER ":"
+#define DELIMETER " ;"
 #define MAX_VOTE_SIZE 13
 #define MAX_VOTE_SIZE 13 // 11 for itoa output + 2 for ":" and ";"
-#define INITIAL_FACTOR 10
-
+#define AREA_FORMAT "Area ID: "
+#define TRIBE_FORMAT "Tribe ID: "
+#define ALLOCATION_FORMAT 22
+#define OPEN "("
+#define CLOSE ")"
 
 
 struct vote_t{
@@ -46,13 +49,15 @@ static char* copyString(const char* str){
 }
 
 static char* createVoteKeyElement(const char* area_id, const char* tribe_id){
-    char* key_to_assign = malloc(strlen(tribe_id) + strlen(area_id) + 2);
+    char* key_to_assign = malloc(strlen(tribe_id) + strlen(area_id) + ALLOCATION_FORMAT);
     if(key_to_assign == NULL){
         return NULL;
     }
-    char* delimeter = DELIMETER;
-    strcpy(key_to_assign, area_id);
-    strcat(key_to_assign, delimeter);
+
+    strcpy(key_to_assign, AREA_FORMAT);
+    strcat(key_to_assign, area_id);
+    strcat(key_to_assign, DELIMETER);
+    strcat(key_to_assign, TRIBE_FORMAT);
     strcat(key_to_assign, tribe_id);
 
     return key_to_assign;
@@ -125,6 +130,10 @@ VoteResult voteRemove(VoteMap votes, const char* name_id, const char* to_remove)
         VOTE_FOREACH(iterator, votes->votes) {
             char *key_copy = copyString(iterator);
             char *token = strtok(key_copy, delimeter);
+
+            if(key_copy == NULL){
+                return VOTE_OUT_OF_MEMORY;
+            }
 
             //in case a tribe ID supplied
             if (strcmp(to_remove, TRIBE) == 0) {

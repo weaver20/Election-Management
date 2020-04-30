@@ -19,8 +19,6 @@ typedef enum VoteResult_t {
     VOTE_INVALID_INPUT
 } VoteResult;
 
-
-
 VoteMap voteCreate(); // Done!
 
 void voteDestroy(VoteMap toDestroy); // Done!
