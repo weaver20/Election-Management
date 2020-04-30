@@ -18,15 +18,12 @@
 *   mapCopy		- Copies an existing map
 *   mapGetSize		- Returns the size of a given map
 *   mapContains	- returns weather or not a key exists inside the map.
-*   				  This resets the internal iterator.
 *   mapPut		    - Gives a specific key a given value.
 *   				  If the key exists, the value is overridden.
-*   				  This resets the internal iterator.
 *   mapGet  	    - Returns the data paired to a key which matches the given key.
 *					  Iterator status unchanged
 *   mapRemove		- Removes a pair of (key,data) elements for which the key
 *                    matches a given element (using the strcmp function).
-*   				  This resets the internal iterator.
 *   mapGetFirst	- Sets the internal iterator to the first key in the
 *   				  map, and returns it.
 *   mapGetNext		- Advances the internal iterator to the next key and
@@ -142,7 +139,7 @@ char* mapGet(Map map, const char* key);
 * 	The data element associated with this key will also be freed.
 * @return
 * 	MAP_NULL_ARGUMENT if a NULL was sent to the function
-*   MAP_ITEM_DOES_NOT_EXIST if an equal key item does not already exists in the map
+*  MAP_ITEM_DOES_NOT_EXIST if an equal key item does not already exists in the map
 * 	MAP_SUCCESS the paired elements had been removed successfully
 */
 MapResult mapRemove(Map map, const char* key);
@@ -185,16 +182,13 @@ char* mapGetNext(Map map);
 */
 MapResult mapClear(Map map);
 
-void mapPrint(Map map);
-
 /*!
 * Macro for iterating over a map.
 * Declares a new iterator for the loop.
 */
-
 #define MAP_FOREACH(iterator, map) \
-    for(char* (iterator) = (char*) mapGetFirst(map) ; \
-        (iterator) ;\
-        (iterator) = mapGetNext(map))
+    for(char* iterator = (char*) mapGetFirst(map) ; \
+        iterator ;\
+        iterator = mapGetNext(map))
 
 #endif /* MAP_H_ */

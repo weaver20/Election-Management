@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "dry.h"
 int main()
 {
@@ -24,17 +25,24 @@ int main()
     printf("list2: (");
     listPrint(list2);
     printf(")\n");
-    Node merged = NULL;
-    mergeSortedLists(list1,list2,&merged);
 
+
+    Node merged = NULL;
+    Node merged_should_be_same = NULL;
+    assert(mergeSortedLists(list2,list1,&merged) == SUCCESS);
     printf("merged: (");
     listPrint(merged);
     printf(")\n");
 
-    Node merged_with_empty = NULL;
-    mergeSortedLists(list1,empty_list,&merged_with_empty);
-    printf("merged with empty: (");
-    listPrint(merged_with_empty);
+    assert(mergeSortedLists(list1,list2,&merged_should_be_same) == SUCCESS);
+    printf("merged should be same: (");
+    listPrint(merged_should_be_same);
+    printf(")\n");
+
+   Node merged_with_empty = NULL;
+   assert(mergeSortedLists(list1,empty_list,&merged_with_empty) == EMPTY_LIST);
+   printf("***** merged with empty: (");
+   listPrint(merged_with_empty);
     printf(")\n");
     return 0;
 }

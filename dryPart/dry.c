@@ -22,7 +22,7 @@ Node makeListUp(int first, int size) {
     list->x= first;
     for(int i=1;i<size;i++)
     {
-       list->next = nodeCreateOrDestroyAll(list_head,first+i);
+        list->next = nodeCreateOrDestroyAll(list_head,first+i);
         if (list->next == NULL) {
             return NULL;
         }
@@ -76,41 +76,31 @@ Node nodeCreateOrDestroyAll(Node head, int data) {
 
 Node listCopyOrDestroyAll(Node source,Node destination,Node destination_head)
 {
+    Node destination_ptr = destination;
     assert(source != NULL);
     while(source) {
-        // destination list is empty
-        if(destination_head == NULL) {
-            destination_head = nodeCreateOrDestroyAll(destination_head, source->x);
-            if(destination_head == NULL){
-                return NULL;
-            }
-            destination = destination_head;
+        destination_ptr->next = nodeCreateOrDestroyAll(destination_head, source->x);
+        if (destination_ptr->next == NULL) {
+            return NULL;
         }
-        // destination list is NOT empty
-        else {
-            destination->next = nodeCreateOrDestroyAll(destination_head, source->x);
-            if (destination->next == NULL) {
-                return NULL;
-            }
-            destination = destination->next;
-        }
+        destination_ptr = destination_ptr->next;
         source = source->next;
     }
-    return destination_head;
+    return destination;
 }
 
 ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
 
-    Node merged_ptr = *merged_out;
-    // both lists are empty
-    if (list1 == NULL && list2 == NULL) {
+    // one of the lists is empty
+    if (list1 == NULL || list2 == NULL) {
         return EMPTY_LIST;
     }
-    // check if lists are sorted (or empty).
-/*    if(!isListSorted((list1)) || !isListSorted((list2))){
-        return UNSORTED_LIST;
-    }*/
-    //both lists are full
+    Node merged_ptr = *merged_out;
+    // check if lists are sorted
+    /*  if(!isListSorted(list1) || !isListSorted(list2)) {
+          return UNSORTED_LIST;
+      }*/
+    //both lists are sorted and full
     while (list1 != NULL && list2 != NULL) {
         int merge_from = (list1->x <= list2->x) ? 1 : 2;
         switch (merge_from) {
@@ -122,14 +112,14 @@ ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
                     }
                     merged_ptr=*merged_out;
                 }
-                else {
+                else {      // merged list is not empty
                     merged_ptr->next = nodeCreateOrDestroyAll(*merged_out, list1->x);
                     if (merged_ptr->next == NULL) {
                         return MEMORY_ERROR;
                     }
                     merged_ptr = merged_ptr->next;
                 }
-                    list1 = list1->next;
+                list1 = list1->next;
 
                 break;
             case 2:
@@ -140,7 +130,7 @@ ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
                     }
                     merged_ptr=*merged_out;
                 }
-                else {
+                else {      // merged list is not empty
                     merged_ptr->next = nodeCreateOrDestroyAll(*merged_out, list2->x);
                     if (merged_ptr->next == NULL) {
                         return MEMORY_ERROR;
@@ -152,19 +142,19 @@ ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
         }
 
     }
-    // one of the lists is empty
-    if (list1 == NULL) {
-        Node tmp = listCopyOrDestroyAll(list2, merged_ptr, *merged_out);
-        if ( tmp == NULL) {
+    Node rest_of_list = NULL;
+    // finished with one of the lists
+    if (list1 == NULL) {    // finished with list1
+        rest_of_list = listCopyOrDestroyAll(list2, merged_ptr, *merged_out);
+        if (rest_of_list == NULL) {
             return MEMORY_ERROR;
         }
-    } else {  // list2 == NULL
-        Node tmp = listCopyOrDestroyAll(list1, merged_ptr, *merged_out);
-        if (tmp == NULL) {
-            return MEMORY_ERROR;
-        }
-        *merged_out = tmp;
     }
-
+    else {  // finished with list2
+        rest_of_list = listCopyOrDestroyAll(list1, merged_ptr, *merged_out);
+        if (rest_of_list == NULL) {
+            return MEMORY_ERROR;
+        }
+    }
     return SUCCESS;
 }

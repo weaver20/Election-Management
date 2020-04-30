@@ -13,6 +13,7 @@
 
 #include "election.h"
 #include "voteMap.h"
+#include "print_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -35,7 +36,7 @@ static bool isValidNameChar(const char toCheck);
 static bool isValidName(const char* name);
 static bool isValidID(int id);
 static char* allocateAndItoa(int x);
-
+static char* allocateAndCopyString(const char *old_value, int new_size);
 /**
  * printing functions
  * @param map

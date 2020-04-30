@@ -1,10 +1,12 @@
 #include <stdlib.h>
 #include "election.h"
 #include "../test_utilities.h"
+#include "print_utils.h"
+
 
 /*The number of tests*/
 #define NUMBER_TESTS 6
-#define NPRINT
+//#define NPRINT
 
 
 bool deleteOnlyFirstArea (int area_id) {
@@ -157,7 +159,7 @@ bool testElectionSetTribeName() {
     ASSERT_TEST(electionSetTribeName(election, -3, "negative id") == ELECTION_INVALID_ID);
     // invalid name
     ASSERT_TEST(electionSetTribeName(election, 2, "INVAL!D NAME") == ELECTION_INVALID_NAME);
-    // invalid name + null + not exists
+    // invalid name + NULL + not exist
     ASSERT_TEST(electionSetTribeName(NULL, 2, "INVAL!D NAME and NULL") == ELECTION_NULL_ARGUMENT);
     ASSERT_TEST(electionSetTribeName(election, 8, "INVAL!D NAME and not exists") == ELECTION_TRIBE_NOT_EXIST);
 
