@@ -201,8 +201,8 @@ bool testElectionRemoveTribe() {
 
 bool testElectionComputeAreasToTribesMapping(){
     Election election = electionCreate();
-    char* areas[] = {"tel aviv", "haifa", "jerusalem",  "beer Sheva", "ashdod", "ashkelon", "rehovot"};
-    char* tribes[] = {"likud", "kahol Lavan", "meretz", "yamina", "avoda", "reshima meshutefet", "s\has"};
+    char* areas[] = {"Tel Aviv", "Haifa", "Jerusalem",  "Beer Sheva", "Ashdod", "Ashkelon", "Rehovot"};
+    char* tribes[] = {"Likud", "Kahol Lavan", "Meretz", "Yamina", "Avoda", "Reshima Meshutefet", "Shas"};
     for(int idx = 0; idx < 7; idx++){
         ASSERT_TEST(electionAddArea(election, idx, areas[idx]) == ELECTION_SUCCESS);
     }

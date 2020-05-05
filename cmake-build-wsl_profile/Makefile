@@ -115,7 +115,7 @@ depend:
 
 # Build rule for target.
 playground: cmake_check_build_system
-    $(MAKE) -f CMakeFiles/Makefile2 playground
+	$(MAKE) -f CMakeFiles/Makefile2 playground
 .PHONY : playground
 
 # fast build rule for target.
