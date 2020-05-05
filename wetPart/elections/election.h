@@ -42,8 +42,9 @@ ElectionResult electionSetTribeName (Election election, int tribe_id, const char
 
 ElectionResult electionRemoveTribe (Election election, int tribe_id); // DONE!
 
-ElectionResult electionRemoveAreas(Election election, AreaConditionFunction should_delete_area); // DONE!
+ElectionResult electionRemoveAreas(Election election, AreaConditionFunction should_delete_area); // Done!
 
-Map electionComputeAreasToTribesMapping (Election election); // DONE!
+Map electionComputeAreasToTribesMapping (Election election); // Done!
 
+void printElection(Election election, const char* name); // Done!
 #endif //MTM_ELECTION_H

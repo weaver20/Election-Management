@@ -77,7 +77,7 @@ static char* allocateAndCopyString(const char *old_value, int new_size) {
  * @return
  */
 static bool isValidNameChar(const char toCheck) {
-    if((toCheck <= 'z' && toCheck >= 'a') || (toCheck <= 'Z' && toCheck >= 'A')
+    if((toCheck <= 'z' && toCheck >= 'a')
         || toCheck == ' ' ) {
         return true;
     }

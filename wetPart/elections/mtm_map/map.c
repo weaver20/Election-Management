@@ -261,12 +261,6 @@ MapResult mapClear(Map map){
     return MAP_SUCCESS;
 }
 
-void mapPrint(Map map){
-    printf("The following map contains the following elements in the format of key : value\n ");
-    MAP_FOREACH(iterator, map){
-        printf("%s : %s ", iterator, map->dictionary[elementIndex(map, iterator)].value);
-    }
-}
 
 
 
