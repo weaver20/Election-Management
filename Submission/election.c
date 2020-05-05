@@ -58,7 +58,7 @@ void printElection(Election election, const char* name) {
     printf("**** Printing Tribes: \n");
     printMap(election->tribes);
     printf("**** Printing Votes: \n");
-    votesPrint(election->votes);
+    printVote(election->votes);
     printf("\n");
 }
 /*       end of printing functions  */
