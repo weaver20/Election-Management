@@ -2,7 +2,7 @@
 // Created by Noam_ on 09/04/2020.
 //
 //comment
-#include "../../map/map.h"
+#include "map.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>

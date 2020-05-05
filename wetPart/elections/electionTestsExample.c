@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "election.h"
+#include "../../Submission/election.h"
 #include "../test_utilities.h"
 #include "print_utils.h"
 #include "Utilities_For_Testing.h"
@@ -8,7 +8,7 @@
 
 /*The number of tests*/
 #define NUMBER_TESTS 7
-//#define NPRINT
+#define NPRINT
 
 
 bool deleteOnlyFirstArea (int area_id) {
@@ -218,12 +218,14 @@ bool testElectionComputeAreasToTribesMapping(){
     }
 
     //printElection(election, "Israel's elections results:\n"); - put here your printing function instead
+#ifndef NPRINT
     puts("Winning tribes by areas:\n");
     Map winners_map = electionComputeAreasToTribesMapping(election);
     MAP_FOREACH(iterator, winners_map){
         printf("%s : %s ", iterator, mapGet(winners_map, iterator));
     }
     mapDestroy(winners_map);
+#endif
     electionDestroy(election);
     return true;
 }
@@ -247,7 +249,6 @@ const char* testNames[] = {
                            "testElectionGetTribeName",
                            "testElectionSetTribeName",
                            "testElectionRemoveTribe",
-                           "testElectionAddVote",
                            "testElectionComputeAreasToTribesMapping"
 };
 

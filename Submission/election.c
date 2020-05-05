@@ -12,9 +12,8 @@
 #define ROOM_FOR_NULL_TERMINATOR 1
 
 #include "election.h"
-#include "mtm_map/map.h"
 #include "voteMap.h"
-#include "print_utils.h"
+// #include "../wetPart/elections/print_utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

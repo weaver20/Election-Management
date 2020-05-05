@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "../test_utilities.h"
-#include "map.h"
+#include "../../Submission/mtm_map/map.h"
 
 bool testMapCreate() {
     printf("Testing mapCreate\n");

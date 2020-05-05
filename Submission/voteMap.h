@@ -7,7 +7,7 @@
 #define AREA "area"
 #define TRIBE "tribe"
 
-#include "mtm_map/map.h"
+#include "../wetPart/elections/mtm_map/map.h"
 
 typedef struct vote_t* VoteMap;
 
