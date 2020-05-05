@@ -10,13 +10,10 @@
 
 #define INITIAL_VOTES 0
 #define DELIMETER " ;"
-#define MAX_VOTE_SIZE 13
 #define MAX_VOTE_SIZE 13 // 11 for itoa output + 2 for ":" and ";"
 #define AREA_FORMAT "Area ID: "
 #define TRIBE_FORMAT "Tribe ID: "
 #define ALLOCATION_FORMAT 22
-#define OPEN "("
-#define CLOSE ")"
 
 
 struct vote_t{
@@ -34,18 +31,18 @@ static void printMap(Map map){
                mapGet(map,iterator));
     }
 }
-void votesPrint(VoteMap votes) {
+void printVote(VoteMap votes) {
     printMap(votes->votes);
 }
 /*      end of printing functions */
 
 
 static char* copyString(const char* str){
-    char* new_str = malloc(strlen(str) + 1);
-    if(new_str == NULL){
+    char* new_copy = malloc(strlen(str) + 1);
+    if(new_copy == NULL){
         return NULL;
     }
-    return strcpy(new_str, str);
+    return strcpy(new_copy, str);
 }
 
 static char* createVoteKeyElement(const char* area_id, const char* tribe_id){
@@ -84,12 +81,12 @@ VoteMap voteCreate(){
 }
 
 void voteDestroy(VoteMap votes){
-     if(votes == NULL){
-         return;
-     }
+    if(votes == NULL){
+        return;
+    }
 
-     mapDestroy(votes->votes);
-     free(votes);
+    mapDestroy(votes->votes);
+    free(votes);
 }
 
 VoteResult votePut(VoteMap votes, const char* tribe_id, const char* area_id){
@@ -106,7 +103,7 @@ VoteResult votePut(VoteMap votes, const char* tribe_id, const char* area_id){
 #ifndef NDEBUG
     MapResult result =
 #endif
-    mapPut(votes->votes, key_to_assign, value_to_assign);
+            mapPut(votes->votes, key_to_assign, value_to_assign);
     assert(result == MAP_SUCCESS);
     free(key_to_assign);
     free(value_to_assign);
@@ -194,7 +191,7 @@ int voteGet(VoteMap votes, const char* area_id, const char* tribe_id){
 
     char* key = createVoteKeyElement(area_id, tribe_id);
     char* votes_number = mapGet(votes->votes, key); // We call this function when it's certain that the key element
-                                                    // is in the map
+    // is in the map
     free(key);
     return atoi(votes_number);
 }

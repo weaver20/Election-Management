@@ -31,7 +31,7 @@ VoteResult voteSet(VoteMap votes, const char* tribe_id, const char* area_id, int
 
 int voteGet(VoteMap votes, const char* area_id, const char* tribe_id); // Done!
 
-void votesPrint(VoteMap votes); // Done!
+void printVote(VoteMap votes); // Done!
 
 #define VOTE_FOREACH(iterator, map) \
     for(char* (iterator) = (char*) mapGetFirst(map) ; \
