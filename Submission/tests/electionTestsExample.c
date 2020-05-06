@@ -1,8 +1,8 @@
 #include <stdlib.h>
-#include "../../Submission/election.h"
+#include "../election.h"
 #include "../test_utilities.h"
-#include "print_utils.h"
-#include "Utilities_For_Testing.h"
+#include "../utils/print_utils.h"
+#include "../utils/Utilities_For_Testing.h"
 #include <math.h>
 
 
