@@ -34,7 +34,7 @@ char *stringDuplicator(char *s, int times) {
                     // **********  Fixed: **********
 
 
-char* stringDuplicate(const char *str, int times) {
+char* stringDuplicate2(const char *str, int times) {
     assert(str);
     assert(times > 0);
     char* out = malloc(strlen(str) * (times+1));

@@ -7,12 +7,28 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 
 
 struct node_t {
     int x;
     struct node_t* next;
 };
+
+bool isListSorted(Node head){
+    Node index = head;
+    int last_value = index->x;
+    index = index->next;
+    while(index != NULL){
+        if(index->x < last_value){
+            return false;
+        }
+        last_value = index->x;
+        index = index->next;
+    }
+    return true;
+}
 
 Node makeListUp(int first, int size) {
     Node list_head = malloc(sizeof(*list_head));
@@ -213,7 +229,7 @@ ErrorCode mergeSortedLists(Node list1, Node list2, Node* merged_out) {
 /* ***************************************************************** */
 
 
-char *stringDuplicator(char *s, int times) {
+char *stringDuplicator1(char *s, int times) {
     // PROGRAMMING ERROR 1: s should be transferred to the function as const to
     // CONVENTION ERROR 1: s name should be src
     // CONVENTION ERROR 2: func name should be a verb

@@ -77,7 +77,7 @@ static char* allocateAndCopyString(const char *old_value, int new_size) {
  * @return
  */
 static bool isValidNameChar(const char to_check) {
-    if((to_check <= 'z' && to_check >= 'a') || (to_check <= 'Z' && to_check >= 'A')
+    if((to_check <= 'z' && to_check >= 'a')
        || to_check == ' ' ) {
         return true;
     }
@@ -170,12 +170,14 @@ void electionDestroy(Election election) {
 
 ElectionResult electionAddTribe (Election election, int tribe_id, const char* tribe_name) {
 
-    if(!isValidID(tribe_id)) {
-        return ELECTION_INVALID_ID;
-    }
     if(tribe_name == NULL || election == NULL) {
         return ELECTION_NULL_ARGUMENT;
     }
+
+    if(!isValidID(tribe_id)) {
+        return ELECTION_INVALID_ID;
+    }
+
     char* tribe_id_in_string = allocateAndItoa(tribe_id);
     if(tribe_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
@@ -209,12 +211,14 @@ ElectionResult electionAddTribe (Election election, int tribe_id, const char* tr
 
 ElectionResult electionAddArea(Election election, int area_id, const char* area_name) {
 
-    if(!isValidID(area_id)) {
-        return ELECTION_INVALID_ID;
-    }
     if(area_name == NULL || election == NULL) {
         return ELECTION_NULL_ARGUMENT;
     }
+
+    if(!isValidID(area_id)) {
+        return ELECTION_INVALID_ID;
+    }
+
     char* area_id_in_string = allocateAndItoa(area_id);
     if(area_id_in_string == NULL) {
         return ELECTION_OUT_OF_MEMORY;
@@ -301,7 +305,7 @@ ElectionResult electionAddVote (Election election, int area_id, int tribe_id, in
     int current_num_of_votes = voteGet(election->votes,area_id_in_string,tribe_id_in_string);
 
     int updated_votes = current_num_of_votes + num_of_votes;
-    if(voteSet(election->votes,tribe_id_in_string,area_id_in_string,updated_votes)
+    if(voteSet(election->votes,area_id_in_string, tribe_id_in_string,updated_votes)
        == VOTE_OUT_OF_MEMORY) {
         free(area_id_in_string);
         free(tribe_id_in_string);
@@ -340,13 +344,13 @@ ElectionResult electionRemoveVote(Election election, int area_id, int tribe_id, 
         return ELECTION_TRIBE_NOT_EXIST;
     }
 
-    int current_votes = voteGet(election->votes,tribe_id_in_string,area_id_in_string);
+    int current_votes = voteGet(election->votes,area_id_in_string, tribe_id_in_string);
     int new_votes = current_votes - num_of_votes;
     if(new_votes < 0) {
         new_votes = 0;
     }
 
-    if(voteSet(election->votes,tribe_id_in_string,area_id_in_string,new_votes)
+    if(voteSet(election->votes,area_id_in_string, tribe_id_in_string,new_votes)
        == VOTE_OUT_OF_MEMORY) {
         free(area_id_in_string);
         free(tribe_id_in_string);
