@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/dryPart/dry.c
+dry.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/dryPart/dry.h
+assert.h
+-
+stdbool.h
+-
+stdio.h
+-
+stdlib.h
+-
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/dryPart/dry.h
+stdbool.h
+-
+stdio.h
+-
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/dryPart/dryMain.c
+stdio.h
+-
+stdlib.h
+-
+dry.h
+/mnt/c/Users/avira/CLionProjects/Ex-1/dryPart/dry.h
+
+/mnt/c/Users/avira/CLionProjects/Ex-1/dryPart/findErrors.c
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+

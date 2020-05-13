@@ -2,8 +2,8 @@
 // Created by bardv on 3/19/2020.
 //
 
-#include "../test_utilities.h"
-#include "map.h"
+#include "../../Submission/test_utilities.h"
+#include "../../Submission/mtm_map/map.h"
 #include <stdlib.h>
 
 /*#define NUMBER_TESTS 4

@@ -28,29 +28,29 @@ static int elementIndex(Map map, const char* key){
             return i;
         }
     }
-    //TODO: returns index of 4
+
     return NOT_FOUND;
 }
 
 static MapResult expand(Map map){
-    int newSize = EXPAND_FACTOR * map->max_size;
-    Element newElements = realloc(map->dictionary, newSize * sizeof(*(map->dictionary)));
+    int new_size = EXPAND_FACTOR * map->max_size;
+    Element newElements = realloc(map->dictionary, new_size * sizeof(*(map->dictionary)));
     if(newElements == NULL){
         return MAP_OUT_OF_MEMORY;
     }
 
     map->dictionary = newElements;
-    map->max_size = newSize;
+    map->max_size = new_size;
 
     return MAP_SUCCESS;
 }
 
 static char* copyString(const char* str){
-    char* new_str = malloc(strlen(str) + 1);
-    if(new_str == NULL){
+    char* new_copy = malloc(strlen(str) + 1);
+    if(new_copy == NULL){
         return NULL;
     }
-    return strcpy(new_str, str);
+    return strcpy(new_copy, str);
 }
 
 static MapResult removeElement(Map map, int index){
@@ -131,17 +131,17 @@ Map mapCopy(Map map){
         return NULL;
     }
 
-    Map newMap = mapCreate();
-    if(newMap == NULL) {
+    Map new_map = mapCreate();
+    if(new_map == NULL) {
         return NULL;
     }
 
-    if(addAllOrDestroy(map, newMap) == MAP_OUT_OF_MEMORY){
+    if(addAllOrDestroy(map, new_map) == MAP_OUT_OF_MEMORY){
         return NULL;
     }
 
-    newMap->iterator = map->iterator;
-    return newMap;
+    new_map->iterator = map->iterator;
+    return new_map;
 }
 
 int mapGetSize(Map map){
@@ -207,7 +207,11 @@ char* mapGet(Map map, const char* key){
         return NULL;
     }
 
-    return map->dictionary[elementIndex(map, key)].value;
+    int index = elementIndex(map, key);
+    if(index == NOT_FOUND){
+        return NULL;
+    }
+    return map->dictionary[index].value;
 }
 
 MapResult mapRemove(Map map, const char* key){

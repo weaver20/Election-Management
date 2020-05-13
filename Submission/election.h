@@ -34,16 +34,16 @@ ElectionResult electionAddArea(Election election, int area_id, const char* area_
 
 char* electionGetTribeName (Election election, int tribe_id); // DONE!
 
-ElectionResult electionAddVote (Election election, int area_id, int tribe_id, int num_of_votes);
+ElectionResult electionAddVote (Election election, int area_id, int tribe_id, int num_of_votes); // DONE!
 
-ElectionResult electionRemoveVote(Election election, int area_id, int tribe_id, int num_of_votes);
+ElectionResult electionRemoveVote(Election election, int area_id, int tribe_id, int num_of_votes); // DONE!
 
 ElectionResult electionSetTribeName (Election election, int tribe_id, const char* tribe_name);  // DONE!
 
 ElectionResult electionRemoveTribe (Election election, int tribe_id); // DONE!
 
-ElectionResult electionRemoveAreas(Election election, AreaConditionFunction should_delete_area);
+ElectionResult electionRemoveAreas(Election election, AreaConditionFunction should_delete_area); // DONE!
 
-Map electionComputeAreasToTribesMapping (Election election);
+Map electionComputeAreasToTribesMapping (Election election); // DONE!
 
 #endif //MTM_ELECTION_H
