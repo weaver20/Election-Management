@@ -1,2 +1,2 @@
 # Ex-1
-The plan to take on the world. by Noam and Aviram.
+This is an election management system written as part of a university course I took. 
